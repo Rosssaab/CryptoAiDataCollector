@@ -120,7 +120,7 @@ class CryptoCollector:
             self.logger.error(f"Error fetching {symbol} from Binance: {str(e)}")
             return None
 
-    def collect_data(self):
+    def collect_data(self, is_gui_mode=False):
         thread_conn = pyodbc.connect(DB_CONNECTION_STRING)
         thread_cursor = thread_conn.cursor()
         records_added = 0
@@ -136,7 +136,7 @@ class CryptoCollector:
             top_coins = self.get_top_coins()
             if not top_coins:
                 self.logger.error("Failed to get coin list from CoinGecko. Aborting.")
-                return
+                return False
 
             self.logger.info(f"Retrieved {len(top_coins)} coins from CoinGecko")
 
@@ -215,15 +215,16 @@ class CryptoCollector:
                             self.logger.info(f"  Volume 24h: ${data['volume_24h']:,.2f}")
                             self.logger.info(f"  Change 24h: {data['price_change_24h']:+.2f}%")
 
-                            # Update GUI
-                            self.tree.insert("", 0, values=(
-                                current_time.strftime('%Y-%m-%d %H:%M:%S'),
-                                coin_symbol,
-                                f"${data['price_usd']:.2f}",
-                                f"${data['volume_24h']:,.2f}",
-                                f"{data['price_change_24h']:+.2f}%",
-                                'Binance'
-                            ), tags=('positive' if data['price_change_24h'] > 0 else 'negative'))
+                            # Update GUI only if in GUI mode
+                            if is_gui_mode and hasattr(self, 'tree'):
+                                self.tree.insert("", 0, values=(
+                                    current_time.strftime('%Y-%m-%d %H:%M:%S'),
+                                    coin_symbol,
+                                    f"${data['price_usd']:.2f}",
+                                    f"${data['volume_24h']:,.2f}",
+                                    f"{data['price_change_24h']:+.2f}%",
+                                    'Binance'
+                                ), tags=('positive' if data['price_change_24h'] > 0 else 'negative'))
 
                         except Exception as e:
                             self.logger.error(f"Failed to save price data for {coin_symbol}: {str(e)}")
@@ -233,9 +234,10 @@ class CryptoCollector:
                         failed_coins += 1
 
                     processed_coins += 1
-                    self.status_label.config(
-                        text=f"Processing: {processed_coins}/{total_coins} | Added: {records_added}"
-                    )
+                    if is_gui_mode and hasattr(self, 'status_label'):
+                        self.status_label.config(
+                            text=f"Processing: {processed_coins}/{total_coins} | Added: {records_added}"
+                        )
 
                 except Exception as e:
                     self.logger.error(f"Error processing {symbol}: {str(e)}")
@@ -257,6 +259,7 @@ class CryptoCollector:
 
         except Exception as e:
             self.logger.error(f"Critical error in collection cycle: {str(e)}")
+            return False
 
         finally:
             try:
@@ -334,7 +337,7 @@ class CryptoGUI(CryptoCollector):
         if not self.is_collecting:
             self.is_collecting = True
             self.collect_button.config(text="Stop Collection")
-            self.collection_thread = threading.Thread(target=self.collect_data)
+            self.collection_thread = threading.Thread(target=lambda: self.collect_data(is_gui_mode=True))
             self.collection_thread.daemon = True
             self.collection_thread.start()
         else:
@@ -345,7 +348,7 @@ def main():
     if len(sys.argv) > 1 and sys.argv[1] == '--service':
         # Run in CLI mode
         collector = CryptoCollector()
-        success = collector.collect_data_once()
+        success = collector.collect_data(is_gui_mode=False)
         sys.exit(0 if success else 1)
     else:
         # Run in GUI mode
