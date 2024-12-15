@@ -81,6 +81,10 @@ class CryptoCollector:
                 coins = response.json()
                 self.logger.info(f"Raw API response received: {len(coins)} coins")
                 
+                # List of stablecoins to exclude
+                stablecoins = ['USDT', 'USDC', 'BUSD', 'DAI', 'TUSD', 'USDP', 'USDD', 
+                              'GUSD', 'USDN', 'USDS', 'WBTC', 'WETH', 'FRAX']
+                
                 coin_data = []
                 for coin in coins:
                     try:
@@ -88,7 +92,8 @@ class CryptoCollector:
                         name = coin['name']
                         self.logger.info(f"Processing coin: {symbol} ({name})")
                         
-                        if symbol != 'USDT':
+                        # Skip if it's a stablecoin
+                        if symbol not in stablecoins and not any(s in name.upper() for s in ['USD', 'STABLE']):
                             coin_data.append({
                                 'symbol': symbol,
                                 'full_name': name,
@@ -98,7 +103,7 @@ class CryptoCollector:
                     except KeyError as ke:
                         self.logger.error(f"Missing key in coin data: {ke}")
                 
-                self.logger.info(f"Processed {len(coin_data)} coins")
+                self.logger.info(f"Processed {len(coin_data)} non-stablecoin coins")
                 return coin_data
             else:
                 self.logger.error(f"CoinGecko API error: {response.status_code}")
@@ -177,13 +182,10 @@ class CryptoCollector:
                                 ''', (coin_symbol, coin_info['full_name']))
                                 thread_conn.commit()
                                 
-                                thread_cursor.execute('''
-                                    SELECT coin_id FROM Coins WHERE symbol = ?
-                                ''', coin_symbol)
+                                thread_cursor.execute('SELECT @@IDENTITY')
                                 new_coin_id = thread_cursor.fetchone()[0]
-                                
                                 self.coin_ids[coin_symbol] = {
-                                    'id': new_coin_id, 
+                                    'id': new_coin_id,
                                     'full_name': coin_info['full_name']
                                 }
                                 cached_coin = self.coin_ids[coin_symbol]
@@ -337,12 +339,29 @@ class CryptoGUI(CryptoCollector):
         if not self.is_collecting:
             self.is_collecting = True
             self.collect_button.config(text="Stop Collection")
-            self.collection_thread = threading.Thread(target=lambda: self.collect_data(is_gui_mode=True))
+            self.collection_thread = threading.Thread(target=self.collect_continuously)
             self.collection_thread.daemon = True
             self.collection_thread.start()
         else:
             self.is_collecting = False
             self.collect_button.config(text="Start Collection")
+
+    def collect_continuously(self):
+        while self.is_collecting:
+            success = self.collect_data(is_gui_mode=True)
+            if not success:
+                self.is_collecting = False
+                self.collect_button.config(text="Start Collection")
+                messagebox.showerror("Error", "Data collection failed")
+                break
+            else:
+                # Show success message and update button
+                self.root.after(0, lambda: messagebox.showinfo("Success", "Data collection completed successfully"))
+                self.root.after(0, lambda: self.collect_button.config(text="Start Collection"))
+                self.is_collecting = False
+            
+            if self.is_collecting:  # Only sleep if we're still meant to be collecting
+                time.sleep(3600)  # Wait for 1 hour before next collection
 
 def main():
     if len(sys.argv) > 1 and sys.argv[1] == '--service':

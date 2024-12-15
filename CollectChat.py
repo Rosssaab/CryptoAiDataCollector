@@ -5,12 +5,22 @@ import logging
 from textblob import TextBlob
 from newsapi import NewsApiClient
 import praw
-from config import DB_CONNECTION_STRING, NEWS_API_KEY, REDDIT_CLIENT_ID, REDDIT_CLIENT_SECRET
+from config import (
+    DB_CONNECTION_STRING, 
+    REDDIT_CLIENT_ID, 
+    REDDIT_CLIENT_SECRET, 
+    TWITTER_BEARER_TOKEN, 
+    CRYPTOCOMPARE_API_KEY
+)
 import tkinter as tk
 from tkinter import ttk, messagebox
 import threading
 import time
 import webbrowser
+from tweepy import Client as TwitterClient
+import cryptocompare
+import requests
+import os
 
 def setup_logging():
     formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
@@ -42,10 +52,6 @@ class ChatCollector:
 
     def init_apis(self):
         try:
-            # Initialize News API
-            self.news_api = NewsApiClient(api_key=NEWS_API_KEY)
-            self.logger.info("News API initialized successfully")
-
             # Initialize Reddit API
             self.reddit = praw.Reddit(
                 client_id=REDDIT_CLIENT_ID,
@@ -53,6 +59,22 @@ class ChatCollector:
                 user_agent="CryptoSentimentBot/1.0"
             )
             self.logger.info("Reddit API initialized successfully")
+
+            # Initialize Twitter API
+            self.twitter = TwitterClient(bearer_token=TWITTER_BEARER_TOKEN)
+            self.logger.info("Twitter API initialized successfully")
+
+            # For CryptoCompare, we'll use requests directly with headers
+            self.cryptocompare_headers = {
+                'authorization': f'Apikey {CRYPTOCOMPARE_API_KEY}'
+            }
+            # Test the connection
+            test_url = "https://min-api.cryptocompare.com/data/v2/news/?lang=EN"
+            response = requests.get(test_url, headers=self.cryptocompare_headers)
+            if response.status_code == 200:
+                self.logger.info("CryptoCompare API initialized successfully")
+            else:
+                raise Exception(f"CryptoCompare API test failed with status {response.status_code}")
             
         except Exception as e:
             self.logger.error(f"API initialization error: {str(e)}")
@@ -66,6 +88,19 @@ class ChatCollector:
         except Exception as e:
             self.logger.error(f"Error loading chat sources: {str(e)}")
             sys.exit(1)
+
+    def get_coins(self):
+        try:
+            self.cursor.execute("""
+                SELECT coin_id, symbol, full_name 
+                FROM coins 
+                WHERE symbol NOT IN ('USDT', 'USDC', 'BUSD', 'DAI', 'TUSD', 'USDP', 'USDD', 'GUSD', 'USDN', 'USDS')
+            """)
+            return [{'coin_id': row[0], 'symbol': row[1], 'full_name': row[2]} 
+                   for row in self.cursor.fetchall()]
+        except Exception as e:
+            self.logger.error(f"Error getting coins: {str(e)}")
+            return []
 
     def analyze_sentiment(self, text):
         try:
@@ -85,65 +120,49 @@ class ChatCollector:
     def collect_news_mentions(self, coin):
         mentions = []
         try:
-            # Check if we should skip this coin based on API limits
-            if hasattr(self, '_news_api_requests'):
-                if self._news_api_requests >= 95:  # Leave some buffer
-                    self.logger.warning("Approaching News API daily limit, skipping remaining coins")
-                    return mentions
-            else:
-                self._news_api_requests = 0
-                
-            self.logger.info(f"Fetching news for {coin['symbol']} (Request #{self._news_api_requests + 1})")
+            self.log_to_output(f"Starting CryptoCompare News API search for {coin['symbol']}")
             
-            # Add delay between requests
-            time.sleep(1)  # 1 second delay between requests
+            url = "https://min-api.cryptocompare.com/data/v2/news/?lang=EN"
+            response = requests.get(url, headers=self.cryptocompare_headers)
             
-            articles = self.news_api.get_everything(
-                q=f"{coin['symbol']} OR {coin['full_name']}",
-                language='en',
-                sort_by='publishedAt',
-                from_param=(datetime.datetime.now() - datetime.timedelta(days=1)).date().isoformat()
-            )
-            
-            if articles.get('status') != 'ok':
-                self.logger.error(f"News API error: {articles.get('message', 'Unknown error')}")
-                return mentions
-
-            self._news_api_requests += 1
-            
-            for article in articles['articles']:
-                if not article.get('url'):
-                    self.logger.warning(f"Skipping article without URL for {coin['symbol']}")
-                    continue
+            if response.status_code == 200:
+                news_data = response.json()
+                if news_data.get('Response') == 'Success' or 'Data' in news_data:
+                    articles = news_data.get('Data', [])
+                    self.log_to_output(f"Found {len(articles)} news articles to process")
                     
-                content = article.get('title', '') + " " + (article.get('description') or "")
-                if not content.strip():
-                    self.logger.warning(f"Skipping empty article for {coin['symbol']}")
-                    continue
-
-                mentions.append({
-                    'source_id': self.sources['News'],
-                    'content': content,
-                    'url': article['url']
-                })
-                self.logger.info(f"Found article: {article.get('title', 'No title')}")
+                    for article in articles:
+                        title = article.get('title', '').lower()
+                        body = article.get('body', '').lower()
+                        if coin['symbol'].lower() in title or coin['full_name'].lower() in title or \
+                           coin['symbol'].lower() in body or coin['full_name'].lower() in body:
+                            
+                            content = f"{article.get('title', '')} - {article.get('body', '')}"
+                            sentiment_score, sentiment_label = self.analyze_sentiment(content)
+                            mentions.append({
+                                'source_id': self.sources['CryptoCompare'],
+                                'content': content[:500],
+                                'url': article.get('url', ''),
+                                'sentiment_score': sentiment_score,
+                                'sentiment_label': sentiment_label
+                            })
+                            self.log_to_output(f"Found news mention for {coin['symbol']}")
+                else:
+                    self.log_to_output(f"CryptoCompare News API error response: {news_data.get('Message', 'Unknown error')}")
+            else:
+                self.log_to_output(f"CryptoCompare News API HTTP error: {response.status_code}")
                 
         except Exception as e:
-            if 'rateLimited' in str(e):
-                self.logger.warning("News API rate limit reached, switching to Reddit only")
-                self._news_api_requests = 100  # Mark as limit reached
-            else:
-                self.logger.error(f"News API error for {coin['symbol']}: {str(e)}")
+            self.log_to_output(f"CryptoCompare News API error for {coin['symbol']}: {str(e)}")
         
+        self.log_to_output(f"News API - Found {len(mentions)} mentions for {coin['symbol']}")
         return mentions
 
     def collect_reddit_mentions(self, coin):
         mentions = []
-        # Only use main crypto subreddits for small coins to avoid 404s
-        if len(coin['symbol']) <= 3:  # For short symbols like 'OM'
-            subreddits = ['cryptocurrency', 'CryptoMarkets']
-        else:
-            subreddits = ['cryptocurrency', 'CryptoMarkets', coin['symbol'].lower()]
+        subreddits = ['cryptocurrency', 'CryptoMarkets']
+        if len(coin['symbol']) > 3:
+            subreddits.append(coin['symbol'].lower())
         
         for subreddit in subreddits:
             try:
@@ -151,555 +170,541 @@ class ChatCollector:
                 
                 try:
                     subreddit_obj = self.reddit.subreddit(subreddit)
-                    # Test if subreddit exists and is accessible
                     subreddit_obj.id
                 except Exception as e:
                     self.logger.warning(f"Skipping inaccessible subreddit r/{subreddit}: {str(e)}")
-                    continue  # Skip to next subreddit without stopping
+                    continue
 
-                # Add error handling for the search
-                try:
-                    search_results = subreddit_obj.search(
-                        f"{coin['symbol']} OR {coin['full_name']}", 
-                        time_filter='day',
-                        limit=100
-                    )
-                    
-                    for post in search_results:
-                        if not post.selftext and not post.title:
-                            continue
-                            
-                        content = f"Title: {post.title}\nContent: {post.selftext}"
-                        if len(content.strip()) < 10:  # Skip very short posts
-                            continue
+                search_results = subreddit_obj.search(
+                    f"{coin['symbol']} OR {coin['full_name']}", 
+                    time_filter='day',
+                    limit=100
+                )
+                
+                for post in search_results:
+                    if not post.selftext and not post.title:
+                        continue
+                        
+                    content = f"Title: {post.title}\nContent: {post.selftext}"
+                    if len(content.strip()) < 10:
+                        continue
 
-                        mentions.append({
-                            'source_id': self.sources['Reddit'],
-                            'content': content,
-                            'url': f"https://reddit.com{post.permalink}"
-                        })
-                        self.logger.info(f"Found Reddit post: {post.title}")
-
-                except Exception as search_error:
-                    self.logger.warning(f"Search failed for r/{subreddit}: {str(search_error)}")
-                    continue  # Continue with next subreddit
+                    sentiment_score, sentiment_label = self.analyze_sentiment(content)
+                    mentions.append({
+                        'source_id': self.sources['Reddit'],
+                        'content': content[:500],
+                        'url': f"https://reddit.com{post.permalink}",
+                        'sentiment_score': sentiment_score,
+                        'sentiment_label': sentiment_label,
+                        'coin_id': coin['coin_id']
+                    })
 
             except Exception as e:
                 self.logger.error(f"Reddit error for {subreddit}/{coin['symbol']}: {str(e)}")
-                continue  # Continue with next subreddit
+                continue
         
         return mentions
 
-    def save_mentions(self, coin_id, mentions):
-        current_time = datetime.datetime.now()
-        saved_count = 0
-        skipped_count = 0
-        error_count = 0
+    def collect_twitter_mentions(self, coin):
+        mentions = []
+        try:
+            self.logger.info(f"Searching Twitter for {coin['symbol']}")
+            
+            query = f"#{coin['symbol'].lower()} OR #{coin['full_name'].lower()} crypto -is:retweet lang:en"
+            tweets = self.twitter.search_recent_tweets(
+                query=query,
+                max_results=100,
+                tweet_fields=['created_at', 'text', 'public_metrics']
+            )
+            
+            if not hasattr(tweets, 'data') or not tweets.data:
+                return mentions
+
+            for tweet in tweets.data:
+                sentiment_score, sentiment_label = self.analyze_sentiment(tweet.text)
+                mentions.append({
+                    'source_id': self.sources['Twitter'],
+                    'content': tweet.text[:500],
+                    'sentiment_score': sentiment_score,
+                    'sentiment_label': sentiment_label,
+                    'url': f"https://twitter.com/i/web/status/{tweet.id}",
+                    'coin_id': coin['coin_id']
+                })
+                
+        except Exception as e:
+            self.logger.error(f"Twitter API error for {coin['symbol']}: {str(e)}")
+            
+        return mentions
+
+    def collect_cryptocompare_mentions(self, coin):
+        mentions = []
+        try:
+            self.logger.info(f"Fetching CryptoCompare news for {coin['symbol']}")
+            
+            url = "https://min-api.cryptocompare.com/data/v2/news/?lang=EN"
+            response = requests.get(url, headers=self.cryptocompare_headers)
+            
+            if response.status_code == 200:
+                data = response.json()
+                if 'Data' not in data:
+                    return mentions
+                
+                news = data['Data']
+                search_terms = [coin['symbol'].lower()]
+                
+                coin_news = [
+                    n for n in news 
+                    if any(term in n['title'].lower() for term in search_terms)
+                ]
+                
+                for article in coin_news:
+                    sentiment_score, sentiment_label = self.analyze_sentiment(article['title'])
+                    mentions.append({
+                        'source_id': self.sources['CryptoCompare'],
+                        'content': article['title'][:500],
+                        'sentiment_score': sentiment_score,
+                        'sentiment_label': sentiment_label,
+                        'url': article.get('url', ''),
+                        'coin_id': coin['coin_id']
+                    })
+                    
+            else:
+                self.logger.error(f"CryptoCompare API error: {response.text}")
+                
+        except Exception as e:
+            self.logger.error(f"CryptoCompare API error for {coin['symbol']}: {str(e)}")
+            
+        return mentions
+
+    def collect_binance_mentions(self, coin):
+        mentions = []
+        try:
+            self.logger.info(f"Fetching Binance news for {coin['symbol']}")
+            
+            url = "https://www.binance.com/bapi/composite/v1/public/cms/article/catalog/list/query"
+            headers = {
+                'User-Agent': 'Mozilla/5.0',
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            }
+            data = {
+                "catalogId": "48",  # News catalog ID
+                "pageNo": 1,
+                "pageSize": 20
+            }
+            
+            response = requests.post(url, json=data, headers=headers)
+            if response.status_code == 200:
+                articles = response.json().get('data', {}).get('articles', [])
+                
+                for article in articles:
+                    title = article.get('title', '').lower()
+                    if coin['symbol'].lower() in title or coin['full_name'].lower() in title:
+                        content = article.get('title', '')
+                        sentiment_score, sentiment_label = self.analyze_sentiment(content)
+                        mentions.append({
+                            'source_id': self.sources['Binance'],
+                            'content': content[:500],
+                            'url': f"https://www.binance.com/en/news/{article.get('code', '')}",
+                            'sentiment_score': sentiment_score,
+                            'sentiment_label': sentiment_label
+                        })
+                    
+        except Exception as e:
+            self.logger.error(f"Binance API error for {coin['symbol']}: {str(e)}")
         
-        for mention in mentions:
-            try:
-                # Validate required fields
-                if not all(key in mention for key in ['source_id', 'content', 'url']):
-                    self.logger.error(f"Missing required fields in mention for coin_id {coin_id}")
-                    error_count += 1
-                    continue
+        return mentions
 
-                # Check for duplicates
-                self.cursor.execute('''
-                    SELECT chat_id FROM chat_data 
-                    WHERE coin_id = ? AND url = ? 
-                    AND DATEDIFF(hour, timestamp, ?) < 24
-                ''', (coin_id, mention['url'], current_time))
+    def collect_coingecko_mentions(self, coin):
+        mentions = []
+        try:
+            self.log_to_output(f"Starting CoinGecko search for {coin['symbol']}")
+            
+            search_url = f"https://api.coingecko.com/api/v3/search?query={coin['symbol']}"
+            self.log_to_output(f"CoinGecko search URL: {search_url}")
+            
+            response = requests.get(search_url)
+            self.log_to_output(f"CoinGecko search response status: {response.status_code}")
+            
+            if response.status_code == 200:
+                search_data = response.json()
+                coins = search_data.get('coins', [])
+                self.log_to_output(f"CoinGecko coins found: {len(coins)}")
                 
-                if self.cursor.fetchone():
-                    self.logger.info(f"Skipping duplicate mention: {mention['url']}")
-                    skipped_count += 1
-                    continue
-                
-                # Validate content length
-                if len(mention['content']) > 4000:  # SQL Server text limit
-                    mention['content'] = mention['content'][:4000]
-                    self.logger.warning(f"Truncated long content for {mention['url']}")
+                if coins:
+                    coin_id = coins[0]['id']
+                    details_url = f"https://api.coingecko.com/api/v3/coins/{coin_id}"
+                    details_response = requests.get(details_url)
+                    self.log_to_output(f"CoinGecko details response status: {details_response.status_code}")
+                    
+                    if details_response.status_code == 200:
+                        details = details_response.json()
+                        if 'description' in details and 'en' in details['description']:
+                            content = details['description']['en']
+                            sentiment_score, sentiment_label = self.analyze_sentiment(content)
+                            mentions.append({
+                                'source_id': self.sources['CoinGecko'],
+                                'content': content[:500],
+                                'url': f"https://www.coingecko.com/en/coins/{coin_id}",
+                                'sentiment_score': sentiment_score,
+                                'sentiment_label': sentiment_label
+                            })
+                    
+        except Exception as e:
+            self.log_to_output(f"CoinGecko API error for {coin['symbol']}: {str(e)}")
+        
+        self.log_to_output(f"CoinGecko - Found {len(mentions)} mentions for {coin['symbol']}")
+        return mentions
 
-                score, label = self.analyze_sentiment(mention['content'])
-                
-                self.cursor.execute('''
+    def save_mentions(self, coin, mentions):
+        try:
+            for mention in mentions:
+                self.cursor.execute("""
                     INSERT INTO chat_data (
-                        timestamp, coin_id, source_id, content,
-                        sentiment_score, sentiment_label, url
-                    )
-                    VALUES (?, ?, ?, ?, ?, ?, ?)
-                ''', (
-                    current_time, coin_id, mention['source_id'],
-                    mention['content'], score, label, mention['url']
+                        coin_id, source_id, content, sentiment_score, 
+                        sentiment_label, url, timestamp
+                    ) VALUES (?, ?, ?, ?, ?, ?, GETDATE())
+                """, (
+                    mention['coin_id'],
+                    mention['source_id'],
+                    mention['content'][:500],
+                    mention.get('sentiment_score', 0.0),
+                    mention.get('sentiment_label', 'NEUTRAL'),
+                    mention.get('url', '')
                 ))
-                self.conn.commit()
-                saved_count += 1
-                
-            except Exception as e:
-                self.logger.error(f"Error saving mention: {str(e)}")
-                error_count += 1
+            self.conn.commit()
+            self.logger.info(f"Saved {len(mentions)} mentions successfully")
+        except Exception as e:
+            self.logger.error(f"Error saving mentions: {str(e)}")
+            self.conn.rollback()
+            raise
 
-        self.logger.info(f"Coin {coin_id} summary: Saved {saved_count}, Skipped {skipped_count}, Errors {error_count}")
-        return saved_count > 0
+    def collect_mentions_template(self, source_name, coin, collection_function):
+        try:
+            raw_mentions = collection_function(coin)
+            processed_mentions = []
+            
+            for raw_mention in raw_mentions:
+                processed_mention = {
+                    'coin_id': coin['coin_id'],
+                    'source_id': self.sources[source_name],
+                    'content': raw_mention.get('content', ''),
+                    'url': raw_mention.get('url', ''),
+                    'sentiment_score': raw_mention.get('sentiment_score', 0.0),
+                    'sentiment_label': raw_mention.get('sentiment_label', 'NEUTRAL')
+                }
+                processed_mentions.append(processed_mention)
+                
+            return processed_mentions
+        except Exception as e:
+            self.logger.error(f"{source_name} API error for {coin['symbol']}: {str(e)}")
+            return []
 
     def collect_chat_data(self):
         try:
-            # Reset counters if it's a new day
-            current_hour = datetime.datetime.now().hour
-            if current_hour == 0 and hasattr(self, '_last_reset_hour'):
-                if self._last_reset_hour != 0:
-                    self.reset_api_counters()
-            self._last_reset_hour = current_hour
-
-            # Verify database connection
-            try:
-                self.cursor.execute("SELECT 1")
-            except Exception as e:
-                self.logger.error("Database connection lost, attempting to reconnect")
-                self.init_database()
-
-            # Changed query to not use market_cap
-            self.cursor.execute("""
-                SELECT coin_id, symbol, full_name 
-                FROM Coins 
-                ORDER BY coin_id
-            """)
-            
-            coins = [{'id': row[0], 'symbol': row[1], 'full_name': row[2]} 
-                    for row in self.cursor.fetchall()]
-            
-            if not coins:
-                self.logger.error("No coins found in database")
-                return False
-
+            coins = self.get_coins()
+            total_coins = len(coins)
             total_mentions = 0
-            for coin in coins:
-                self.logger.info(f"Collecting mentions for {coin['symbol']}")
+
+            self.log_to_output("\nStarting data collection...")
+            
+            for index, coin in enumerate(coins, 1):
+                coin_symbol = coin['symbol']
+                self.log_to_output(f"\nProcessing {coin_symbol} ({index}/{total_coins})")
                 
                 mentions = []
                 
-                # Only collect news if we haven't hit the limit
-                if not hasattr(self, '_news_api_requests') or self._news_api_requests < 95:
-                    news_mentions = self.collect_news_mentions(coin)
-                    self.logger.info(f"Found {len(news_mentions)} news mentions for {coin['symbol']}")
-                    mentions.extend(news_mentions)
+                sources = {
+                    'News API': self.collect_news_mentions,
+                    'Reddit': self.collect_reddit_mentions,
+                    'Twitter': self.collect_twitter_mentions,
+                    'CryptoCompare': self.collect_cryptocompare_mentions,
+                    'Binance': self.collect_binance_mentions,
+                    'CoinGecko': self.collect_coingecko_mentions
+                }
                 
-                reddit_mentions = self.collect_reddit_mentions(coin)
-                self.logger.info(f"Found {len(reddit_mentions)} Reddit mentions for {coin['symbol']}")
-                mentions.extend(reddit_mentions)
-                
+                for source_name, collection_func in sources.items():
+                    try:
+                        source_mentions = self.collect_mentions_template(source_name, coin, collection_func)
+                        mentions.extend(source_mentions)
+                        self.log_to_output(f"{source_name} - {coin_symbol}: Found {len(source_mentions)} mentions")
+                        
+                        # Update GUI with new mentions
+                        for mention in source_mentions:
+                            self.tree.insert("", 0, values=(
+                                datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
+                                coin_symbol,
+                                source_name,
+                                mention['sentiment_label'],
+                                mention['content'][:100]
+                            ), tags=(mention['sentiment_label'].lower(),))
+                            
+                    except Exception as e:
+                        self.log_to_output(f"ERROR - {source_name} - {coin_symbol}: {str(e)}")
+
                 if mentions:
-                    self.save_mentions(coin['id'], mentions)
-                    total_mentions += len(mentions)
+                    try:
+                        self.save_mentions(coin, mentions)
+                        total_mentions += len(mentions)
+                        self.log_to_output("Save completed")
+                    except Exception as e:
+                        self.log_to_output(f"ERROR - Database - {coin_symbol}: {str(e)}")
                 
-            self.logger.info(f"Collection completed. Total mentions: {total_mentions}")
+                self.log_to_output(f"Progress: {index}/{total_coins} coins processed")
+                self.log_to_output(f"Total mentions collected so far: {total_mentions}")
+
+            self.log_to_output(f"\nData collection completed!")
+            self.log_to_output(f"Total mentions collected: {total_mentions}")
+
             return True
-            
+
         except Exception as e:
-            self.logger.error(f"Error in chat collection: {str(e)}")
+            self.log_to_output(f"ERROR - Collection Process - SYSTEM: {str(e)}")
             return False
 
-class ChatCollectorGUI(ChatCollector):
+    def log_to_output(self, message):
+        try:
+            # Write to output.txt with absolute path
+            timestamp = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+            log_message = f"{timestamp} - {message}\n"
+            
+            # Get current directory and create full path
+            current_dir = os.path.dirname(os.path.abspath(__file__))
+            output_file = os.path.join(current_dir, 'output.txt')
+            
+            # Write to file
+            with open(output_file, 'a', encoding='utf-8') as f:
+                f.write(log_message)
+            
+            # Print to console
+            print(log_message.strip())
+            
+            # Update GUI status
+            self.status_label.config(text=message)
+            
+            # Force GUI to update
+            self.root.update_idletasks()
+            
+        except Exception as e:
+            print(f"Error writing to output.txt: {str(e)}")
+
+class ChatGUI(ChatCollector):
     def __init__(self):
         super().__init__()
         self.root = tk.Tk()
         self.root.title("Crypto Chat Collector")
         self.is_collecting = False
         self.create_gui()
-        self.setup_tree_bindings()
-
-    def setup_tree_bindings(self):
-        self.tree.bind('<Double-1>', self.on_tree_double_click)
-        self.tree.bind('<Return>', self.on_tree_double_click)
-
-    def on_tree_double_click(self, event):
-        # Get selected item
-        selected_item = self.tree.selection()
-        if not selected_item:
-            return
-            
-        # Get the URL from the selected row (URL is the last column)
-        item_values = self.tree.item(selected_item[0])['values']
-        if item_values and len(item_values) >= 5:  # Make sure we have all columns
-            url = item_values[4]  # URL is the 5th column
-            try:
-                webbrowser.open(url)  # This opens the system's default browser
-            except Exception as e:
-                self.logger.error(f"Error opening URL: {str(e)}")
-                messagebox.showerror("Error", f"Could not open URL: {str(e)}")
 
     def create_gui(self):
-        main_frame = ttk.Frame(self.root, padding="10")
-        main_frame.grid(row=0, column=0, sticky=(tk.W, tk.E, tk.N, tk.S))
+        # Create main frame
+        self.main_frame = ttk.Frame(self.root, padding="10")
+        self.main_frame.grid(row=0, column=0, sticky=(tk.W, tk.E, tk.N, tk.S))
 
-        # Control frame for buttons and filters
-        control_frame = ttk.Frame(main_frame)
-        control_frame.grid(row=0, column=0, columnspan=3, sticky=(tk.W, tk.E), pady=(0, 10))
+        # Create control frame for collection controls
+        collection_frame = ttk.LabelFrame(self.main_frame, text="Data Collection", padding="5")
+        collection_frame.grid(row=0, column=0, sticky=(tk.W, tk.E), pady=5)
 
-        # Left side: Buttons and status
-        button_frame = ttk.Frame(control_frame)
-        button_frame.pack(side=tk.LEFT, padx=(0, 20))
-        
-        # Collection button
+        # Add Start/Stop button
         self.collect_button = ttk.Button(
-            button_frame, 
-            text="Start Collection",
-            width=15,
+            collection_frame, 
+            text="Start Collection", 
             command=self.toggle_collection
         )
-        self.collect_button.pack(side=tk.LEFT, padx=5)
-        
-        # Load History button - make sure it's visible
-        self.load_button = ttk.Button(
-            button_frame, 
-            text="Load History",
-            width=15,
-            command=self.load_history
+        self.collect_button.pack(side="left", padx=5)
+
+        # Add status label
+        self.status_label = ttk.Label(collection_frame, text="Ready")
+        self.status_label.pack(side="left", padx=5)
+
+        # Create historic view frame
+        historic_frame = ttk.LabelFrame(self.main_frame, text="Historic Data View", padding="5")
+        historic_frame.grid(row=1, column=0, sticky=(tk.W, tk.E), pady=5)
+
+        # Coin filter dropdown
+        ttk.Label(historic_frame, text="Coin:").pack(side=tk.LEFT, padx=5)
+        self.hist_coin_var = tk.StringVar()
+        self.hist_coin_dropdown = ttk.Combobox(
+            historic_frame, 
+            textvariable=self.hist_coin_var,
+            state='readonly',
+            width=10
         )
-        self.load_button.pack(side=tk.LEFT, padx=5)
-        
-        # Status label
-        self.status_label = ttk.Label(button_frame, text="Ready", width=30)
-        self.status_label.pack(side=tk.LEFT, padx=10)
+        self.update_coin_dropdown()
+        self.hist_coin_dropdown.pack(side=tk.LEFT, padx=5)
 
-        # Right side: Filters
-        filter_frame = ttk.Frame(control_frame)
-        filter_frame.pack(side=tk.RIGHT)
-
-        # Source filter
-        ttk.Label(filter_frame, text="Source:").pack(side=tk.LEFT, padx=(0, 5))
-        self.source_var = tk.StringVar(value="All")
-        self.source_filter = ttk.Combobox(
-            filter_frame, 
-            textvariable=self.source_var,
-            values=["All", "News", "Reddit"],
-            width=10,
-            state="readonly"
+        # Source filter dropdown
+        ttk.Label(historic_frame, text="Source:").pack(side=tk.LEFT, padx=5)
+        self.hist_source_var = tk.StringVar()
+        self.hist_source_dropdown = ttk.Combobox(
+            historic_frame,
+            textvariable=self.hist_source_var,
+            values=['All'] + list(self.sources.keys()),
+            state='readonly',
+            width=15
         )
-        self.source_filter.pack(side=tk.LEFT, padx=(0, 20))
-        self.source_filter.bind('<<ComboboxSelected>>', self.apply_filters)
+        self.hist_source_dropdown.set('All')
+        self.hist_source_dropdown.pack(side=tk.LEFT, padx=5)
 
-        # Coin filter
-        ttk.Label(filter_frame, text="Coin:").pack(side=tk.LEFT, padx=(0, 5))
-        self.coin_var = tk.StringVar(value="All")
-        self.coin_filter = ttk.Combobox(
-            filter_frame, 
-            textvariable=self.coin_var,
-            width=10,
-            state="readonly"
+        # View button
+        self.view_historic_button = ttk.Button(
+            historic_frame,
+            text="View Historic Data",
+            command=self.refresh_historic_data
         )
-        self.coin_filter.pack(side=tk.LEFT)
-        self.coin_filter.bind('<<ComboboxSelected>>', self.apply_filters)
-        
-        # Update coin filter with available coins
-        self.update_coin_filter()
+        self.view_historic_button.pack(side=tk.LEFT, padx=5)
 
-        # Results treeview
-        self.tree = ttk.Treeview(main_frame, columns=(
-            "timestamp", "coin", "source", "sentiment", "url"
-        ), show="headings")
+        # Create treeview for data display
+        self.tree = ttk.Treeview(self.main_frame, columns=(
+            "timestamp", "symbol", "source", "sentiment", "content"
+        ), show="headings", height=20)
 
         # Configure columns
-        self.tree.heading("timestamp", text="Time")
-        self.tree.heading("coin", text="Coin")
+        self.tree.heading("timestamp", text="Timestamp")
+        self.tree.heading("symbol", text="Symbol")
         self.tree.heading("source", text="Source")
         self.tree.heading("sentiment", text="Sentiment")
-        self.tree.heading("url", text="URL")
+        self.tree.heading("content", text="Content")
 
+        # Configure column widths
         self.tree.column("timestamp", width=150)
-        self.tree.column("coin", width=100)
+        self.tree.column("symbol", width=100)
         self.tree.column("source", width=100)
         self.tree.column("sentiment", width=100)
-        self.tree.column("url", width=300)
+        self.tree.column("content", width=400)
 
-        self.tree.grid(row=1, column=0, columnspan=2, sticky=(tk.W, tk.E, tk.N, tk.S))
+        # Add treeview to main frame
+        self.tree.grid(row=2, column=0, sticky=(tk.W, tk.E, tk.N, tk.S))
 
-        # Scrollbar
-        scrollbar = ttk.Scrollbar(main_frame, orient=tk.VERTICAL, command=self.tree.yview)
-        scrollbar.grid(row=1, column=2, sticky=(tk.N, tk.S))
+        # Configure tag colors for sentiment
+        self.tree.tag_configure('positive', foreground='green')
+        self.tree.tag_configure('negative', foreground='red')
+        self.tree.tag_configure('neutral', foreground='gray')
+
+        # Add scrollbar
+        scrollbar = ttk.Scrollbar(self.main_frame, orient=tk.VERTICAL, command=self.tree.yview)
+        scrollbar.grid(row=2, column=1, sticky=(tk.N, tk.S))
         self.tree.configure(yscrollcommand=scrollbar.set)
 
-        # Stats frame
-        stats_frame = ttk.LabelFrame(main_frame, text="Collection Statistics", padding="5")
-        stats_frame.grid(row=2, column=0, columnspan=3, sticky=(tk.W, tk.E), pady=5)
+        # Make the content column expandable
+        self.main_frame.columnconfigure(0, weight=1)
+        self.main_frame.rowconfigure(2, weight=1)
 
-        # Stats labels
-        self.stats_labels = {
-            'total': ttk.Label(stats_frame, text="Total Mentions: 0"),
-            'news': ttk.Label(stats_frame, text="News Articles: 0"),
-            'reddit': ttk.Label(stats_frame, text="Reddit Posts: 0"),
-            'sentiment': ttk.Label(stats_frame, text="Avg Sentiment: 0.00")
-        }
+        # Add bindings for automatic refresh when dropdowns change
+        self.hist_coin_dropdown.bind('<<ComboboxSelected>>', lambda e: self.refresh_historic_data())
+        self.hist_source_dropdown.bind('<<ComboboxSelected>>', lambda e: self.refresh_historic_data())
 
-        for i, label in enumerate(self.stats_labels.values()):
-            label.grid(row=0, column=i, padx=10)
-
-        # Help label
-        help_label = ttk.Label(
-            main_frame, 
-            text="Double-click or press Enter on a row to open the article",
-            font=('Helvetica', 9, 'italic')
-        )
-        help_label.grid(row=3, column=0, columnspan=3, pady=(5,0))
-
-    def update_coin_filter(self):
+    def refresh_historic_data(self):
         try:
-            self.cursor.execute("SELECT DISTINCT symbol FROM Coins ORDER BY symbol")
-            coins = ["All"] + [row[0] for row in self.cursor.fetchall()]
-            self.coin_filter['values'] = coins
-        except Exception as e:
-            self.logger.error(f"Error updating coin filter: {str(e)}")
-            self.coin_filter['values'] = ["All"]
+            # Clear existing items
+            for item in self.tree.get_children():
+                self.tree.delete(item)
 
-    def apply_filters(self, event=None):
-        try:
-            self.status_label.config(text="Applying filters...")
-            self.tree.delete(*self.tree.get_children())  # Clear current items
-            
             # Build query based on filters
             query = """
-                SELECT TOP 100
-                    cd.timestamp,
-                    c.symbol,
-                    cs.source_name,
-                    cd.sentiment_score,
-                    cd.sentiment_label,
+                SELECT TOP 1000 
+                    c.symbol, 
+                    cs.source_name, 
+                    cd.sentiment_label, 
+                    cd.content, 
+                    cd.timestamp, 
                     cd.url
                 FROM chat_data cd
-                JOIN Coins c ON cd.coin_id = c.coin_id
+                JOIN coins c ON cd.coin_id = c.coin_id
                 JOIN chat_source cs ON cd.source_id = cs.source_id
                 WHERE 1=1
             """
             params = []
-            
-            # Apply source filter
-            if self.source_var.get() != "All":
-                query += " AND cs.source_name = ?"
-                params.append(self.source_var.get())
-                
-            # Apply coin filter
-            if self.coin_var.get() != "All":
+
+            # Add coin filter if not 'All'
+            if self.hist_coin_var.get() and self.hist_coin_var.get() != 'All':
                 query += " AND c.symbol = ?"
-                params.append(self.coin_var.get())
-                
+                params.append(self.hist_coin_var.get())
+
+            # Add source filter if not 'All'
+            if self.hist_source_var.get() and self.hist_source_var.get() != 'All':
+                query += " AND cs.source_name = ?"
+                params.append(self.hist_source_var.get())
+
+            # Add order by
             query += " ORDER BY cd.timestamp DESC"
-            
-            # Execute query with filters
+
+            # Execute query
             self.cursor.execute(query, params)
             rows = self.cursor.fetchall()
             
-            # Populate tree with filtered results
+            # Populate tree
             for row in rows:
-                self.tree.insert("", "end", values=(
-                    row[0].strftime('%Y-%m-%d %H:%M:%S'),
-                    row[1],  # symbol
-                    row[2],  # source_name
-                    f"{row[4]} ({row[3]:.2f})",  # sentiment_label (sentiment_score)
-                    row[5]   # url
-                ))
-                
-            # Update statistics for filtered results
-            news_count = sum(1 for item in self.tree.get_children() 
-                            if self.tree.item(item)['values'][2] == 'News')
-            reddit_count = sum(1 for item in self.tree.get_children() 
-                              if self.tree.item(item)['values'][2] == 'Reddit')
-            
-            if rows:
-                total_sentiment = sum(float(self.tree.item(item)['values'][3].split('(')[1].strip(')'))
-                                     for item in self.tree.get_children())
-                avg_sentiment = total_sentiment / len(rows)
-            else:
-                avg_sentiment = 0
-            
-            self.update_stats(news_count, reddit_count, avg_sentiment)
-            
-            self.status_label.config(text=f"Showing {len(rows)} records")
-            
+                self.tree.insert("", 'end', values=(
+                    row[4].strftime('%Y-%m-%d %H:%M:%S'),
+                    row[0],  # symbol
+                    row[1],  # source
+                    row[2],  # sentiment
+                    row[3][:200]  # content (truncated)
+                ), tags=(row[2].lower(),))
+
+            # Update status
+            record_count = len(rows)
+            status_message = f"Loaded {record_count} records"
+            self.status_label.config(text=status_message)
+            self.log_to_output(status_message)
+
         except Exception as e:
-            self.logger.error(f"Error applying filters: {str(e)}")
-            messagebox.showerror("Error", f"Failed to apply filters: {str(e)}")
-            self.status_label.config(text="Error applying filters")
-
-    def add_mention(self, coin_symbol, source, sentiment_score, sentiment_label, url):
-        timestamp = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-        item = self.tree.insert("", "end", values=(
-            timestamp,
-            coin_symbol,
-            source,
-            f"{sentiment_label} ({sentiment_score:.2f})",
-            url
-        ))
-        
-        # Apply current filters to new item
-        self.apply_filters()
-        
-        # Keep only last 100 items
-        items = self.tree.get_children()
-        if len(items) > 100:
-            self.tree.delete(items[0])
-
-    def update_stats(self, news_count, reddit_count, sentiment_avg):
-        total = news_count + reddit_count
-        self.stats_labels['total'].config(text=f"Total Mentions: {total}")
-        self.stats_labels['news'].config(text=f"News Articles: {news_count}")
-        self.stats_labels['reddit'].config(text=f"Reddit Posts: {reddit_count}")
-        self.stats_labels['sentiment'].config(text=f"Avg Sentiment: {sentiment_avg:.2f}")
+            error_msg = f"Failed to load historic data: {str(e)}"
+            self.log_to_output(error_msg)
+            messagebox.showerror("Error", error_msg)
 
     def toggle_collection(self):
         if not self.is_collecting:
             self.is_collecting = True
             self.collect_button.config(text="Stop Collection")
-            self.collection_thread = threading.Thread(target=self.collect_with_gui_updates)
+            self.collection_thread = threading.Thread(target=self.collect_continuously)
             self.collection_thread.daemon = True
             self.collection_thread.start()
         else:
             self.is_collecting = False
             self.collect_button.config(text="Start Collection")
 
-    def collect_with_gui_updates(self):
+    def collect_continuously(self):
         while self.is_collecting:
-            try:
-                self.status_label.config(text="Starting collection...")
-                self.tree.delete(*self.tree.get_children())  # Clear previous items
-                news_count = 0
-                reddit_count = 0
-                total_sentiment = 0
-                mention_count = 0
-
-                self.cursor.execute("""
-                    SELECT coin_id, symbol, full_name 
-                    FROM Coins 
-                    ORDER BY coin_id
-                """)
-                
-                coins = [{'id': row[0], 'symbol': row[1], 'full_name': row[2]} 
-                        for row in self.cursor.fetchall()]
-
-                for coin in coins:
-                    if not self.is_collecting:  # Check if stopped
-                        break
-                    
-                    self.status_label.config(text=f"Collecting {coin['symbol']}...")
-                    
-                    if not hasattr(self, '_news_api_requests') or self._news_api_requests < 95:
-                        news_mentions = self.collect_news_mentions(coin)
-                        for mention in news_mentions:
-                            score, label = self.analyze_sentiment(mention['content'])
-                            self.add_mention(coin['symbol'], 'News', score, label, mention['url'])
-                            total_sentiment += score
-                            news_count += 1
-                            mention_count += 1
-
-                    reddit_mentions = self.collect_reddit_mentions(coin)
-                    for mention in reddit_mentions:
-                        score, label = self.analyze_sentiment(mention['content'])
-                        self.add_mention(coin['symbol'], 'Reddit', score, label, mention['url'])
-                        total_sentiment += score
-                        reddit_count += 1
-                        mention_count += 1
-
-                # Update final stats
-                avg_sentiment = total_sentiment / mention_count if mention_count > 0 else 0
-                self.update_stats(news_count, reddit_count, avg_sentiment)
-                
-                collection_time = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-                if self.is_collecting:  # Only show "waiting" if not manually stopped
-                    self.status_label.config(text=f"Last collection: {collection_time}. Waiting for next run...")
-                else:
-                    self.status_label.config(text=f"Collection stopped at {collection_time}")
-                
-                # Wait for an hour if still collecting
-                for _ in range(3600):
-                    if not self.is_collecting:
-                        break
-                    time.sleep(1)
-                    
-            except Exception as e:
-                self.logger.error(f"GUI collection error: {str(e)}")
-                messagebox.showerror("Error", f"Collection failed: {str(e)}")
+            success = self.collect_chat_data()
+            if not success:
                 self.is_collecting = False
                 self.collect_button.config(text="Start Collection")
-                self.status_label.config(text="Collection failed!")
+                messagebox.showerror("Error", "Data collection failed")
                 break
+            else:
+                # Show success message and update button
+                self.root.after(0, lambda: messagebox.showinfo("Success", "Data collection completed successfully"))
+                self.root.after(0, lambda: self.collect_button.config(text="Start Collection"))
+                self.is_collecting = False
             
-        # Make sure button text is reset when collection stops
-        self.collect_button.config(text="Start Collection")
-        if self.status_label.cget("text") != "Collection failed!":
-            self.status_label.config(text="Collection stopped")
+            if self.is_collecting:  # Only sleep if we're still meant to be collecting
+                time.sleep(3600)  # Wait for 1 hour before next collection
 
-    def load_history(self):
+    def update_coin_dropdown(self):
         try:
-            self.status_label.config(text="Loading history...")
-            self.tree.delete(*self.tree.get_children())  # Clear current items
+            # Get coins from database
+            coins = self.get_coins()
+            coin_symbols = ['All'] + [coin['symbol'] for coin in coins]
             
-            # Build query based on filters - using TOP instead of LIMIT for SQL Server
-            query = """
-                SELECT TOP 100
-                    cd.timestamp,
-                    c.symbol,
-                    cs.source_name,
-                    cd.sentiment_score,
-                    cd.sentiment_label,
-                    cd.url
-                FROM chat_data cd
-                JOIN Coins c ON cd.coin_id = c.coin_id
-                JOIN chat_source cs ON cd.source_id = cs.source_id
-                WHERE 1=1
-            """
-            params = []
-            
-            if self.coin_var.get() != "All":
-                query += " AND c.symbol = ?"
-                params.append(self.coin_var.get())
+            # Update both dropdowns if they exist
+            if hasattr(self, 'hist_coin_dropdown'):
+                self.hist_coin_dropdown['values'] = coin_symbols
+                self.hist_coin_dropdown.set('All')
                 
-            if self.source_var.get() != "All":
-                query += " AND cs.source_name = ?"
-                params.append(self.source_var.get())
-                
-            query += " ORDER BY cd.timestamp DESC"  # Removed LIMIT, using TOP instead
-            
-            self.cursor.execute(query, params)
-            rows = self.cursor.fetchall()
-            
-            for row in rows:
-                self.tree.insert("", "end", values=(
-                    row[0].strftime('%Y-%m-%d %H:%M:%S'),
-                    row[1],  # symbol
-                    row[2],  # source_name
-                    f"{row[4]} ({row[3]:.2f})",  # sentiment_label (sentiment_score)
-                    row[5]   # url
-                ))
-                
-            self.status_label.config(text=f"Loaded {len(rows)} records")
-            
-            # Update statistics
-            news_count = sum(1 for item in self.tree.get_children() 
-                            if self.tree.item(item)['values'][2] == 'News')
-            reddit_count = sum(1 for item in self.tree.get_children() 
-                              if self.tree.item(item)['values'][2] == 'Reddit')
-            
-            total_sentiment = sum(float(self.tree.item(item)['values'][3].split('(')[1].strip(')'))
-                                 for item in self.tree.get_children())
-            avg_sentiment = total_sentiment / len(rows) if rows else 0
-            
-            self.update_stats(news_count, reddit_count, avg_sentiment)
-            
+            self.log_to_output(f"Updated coin dropdown with {len(coin_symbols)-1} coins")
         except Exception as e:
-            self.logger.error(f"Error loading history: {str(e)}")
-            messagebox.showerror("Error", f"Failed to load history: {str(e)}")
-            self.status_label.config(text="Error loading history")
+            self.log_to_output(f"Error updating coin dropdown: {str(e)}")
 
 def main():
     if len(sys.argv) > 1 and sys.argv[1] == '--service':
-        # Run in service mode
+        # Run in CLI mode
         collector = ChatCollector()
-        while True:
-            collector.collect_chat_data()
-            time.sleep(3600)  # Wait for 1 hour
+        collector.collect_chat_data()
     else:
         # Run in GUI mode
-        app = ChatCollectorGUI()
+        app = ChatGUI()
         app.root.mainloop()
 
 if __name__ == "__main__":

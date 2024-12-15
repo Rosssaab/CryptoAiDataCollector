@@ -18,15 +18,16 @@ DB_CONNECTION_STRING = (
 )
 
 # Social Media API Keys
-REDDIT_CLIENT_ID = 'your_reddit_client_id'
-REDDIT_CLIENT_SECRET = 'your_reddit_client_secret'
+REDDIT_CLIENT_ID = 'l9FpONLMIvRE7Xfgzj7J2g'
+REDDIT_CLIENT_SECRET = 'yNUKaC39Qq6ojMVIw0z1w1f667r6hA'
+
+TWITTER_BEARER_TOKEN = 'AAAAAAAAAAAAAAAAAAAAAHc9xgEAAAAAp8WM548Be6L6tf%2BDZc9qRvaf2P4%3DthjSlQw0W3r16WxXjkJQZaCAyHPVY94piDMpbWUAs4Z54kYjJO'  # Get from Twitter Developer Portal
+CRYPTOCOMPARE_API_KEY = 'e50f480237f72014cc79a1141b4be8750d32c9f714fdfdc7a751183843404b92'  # Get from CryptoCompare
 
 TWITTER_API_KEY = 'your_twitter_api_key'
 TWITTER_API_SECRET = 'your_twitter_api_secret'
 TWITTER_ACCESS_TOKEN = 'your_twitter_access_token'
 TWITTER_ACCESS_TOKEN_SECRET = 'your_twitter_access_token_secret'
-
-NEWS_API_KEY = 'a615eccfb6c94bb2b0d1ea6ddce46fb8'
 
 
 
