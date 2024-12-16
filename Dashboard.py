@@ -13,11 +13,26 @@ class Dashboard:
     def __init__(self):
         self.root = tk.Tk()
         self.root.title("Crypto Analytics Dashboard")
-        self.root.state('zoomed')  # Start maximized
+        
+        # Set initial window size to 1024px wide
+        # Calculate height based on 16:9 aspect ratio
+        width = 1024
+        height = int(width * 9/16)  # This will be 576px
+        
+        # Get screen dimensions
+        screen_width = self.root.winfo_screenwidth()
+        screen_height = self.root.winfo_screenheight()
+        
+        # Calculate center position
+        x = (screen_width - width) // 2
+        y = (screen_height - height) // 2
+        
+        # Set window size and position
+        self.root.geometry(f"{width}x{height}+{x}+{y}")
         
         # Apply a modern theme
         style = ttk.Style()
-        style.theme_use('clam')  # Using clam theme as base
+        style.theme_use('clam')
         
         # Configure custom colors
         style.configure("TFrame", background="#2B2B2B")
@@ -60,6 +75,22 @@ class Dashboard:
         
         # Add resize timer variable
         self.resize_timer = None
+        
+        # Add initial window size
+        self.last_width = None
+        self.last_height = None
+        
+        # Create a loading label (hidden initially)
+        self.loading_label = ttk.Label(self.root, text="Loading...", style='Loading.TLabel')
+        self.loading_label.place(relx=0.5, rely=0.5, anchor='center')
+        self.loading_label.place_forget()  # Hide initially
+        
+        # Configure loading label style
+        style = ttk.Style()
+        style.configure('Loading.TLabel', 
+                       font=('Helvetica', 14, 'bold'),
+                       background='#2B2B2B',
+                       foreground='white')
 
     def get_db_connection(self):
         return pyodbc.connect(self.conn_str)
@@ -277,6 +308,14 @@ class Dashboard:
             widget.destroy()
             
         try:
+            # Get current window size
+            current_width = self.root.winfo_width()
+            current_height = self.root.winfo_height()
+            
+            # Update last known size
+            self.last_width = current_width
+            self.last_height = current_height
+            
             # Get the time range
             timerange = self.mentions_timerange_var.get()
             
@@ -314,6 +353,10 @@ class Dashboard:
                 coin_data = df[df['symbol'] == coin]
                 total_mentions = coin_data['mention_count'].sum()
                 positive_mentions = coin_data[coin_data['sentiment_label'].isin(['positive', 'very positive'])]['mention_count'].sum()
+                negative_mentions = coin_data[coin_data['sentiment_label'].isin(['negative', 'very negative'])]['mention_count'].sum()
+                neutral_mentions = coin_data[coin_data['sentiment_label'] == 'neutral']['mention_count'].sum()
+                
+                # Calculate positive percentage
                 positive_percentage = (positive_mentions / total_mentions * 100) if total_mentions > 0 else 0
                 coin_sentiments.append((coin, positive_percentage))
             
@@ -323,12 +366,8 @@ class Dashboard:
             n_cols = 3  # Changed to 3 columns
             n_rows = (n_coins + n_cols - 1) // n_cols
             
-            # Get window dimensions once
-            window_width = self.root.winfo_width()
-            window_height = self.root.winfo_height()
-            
             # Create a canvas with scrollbar first
-            canvas = tk.Canvas(self.mentions_charts_frame, width=window_width-50)
+            canvas = tk.Canvas(self.mentions_charts_frame, width=current_width-50)
             scrollbar = ttk.Scrollbar(self.mentions_charts_frame, orient="vertical", command=canvas.yview)
             scrollable_frame = ttk.Frame(canvas)
             
@@ -342,9 +381,9 @@ class Dashboard:
             # Create a window in the canvas for the scrollable frame
             canvas.create_window((0, 0), window=scrollable_frame, anchor="nw")
             
-            # Calculate figure size
-            fig_width = window_width / 100  # Convert to inches
-            single_pie_height = window_height / 100 * 0.8
+            # Calculate figure size based on current window size
+            fig_width = current_width / 100  # Convert to inches
+            single_pie_height = current_height / 100 * 0.8
             fig_height = single_pie_height * n_rows
             
             # Create figure with lemon background
@@ -379,8 +418,8 @@ class Dashboard:
                 
                 plt.setp(autotexts, size=16, weight="bold", color='black')
                 
-                positive_pct = next(pct for coin_, pct in coin_sentiments if coin_ == coin)
-                ax.set_title(f'{coin} ({positive_pct:.1f}% Positive)', 
+                # Just show the coin symbol in the title
+                ax.set_title(coin, 
                             pad=20, 
                             y=1.1, 
                             fontsize=18, 
@@ -388,6 +427,48 @@ class Dashboard:
                             color='black')
                 
                 ax.set_facecolor('#FFFACD')
+                
+                # Add click event handler for this pie chart
+                def make_click_handler(coin_symbol):
+                    def on_click(event):
+                        # Check if click is within the axes
+                        if event.inaxes != ax:
+                            return
+                        
+                        # Disable the event temporarily
+                        ax.figure.canvas.mpl_disconnect(ax.figure.canvas._button_press_handler_id)
+                        
+                        # Show loading indicator
+                        self.show_loading()
+                        
+                        try:
+                            # Set coin in price analysis tab
+                            self.coin_var.set(coin_symbol)
+                            self.update_price_charts()
+                            
+                            # Set coin in sentiment tab
+                            self.sentiment_coin_var.set(coin_symbol)
+                            self.update_sentiment_charts()
+                            
+                            # Switch to sentiment tab
+                            self.notebook.select(2)  # Index 2 is sentiment tab
+                        finally:
+                            # Hide loading indicator
+                            self.hide_loading()
+                            
+                            # Re-enable the event handler
+                            ax.figure.canvas._button_press_handler_id = ax.figure.canvas.mpl_connect(
+                                'button_press_event', make_click_handler(coin_symbol))
+                    return on_click
+                
+                # Connect the click handler to the pie chart
+                handler_id = ax.figure.canvas.mpl_connect('button_press_event', 
+                                                        make_click_handler(coin))
+                ax.figure.canvas._button_press_handler_id = handler_id
+                
+                # Make the pie chart clickable by setting picker
+                for wedge in wedges:
+                    wedge.set_picker(True)
             
             plt.tight_layout(h_pad=4.0, w_pad=2.0)
             
@@ -408,7 +489,24 @@ class Dashboard:
             
             scrollable_frame.bind('<Configure>', configure_scroll_region)
             
-            # Draw once
+            # Add resize handler
+            def on_window_resize(event=None):
+                if event.widget == self.root:  # Only handle root window resizes
+                    # Check if size changed significantly (more than 50 pixels)
+                    if (abs(event.width - self.last_width) > 50 or 
+                        abs(event.height - self.last_height) > 50):
+                        
+                        # Cancel previous timer if it exists
+                        if self.resize_timer:
+                            self.root.after_cancel(self.resize_timer)
+                        
+                        # Schedule new update
+                        self.resize_timer = self.root.after(500, self.update_mentions_view)
+            
+            # Bind resize event
+            self.root.bind('<Configure>', on_window_resize)
+            
+            # Draw the canvas
             chart_canvas.draw()
             
         except Exception as e:
@@ -495,7 +593,7 @@ class Dashboard:
         """Handle cleanup when window is closed"""
         try:
             # Cancel any pending resize timer
-            if hasattr(self, 'resize_timer') and self.resize_timer:
+            if self.resize_timer:
                 self.root.after_cancel(self.resize_timer)
             
             # Close all matplotlib figures
@@ -511,6 +609,17 @@ class Dashboard:
 
     def run(self):
         self.root.mainloop()
+
+    def show_loading(self):
+        """Show the loading indicator"""
+        self.loading_label.lift()  # Bring to front
+        self.loading_label.place(relx=0.5, rely=0.5, anchor='center')
+        self.root.update()
+
+    def hide_loading(self):
+        """Hide the loading indicator"""
+        self.loading_label.place_forget()
+        self.root.update()
 
 if __name__ == "__main__":
     app = Dashboard()
