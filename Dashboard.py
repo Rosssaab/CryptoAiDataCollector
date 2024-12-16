@@ -15,6 +15,21 @@ class Dashboard:
         self.root.title("Crypto Analytics Dashboard")
         self.root.state('zoomed')  # Start maximized
         
+        # Apply a modern theme
+        style = ttk.Style()
+        style.theme_use('clam')  # Using clam theme as base
+        
+        # Configure custom colors
+        style.configure("TFrame", background="#2B2B2B")
+        style.configure("TLabel", background="#2B2B2B", foreground="white")
+        style.configure("TButton", background="#404040", foreground="white")
+        style.configure("TNotebook", background="#2B2B2B", foreground="white")
+        style.configure("TNotebook.Tab", background="#404040", foreground="white", padding=[10, 2])
+        style.map('TNotebook.Tab', background=[('selected', '#505050')])
+        
+        # Configure the root window color
+        self.root.configure(bg="#2B2B2B")
+        
         # Add protocol handler for window close button
         self.root.protocol("WM_DELETE_WINDOW", self.on_closing)
         
@@ -287,9 +302,18 @@ class Dashboard:
                 print("No data found")
                 return
             
-            # Create figure with subplots for each coin
-            coins = df['symbol'].unique()
-            n_coins = len(coins)
+            # Calculate positive sentiment percentage for each coin
+            coin_sentiments = []
+            for coin in df['symbol'].unique():
+                coin_data = df[df['symbol'] == coin]
+                total_mentions = coin_data['mention_count'].sum()
+                positive_mentions = coin_data[coin_data['sentiment_label'].isin(['positive', 'very positive'])]['mention_count'].sum()
+                positive_percentage = (positive_mentions / total_mentions * 100) if total_mentions > 0 else 0
+                coin_sentiments.append((coin, positive_percentage))
+            
+            # Sort coins by positive sentiment percentage (descending)
+            sorted_coins = [coin for coin, _ in sorted(coin_sentiments, key=lambda x: x[1], reverse=True)]
+            n_coins = len(sorted_coins)
             n_cols = 2  # 2 columns
             n_rows = (n_coins + n_cols - 1) // n_cols
             
@@ -298,7 +322,7 @@ class Dashboard:
             screen_height = self.root.winfo_screenheight()
             
             # Create a canvas with scrollbar first
-            canvas = tk.Canvas(self.mentions_charts_frame, width=screen_width-50)  # Leave room for scrollbar
+            canvas = tk.Canvas(self.mentions_charts_frame, width=screen_width-50)
             scrollbar = ttk.Scrollbar(self.mentions_charts_frame, orient="vertical", command=canvas.yview)
             scrollable_frame = ttk.Frame(canvas)
             
@@ -317,8 +341,8 @@ class Dashboard:
             single_pie_height = screen_height / 100 * 0.8  # 80% of screen height
             fig_height = single_pie_height * n_rows
             
-            # Create figure
-            fig = plt.figure(figsize=(fig_width, fig_height), dpi=100)
+            # Create figure with dark background
+            fig = plt.figure(figsize=(fig_width, fig_height), dpi=100, facecolor='#2B2B2B')
             
             colors = {
                 'positive': '#00ff00',    # Bright green
@@ -331,28 +355,56 @@ class Dashboard:
             # Maximum spacing between plots
             plt.subplots_adjust(hspace=1.2, wspace=0.4)
             
-            for idx, coin in enumerate(coins):
+            # Use the sorted coins list for creating pie charts
+            for idx, coin in enumerate(sorted_coins):
                 coin_data = df[df['symbol'] == coin]
-                ax = fig.add_subplot(n_rows, n_cols, idx + 1)
+                ax = fig.add_subplot(n_rows, n_cols, idx + 1)  # Remove 3D projection
+                
                 sentiment_counts = coin_data.groupby('sentiment_label')['mention_count'].sum()
+                
+                # Calculate start angle
+                start_angle = 90
                 
                 pie_colors = [colors.get(label.lower(), '#808080') for label in sentiment_counts.index]
                 wedges, texts, autotexts = ax.pie(sentiment_counts, 
                                                 labels=sentiment_counts.index,
                                                 autopct='%1.1f%%',
                                                 colors=pie_colors,
-                                                radius=1.0)
+                                                radius=1.0,
+                                                startangle=start_angle,  # Start from top
+                                                labeldistance=1.1,      # Move labels out slightly
+                                                explode=[0.05] * len(sentiment_counts),  # Slight explode effect
+                                                shadow=True)  # Add shadow for 3D effect
                 
-                plt.setp(autotexts, size=16, weight="bold")
-                plt.setp(texts, size=16)
-                ax.set_title(coin, pad=20, y=-0.1, fontsize=18, weight='bold')
+                # Style the text
+                plt.setp(autotexts, size=16, weight="bold", color='white')
+                plt.setp(texts, size=16, color='white')
+                
+                # Add title with positive sentiment percentage
+                positive_pct = next(pct for coin_, pct in coin_sentiments if coin_ == coin)
+                ax.set_title(f'{coin} ({positive_pct:.1f}% Positive)', 
+                            pad=20, 
+                            y=1.1, 
+                            fontsize=18, 
+                            weight='bold',
+                            color='white')
+                
+                # Set background color
+                ax.set_facecolor('#2B2B2B')
             
+            # Configure figure appearance
             plt.tight_layout(h_pad=4.0, w_pad=2.0)
+            fig.patch.set_facecolor('#2B2B2B')
             
-            # Create the matplotlib canvas and add it to the scrollable frame
+            # Create the matplotlib canvas with dark theme
             chart_canvas = FigureCanvasTkAgg(fig, scrollable_frame)
             chart_widget = chart_canvas.get_tk_widget()
+            chart_widget.configure(bg='#2B2B2B')
             chart_widget.pack(fill='both', expand=True)
+            
+            # Configure scrollable frame colors
+            scrollable_frame.configure(style='Custom.TFrame')
+            canvas.configure(bg='#2B2B2B')
             
             # Update the scroll region after the window is updated
             def configure_scroll_region(event):
