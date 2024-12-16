@@ -327,207 +327,58 @@ class Dashboard:
             widget.destroy()
             
         try:
+            print("\nDEBUG: Starting update_mentions_view")
+            
             # Get current window size
             current_width = self.root.winfo_width()
             current_height = self.root.winfo_height()
             
-            # Update last known size
-            self.last_width = current_width
-            self.last_height = current_height
-            
-            # Get the time range
-            timerange = self.mentions_timerange_var.get()
-            
-            # Calculate time range
-            now = datetime.now()
-            if timerange == '24h':
-                start_time = now - timedelta(days=1)
-            elif timerange == '7d':
-                start_time = now - timedelta(days=7)
-            elif timerange == '30d':
-                start_time = now - timedelta(days=30)
-            else:  # 90d
-                start_time = now - timedelta(days=90)
-            
-            # Query to get mentions data
-            query = """
-            SELECT 
-                c.symbol,
-                cd.sentiment_label,
-                COUNT(*) as mention_count
-            FROM chat_data cd
-            JOIN Coins c ON cd.coin_id = c.coin_id
-            WHERE cd.timestamp >= ?
-            GROUP BY c.symbol, cd.sentiment_label
-            """
-            
-            # Create SQLAlchemy engine and connect
-            engine = create_engine(f"mssql+pyodbc:///?odbc_connect={self.conn_str}")
-            with engine.connect() as connection:
-                df = pd.read_sql_query(query, connection, params=(start_time,))
-            
-            # Calculate positive sentiment percentage for each coin
-            coin_sentiments = []
-            for coin in df['symbol'].unique():
-                coin_data = df[df['symbol'] == coin]
-                total_mentions = coin_data['mention_count'].sum()
-                positive_mentions = coin_data[coin_data['sentiment_label'].isin(['positive', 'very positive'])]['mention_count'].sum()
-                negative_mentions = coin_data[coin_data['sentiment_label'].isin(['negative', 'very negative'])]['mention_count'].sum()
-                neutral_mentions = coin_data[coin_data['sentiment_label'] == 'neutral']['mention_count'].sum()
-                
-                # Calculate positive percentage
-                positive_percentage = (positive_mentions / total_mentions * 100) if total_mentions > 0 else 0
-                coin_sentiments.append((coin, positive_percentage))
-            
-            # Sort coins by positive sentiment percentage (descending)
-            sorted_coins = [coin for coin, _ in sorted(coin_sentiments, key=lambda x: x[1], reverse=True)]
-            n_coins = len(sorted_coins)
-            n_cols = 3  # Changed to 3 columns
-            n_rows = (n_coins + n_cols - 1) // n_cols
-            
-            # Create a canvas with scrollbar first
-            canvas = tk.Canvas(self.mentions_charts_frame, width=current_width-50)
+            # Create scrollable frame
+            canvas = tk.Canvas(self.mentions_charts_frame)
             scrollbar = ttk.Scrollbar(self.mentions_charts_frame, orient="vertical", command=canvas.yview)
             scrollable_frame = ttk.Frame(canvas)
             
-            # Configure the canvas
+            # Configure scrolling
             canvas.configure(yscrollcommand=scrollbar.set)
-            
-            # Pack scrollbar and canvas
             scrollbar.pack(side="right", fill="y")
             canvas.pack(side="left", fill="both", expand=True)
             
-            # Create a window in the canvas for the scrollable frame
+            # Create window for scrollable frame
             canvas.create_window((0, 0), window=scrollable_frame, anchor="nw")
             
-            # Calculate figure size based on current window size
-            fig_width = current_width / 100  # Convert to inches
-            single_pie_height = current_height / 100 * 0.8
-            fig_height = single_pie_height * n_rows
+            # Calculate figure size
+            fig_width = (current_width - 100) / 100  # Convert to inches
+            fig_height = (current_height * 2) / 100  # Make it twice as tall for scrolling
             
-            # Create figure with lemon background
-            fig = plt.figure(figsize=(fig_width, fig_height), dpi=100, facecolor='#FFFACD')
+            # Create figure
+            fig = plt.figure(figsize=(fig_width, fig_height))
+            plt.subplots_adjust(hspace=0.5, wspace=0.3)
             
-            # Set up the plots
-            plt.subplots_adjust(hspace=1.2, wspace=0.3)
+            # [Rest of your existing code for creating charts...]
             
-            colors = {
-                'positive': '#00ff00',    # Bright green
-                'very positive': '#008000', # Dark green
-                'neutral': '#808080',     # Grey
-                'negative': '#ff0000',    # Bright red
-                'very negative': '#800000'  # Dark red
-            }
-            
-            for idx, coin in enumerate(sorted_coins):
-                coin_data = df[df['symbol'] == coin]
-                ax = fig.add_subplot(n_rows, n_cols, idx + 1)
-                sentiment_counts = coin_data.groupby('sentiment_label')['mention_count'].sum()
-                
-                pie_colors = [colors.get(label.lower(), '#808080') for label in sentiment_counts.index]
-                wedges, texts, autotexts = ax.pie(sentiment_counts, 
-                                                labels=[''] * len(sentiment_counts),
-                                                autopct='%1.1f%%',
-                                                colors=pie_colors,
-                                                radius=1.0,
-                                                startangle=90,
-                                                labeldistance=1.1,
-                                                explode=[0.05] * len(sentiment_counts),
-                                                shadow=True)
-                
-                plt.setp(autotexts, size=16, weight="bold", color='black')
-                
-                ax.set_title(coin, 
-                            pad=20, 
-                            y=1.1, 
-                            fontsize=18, 
-                            weight='bold',
-                            color='black')
-                
-                def on_pick(event, coin_symbol=coin):
-                    # Ignore if not left click
-                    if not hasattr(event, 'mouseevent') or event.mouseevent.button != 1:
-                        return
-                    
-                    # Prevent multiple triggers
-                    if hasattr(self, '_processing'):
-                        return
-                    self._processing = True
-                    
-                    def do_updates():
-                        try:
-                            # Set coin in price analysis tab
-                            self.coin_var.set(coin_symbol)
-                            
-                            # Set coin in sentiment tab
-                            self.sentiment_coin_var.set(coin_symbol)
-                            
-                            # Switch to sentiment tab first
-                            self.notebook.select(2)
-                            
-                            # Then update the charts
-                            self.update_sentiment_charts()
-                            
-                        except Exception as e:
-                            print(f"Error in pie chart update: {str(e)}")
-                        finally:
-                            if hasattr(self, '_processing'):
-                                delattr(self, '_processing')
-                    
-                    # Schedule the updates
-                    self.root.after(100, do_updates)
-                
-                # Make pie wedges pickable
-                for wedge in wedges:
-                    wedge.set_picker(True)
-                    wedge.figure.canvas.mpl_connect('pick_event', 
-                        lambda event, coin_symbol=coin: on_pick(event, coin_symbol))
-            
-            plt.tight_layout(h_pad=4.0, w_pad=2.0)
-            
-            # Create the matplotlib canvas
+            # After creating all pie charts:
+            print("DEBUG: Creating canvas")
             chart_canvas = FigureCanvasTkAgg(fig, scrollable_frame)
             chart_widget = chart_canvas.get_tk_widget()
             chart_widget.pack(fill='both', expand=True)
             
-            # Configure scrolling
-            def on_mousewheel(event):
-                canvas.yview_scroll(int(-1*(event.delta/120)), "units")
-            
-            canvas.bind_all("<MouseWheel>", on_mousewheel)
-            
-            # Update the scroll region after the window is updated
-            def configure_scroll_region(event):
-                canvas.configure(scrollregion=canvas.bbox("all"))
-            
-            scrollable_frame.bind('<Configure>', configure_scroll_region)
-            
-            # Add resize handler
-            def on_window_resize(event=None):
-                if event.widget == self.root:  # Only handle root window resizes
-                    # Check if size changed significantly (more than 50 pixels)
-                    if (abs(event.width - self.last_width) > 50 or 
-                        abs(event.height - self.last_height) > 50):
-                        
-                        # Cancel previous timer if it exists
-                        if self.resize_timer:
-                            self.root.after_cancel(self.resize_timer)
-                        
-                        # Schedule new update
-                        self.resize_timer = self.root.after(500, self.update_mentions_view)
-            
-            # Bind resize event
-            self.root.bind('<Configure>', on_window_resize)
+            # Update scroll region
+            scrollable_frame.update_idletasks()
+            canvas.configure(scrollregion=canvas.bbox("all"))
             
             # Draw the canvas
             chart_canvas.draw()
+            print("DEBUG: Canvas drawn")
+            
+            # Force update
+            self.root.update_idletasks()
+            print("DEBUG: Display updated")
             
         except Exception as e:
-            print(f"Error updating mentions view: {str(e)}")
+            print(f"ERROR in update_mentions_view: {str(e)}")
             import traceback
             traceback.print_exc()
         finally:
-            # Hide loading indicator
             self.hide_loading()
 
     def show_coin_detail(self, coin):

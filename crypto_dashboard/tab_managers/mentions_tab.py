@@ -17,6 +17,9 @@ class MentionsTab:
         self.last_width = None
         self.last_height = None
         self.resize_timer = None
+        
+        # Bind resize event
+        self.frame.bind('<Configure>', self.handle_resize)
 
     def setup_tab(self):
         # Controls frame
@@ -51,23 +54,39 @@ class MentionsTab:
         try:
             print("Starting update_view...")
             
+            # Get current dimensions
+            current_width = self.frame.winfo_width()
+            current_height = self.frame.winfo_height()
+            print(f"Current dimensions: {current_width}x{current_height}")
+            
             # Clear existing charts
             for widget in self.charts_frame.winfo_children():
                 widget.destroy()
             
-            # Create main scrollable canvas
-            main_canvas = tk.Canvas(self.charts_frame, bg='#FFFACD')
-            scrollbar = ttk.Scrollbar(self.charts_frame, orient="vertical", command=main_canvas.yview)
+            # Create canvas with current dimensions
+            canvas = tk.Canvas(self.charts_frame, bg='#FFFACD', 
+                             width=current_width-50,
+                             height=current_height-50)
+            scrollbar = ttk.Scrollbar(self.charts_frame, orient="vertical", 
+                                    command=canvas.yview)
+            
+            # Create a frame inside canvas to hold the charts
+            scrollable_frame = ttk.Frame(canvas)
+            scrollable_frame.bind(
+                "<Configure>",
+                lambda e: canvas.configure(scrollregion=canvas.bbox("all"))
+            )
+            
+            # Create window in canvas that contains the frame
+            canvas.create_window((0, 0), window=scrollable_frame, 
+                               anchor="nw", width=current_width-50)
             
             # Configure the canvas scrolling
-            main_canvas.configure(yscrollcommand=scrollbar.set)
+            canvas.configure(yscrollcommand=scrollbar.set)
             
             # Pack scrollbar and canvas
             scrollbar.pack(side="right", fill="y")
-            main_canvas.pack(side="left", fill="both", expand=True)
-            
-            # Create a frame inside the canvas for the charts
-            chart_frame = ttk.Frame(main_canvas)
+            canvas.pack(side="left", fill="both", expand=True)
             
             # Get data and create charts
             df = self.db_manager.get_mentions_data(self.timerange_var.get())
@@ -75,38 +94,31 @@ class MentionsTab:
                 print("No data returned from database")
                 return
             
-            # Sort coins by total mentions
             sorted_coins = df.groupby('symbol')['mention_count'].sum().sort_values(ascending=False).index
-            
-            # Calculate grid layout
             n_coins = len(sorted_coins)
             n_cols = 3
             n_rows = (n_coins + n_cols - 1) // n_cols
             
-            # Create the figure with proper size
-            fig_width = self.frame.winfo_width() * 0.9  # 90% of frame width
-            fig_height = 300 * n_rows  # Fixed height per row
-            
+            # Create the figure and charts with current dimensions
             fig, colors = self.chart_manager.create_mentions_pie_charts(
-                df, sorted_coins, n_rows, n_cols, fig_width, fig_height, chart_frame
+                df, sorted_coins, n_rows, n_cols, current_width, current_height, 
+                scrollable_frame
             )
             
-            # Create and pack the chart
-            chart_canvas = FigureCanvasTkAgg(fig, chart_frame)
+            # Create chart canvas and pack it
+            chart_canvas = FigureCanvasTkAgg(fig, scrollable_frame)
             chart_widget = chart_canvas.get_tk_widget()
             chart_widget.pack(fill='both', expand=True)
             
-            # Create window in canvas that contains the frame
-            main_canvas.create_window((0, 0), window=chart_frame, anchor='nw')
-            
-            # Update scroll region
-            chart_frame.bind('<Configure>', lambda e: main_canvas.configure(scrollregion=main_canvas.bbox("all")))
-            
             # Configure mouse wheel scrolling
             def _on_mousewheel(event):
-                main_canvas.yview_scroll(int(-1*(event.delta/120)), "units")
+                canvas.yview_scroll(int(-1*(event.delta/120)), "units")
             
-            main_canvas.bind_all("<MouseWheel>", _on_mousewheel)
+            canvas.bind_all("<MouseWheel>", _on_mousewheel)
+            
+            # Update scroll region
+            canvas.update_idletasks()
+            canvas.configure(scrollregion=canvas.bbox("all"))
             
             # Draw the canvas
             chart_canvas.draw()
@@ -164,15 +176,23 @@ class MentionsTab:
         return self.frame
 
     def handle_resize(self, event=None):
-        """Handle window resize events"""
-        if event and event.widget == self.parent:
+        """Handle window resize events with debouncing"""
+        if event and event.widget == self.frame:
+            # Only handle if size actually changed
+            current_width = event.width
+            current_height = event.height
+            
             if (self.last_width is None or 
-                abs(event.width - self.last_width) > 50 or 
-                abs(event.height - self.last_height) > 50):
+                abs(current_width - self.last_width) > 20 or 
+                abs(current_height - self.last_height) > 20):
                 
+                # Cancel existing timer if any
                 if self.resize_timer:
-                    self.parent.after_cancel(self.resize_timer)
+                    self.frame.after_cancel(self.resize_timer)
                 
-                self.resize_timer = self.parent.after(500, self.update_view)
-                self.last_width = event.width
-                self.last_height = event.height
+                # Set new timer
+                self.resize_timer = self.frame.after(300, self.update_view)
+                
+                # Update last known dimensions
+                self.last_width = current_width
+                self.last_height = current_height
