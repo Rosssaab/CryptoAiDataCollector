@@ -108,7 +108,7 @@ class ChartManager:
                                            autopct='%1.1f%%',
                                            pctdistance=0.85)
                 
-                ax.set_title(f"{coin}\nTotal: {coin_data.sum()}\nPositive: {sentiment_pct:.1f}%", 
+                ax.set_title(f"{coin}\nTotal: {coin_data.sum()}", 
                             fontsize=12, pad=10)
                 
                 plt.setp(autotexts, size=10, weight="bold")

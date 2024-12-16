@@ -135,3 +135,25 @@ class DatabaseManager:
         except Exception as e:
             print(f"Error getting coin details: {str(e)}")
             return None, None
+
+    def get_coin_names(self):
+        """Get dictionary of coin symbols and their full names from database"""
+        try:
+            query = """
+            SELECT symbol, full_name 
+            FROM Coins 
+            ORDER BY symbol
+            """
+            engine = self.get_engine()
+            df = pd.read_sql_query(query, engine)
+            
+            # Convert full names to URL format (lowercase, replace spaces with hyphens)
+            coin_names = {}
+            for _, row in df.iterrows():
+                url_name = row['full_name'].lower().replace(' ', '-')
+                coin_names[row['symbol']] = url_name
+            
+            return coin_names
+        except Exception as e:
+            print(f"Error getting coin names: {str(e)}")
+            return {}
