@@ -87,19 +87,18 @@ class ChartManager:
                 # Create color list for this pie
                 chart_colors = [colors.get(label, '#CCCCCC') for label in coin_data.index]
                 
-                # Create pie chart
-                wedges, texts, autotexts = ax.pie(coin_data.values, 
-                                                labels=coin_data.index,
-                                                colors=chart_colors,
-                                                autopct='%1.1f%%',
-                                                pctdistance=0.85)
+                # Create pie chart without labels, only percentages
+                wedges, _, autotexts = ax.pie(coin_data.values, 
+                                           labels=None,  # Remove labels
+                                           colors=chart_colors,
+                                           autopct='%1.1f%%',
+                                           pctdistance=0.85)
                 
                 # Set title
                 ax.set_title(f"{coin}\nTotal: {coin_data.sum()}", fontsize=12, pad=10)
                 
-                # Make the labels larger
+                # Make the percentage labels larger
                 plt.setp(autotexts, size=10, weight="bold")
-                plt.setp(texts, size=8)
         
         plt.tight_layout()
         return fig, colors
