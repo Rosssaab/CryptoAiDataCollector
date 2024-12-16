@@ -14768,3 +14768,6 @@ Too Many Requests
 2024-12-16 13:06:27,457 - ERROR - News API API error for DOGE: 'News API'
 2024-12-16 13:06:27,457 - INFO - Searching Reddit r/cryptocurrency for DOGE
 2024-12-16 13:06:27,836 - INFO - Searching Reddit r/CryptoMarkets for DOGE
+2024-12-16 13:59:44,570 - INFO - Database connected successfully
+2024-12-16 13:59:45,241 - INFO - Reddit API initialized successfully
+2024-12-16 13:59:45,241 - INFO - Twitter API initialized successfully

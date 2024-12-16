@@ -3087,3 +3087,112 @@ Processing KAS/USDT (43/44)
 2024-12-16 13:01:06,022 - INFO - ==================================================
 
 2024-12-16 13:01:06,022 - INFO - Database connection closed
+2024-12-16 13:59:48,394 - INFO - Connecting to database...
+2024-12-16 13:59:48,456 - INFO - Database connected. Found 35 coins and 127 price records
+2024-12-16 13:59:48,457 - INFO - Cached 35 coin IDs for tracking
+2024-12-16 13:59:48,473 - INFO - ==================================================
+2024-12-16 13:59:48,473 - INFO - STARTING NEW COLLECTION CYCLE: 2024-12-16 13:59:48.473301
+2024-12-16 13:59:48,473 - INFO - ==================================================
+2024-12-16 13:59:48,473 - INFO - Step 1: Fetching top coins from CoinGecko...
+2024-12-16 13:59:48,473 - INFO - Fetching top 50 coins from CoinGecko...
+2024-12-16 13:59:48,475 - INFO - Calling CoinGecko API: https://api.coingecko.com/api/v3/coins/markets
+2024-12-16 13:59:49,222 - INFO - API Response Status: 200
+2024-12-16 13:59:49,232 - INFO - Raw API response received: 50 coins
+2024-12-16 13:59:49,232 - INFO - Processing coin: BTC (Bitcoin)
+2024-12-16 13:59:49,232 - INFO - Added coin: BTC - Bitcoin
+2024-12-16 13:59:49,233 - INFO - Processing coin: ETH (Ethereum)
+2024-12-16 13:59:49,233 - INFO - Added coin: ETH - Ethereum
+2024-12-16 13:59:49,233 - INFO - Processing coin: USDT (Tether)
+2024-12-16 13:59:49,233 - INFO - Processing coin: XRP (XRP)
+2024-12-16 13:59:49,234 - INFO - Added coin: XRP - XRP
+2024-12-16 13:59:49,234 - INFO - Processing coin: BNB (BNB)
+2024-12-16 13:59:49,235 - INFO - Added coin: BNB - BNB
+2024-12-16 13:59:49,235 - INFO - Processing coin: SOL (Solana)
+2024-12-16 13:59:49,235 - INFO - Added coin: SOL - Solana
+2024-12-16 13:59:49,235 - INFO - Processing coin: DOGE (Dogecoin)
+2024-12-16 13:59:49,236 - INFO - Added coin: DOGE - Dogecoin
+2024-12-16 13:59:49,236 - INFO - Processing coin: USDC (USDC)
+2024-12-16 13:59:49,237 - INFO - Processing coin: STETH (Lido Staked Ether)
+2024-12-16 13:59:49,237 - INFO - Added coin: STETH - Lido Staked Ether
+2024-12-16 13:59:49,237 - INFO - Processing coin: ADA (Cardano)
+2024-12-16 13:59:49,238 - INFO - Added coin: ADA - Cardano
+2024-12-16 13:59:49,238 - INFO - Processing coin: TRX (TRON)
+2024-12-16 13:59:49,238 - INFO - Added coin: TRX - TRON
+2024-12-16 13:59:49,239 - INFO - Processing coin: AVAX (Avalanche)
+2024-12-16 13:59:49,239 - INFO - Added coin: AVAX - Avalanche
+2024-12-16 13:59:49,239 - INFO - Processing coin: LINK (Chainlink)
+2024-12-16 13:59:49,240 - INFO - Added coin: LINK - Chainlink
+2024-12-16 13:59:49,240 - INFO - Processing coin: WSTETH (Wrapped stETH)
+2024-12-16 13:59:49,240 - INFO - Added coin: WSTETH - Wrapped stETH
+2024-12-16 13:59:49,241 - INFO - Processing coin: SHIB (Shiba Inu)
+2024-12-16 13:59:49,241 - INFO - Added coin: SHIB - Shiba Inu
+2024-12-16 13:59:49,241 - INFO - Processing coin: TON (Toncoin)
+2024-12-16 13:59:49,242 - INFO - Added coin: TON - Toncoin
+2024-12-16 13:59:49,242 - INFO - Processing coin: WBTC (Wrapped Bitcoin)
+2024-12-16 13:59:49,242 - INFO - Processing coin: SUI (Sui)
+2024-12-16 13:59:49,243 - INFO - Added coin: SUI - Sui
+2024-12-16 13:59:49,243 - INFO - Processing coin: DOT (Polkadot)
+2024-12-16 13:59:49,244 - INFO - Added coin: DOT - Polkadot
+2024-12-16 13:59:49,244 - INFO - Processing coin: XLM (Stellar)
+2024-12-16 13:59:49,244 - INFO - Added coin: XLM - Stellar
+2024-12-16 13:59:49,244 - INFO - Processing coin: HBAR (Hedera)
+2024-12-16 13:59:49,245 - INFO - Added coin: HBAR - Hedera
+2024-12-16 13:59:49,245 - INFO - Processing coin: WETH (WETH)
+2024-12-16 13:59:49,245 - INFO - Processing coin: BCH (Bitcoin Cash)
+2024-12-16 13:59:49,245 - INFO - Added coin: BCH - Bitcoin Cash
+2024-12-16 13:59:49,247 - INFO - Processing coin: UNI (Uniswap)
+2024-12-16 13:59:49,247 - INFO - Added coin: UNI - Uniswap
+2024-12-16 13:59:49,247 - INFO - Processing coin: PEPE (Pepe)
+2024-12-16 13:59:49,247 - INFO - Added coin: PEPE - Pepe
+2024-12-16 13:59:49,247 - INFO - Processing coin: LEO (LEO Token)
+2024-12-16 13:59:49,247 - INFO - Added coin: LEO - LEO Token
+2024-12-16 13:59:49,248 - INFO - Processing coin: LTC (Litecoin)
+2024-12-16 13:59:49,248 - INFO - Added coin: LTC - Litecoin
+2024-12-16 13:59:49,248 - INFO - Processing coin: HYPE (Hyperliquid)
+2024-12-16 13:59:49,248 - INFO - Added coin: HYPE - Hyperliquid
+2024-12-16 13:59:49,249 - INFO - Processing coin: NEAR (NEAR Protocol)
+2024-12-16 13:59:49,249 - INFO - Added coin: NEAR - NEAR Protocol
+2024-12-16 13:59:49,249 - INFO - Processing coin: APT (Aptos)
+2024-12-16 13:59:49,249 - INFO - Added coin: APT - Aptos
+2024-12-16 13:59:49,250 - INFO - Processing coin: WEETH (Wrapped eETH)
+2024-12-16 13:59:49,250 - INFO - Added coin: WEETH - Wrapped eETH
+2024-12-16 13:59:49,250 - INFO - Processing coin: ICP (Internet Computer)
+2024-12-16 13:59:49,251 - INFO - Added coin: ICP - Internet Computer
+2024-12-16 13:59:49,251 - INFO - Processing coin: USDE (Ethena USDe)
+2024-12-16 13:59:49,252 - INFO - Processing coin: AAVE (Aave)
+2024-12-16 13:59:49,252 - INFO - Added coin: AAVE - Aave
+2024-12-16 13:59:49,252 - INFO - Processing coin: USDS (USDS)
+2024-12-16 13:59:49,252 - INFO - Processing coin: POL (POL (ex-MATIC))
+2024-12-16 13:59:49,252 - INFO - Added coin: POL - POL (ex-MATIC)
+2024-12-16 13:59:49,252 - INFO - Processing coin: ETC (Ethereum Classic)
+2024-12-16 13:59:49,252 - INFO - Added coin: ETC - Ethereum Classic
+2024-12-16 13:59:49,252 - INFO - Processing coin: CRO (Cronos)
+2024-12-16 13:59:49,252 - INFO - Added coin: CRO - Cronos
+2024-12-16 13:59:49,252 - INFO - Processing coin: RENDER (Render)
+2024-12-16 13:59:49,252 - INFO - Added coin: RENDER - Render
+2024-12-16 13:59:49,252 - INFO - Processing coin: BGB (Bitget Token)
+2024-12-16 13:59:49,252 - INFO - Added coin: BGB - Bitget Token
+2024-12-16 13:59:49,252 - INFO - Processing coin: FET (Artificial Superintelligence Alliance)
+2024-12-16 13:59:49,252 - INFO - Added coin: FET - Artificial Superintelligence Alliance
+2024-12-16 13:59:49,252 - INFO - Processing coin: VET (VeChain)
+2024-12-16 13:59:49,252 - INFO - Added coin: VET - VeChain
+2024-12-16 13:59:49,252 - INFO - Processing coin: ARB (Arbitrum)
+2024-12-16 13:59:49,252 - INFO - Added coin: ARB - Arbitrum
+2024-12-16 13:59:49,252 - INFO - Processing coin: MNT (Mantle)
+2024-12-16 13:59:49,252 - INFO - Added coin: MNT - Mantle
+2024-12-16 13:59:49,259 - INFO - Processing coin: TAO (Bittensor)
+2024-12-16 13:59:49,259 - INFO - Added coin: TAO - Bittensor
+2024-12-16 13:59:49,259 - INFO - Processing coin: FIL (Filecoin)
+2024-12-16 13:59:49,260 - INFO - Added coin: FIL - Filecoin
+2024-12-16 13:59:49,260 - INFO - Processing coin: XMR (Monero)
+2024-12-16 13:59:49,260 - INFO - Added coin: XMR - Monero
+2024-12-16 13:59:49,260 - INFO - Processing coin: FTM (Fantom)
+2024-12-16 13:59:49,260 - INFO - Added coin: FTM - Fantom
+2024-12-16 13:59:49,260 - INFO - Processing coin: OM (MANTRA)
+2024-12-16 13:59:49,260 - INFO - Added coin: OM - MANTRA
+2024-12-16 13:59:49,260 - INFO - Processing coin: KAS (Kaspa)
+2024-12-16 13:59:49,270 - INFO - Added coin: KAS - Kaspa
+2024-12-16 13:59:49,275 - INFO - Processed 44 non-stablecoin coins
+2024-12-16 13:59:49,285 - INFO - Retrieved 44 coins from CoinGecko
+2024-12-16 13:59:49,286 - INFO - Step 2: Initializing Binance connection...
+2024-12-16 13:59:49,491 - INFO - Database connection closed
