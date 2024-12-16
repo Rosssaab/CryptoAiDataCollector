@@ -27,6 +27,9 @@ class Dashboard:
         style.configure("TNotebook.Tab", background="#404040", foreground="white", padding=[10, 2])
         style.map('TNotebook.Tab', background=[('selected', '#505050')])
         
+        # Configure custom style for mentions tab
+        style.configure("Mentions.TFrame", background="#FFFACD")  # Lemon chiffon color
+        
         # Configure the root window color
         self.root.configure(bg="#2B2B2B")
         
@@ -41,18 +44,22 @@ class Dashboard:
         self.notebook.pack(fill='both', expand=True, padx=5, pady=5)
         
         # Create tabs
+        self.mentions_tab = ttk.Frame(self.notebook, style="Mentions.TFrame")  # Apply lemon style
         self.price_tab = ttk.Frame(self.notebook)
         self.sentiment_tab = ttk.Frame(self.notebook)
-        self.mentions_tab = ttk.Frame(self.notebook)
         
+        # Add tabs in new order
+        self.notebook.add(self.mentions_tab, text='Mentions Overview')
         self.notebook.add(self.price_tab, text='Price Analysis')
         self.notebook.add(self.sentiment_tab, text='Sentiment Analysis')
-        self.notebook.add(self.mentions_tab, text='Mentions Overview')
         
         # Setup each tab
+        self.setup_mentions_tab()
         self.setup_price_tab()
         self.setup_sentiment_tab()
-        self.setup_mentions_tab()
+        
+        # Add resize timer variable
+        self.resize_timer = None
 
     def get_db_connection(self):
         return pyodbc.connect(self.conn_str)
@@ -270,9 +277,11 @@ class Dashboard:
             widget.destroy()
             
         try:
+            # Get the time range
+            timerange = self.mentions_timerange_var.get()
+            
             # Calculate time range
             now = datetime.now()
-            timerange = self.mentions_timerange_var.get()
             if timerange == '24h':
                 start_time = now - timedelta(days=1)
             elif timerange == '7d':
@@ -282,25 +291,22 @@ class Dashboard:
             else:  # 90d
                 start_time = now - timedelta(days=90)
             
-            engine = create_engine(f"mssql+pyodbc:///?odbc_connect={self.conn_str}")
-            
+            # Query to get mentions data
             query = """
             SELECT 
                 c.symbol,
-                ISNULL(cd.sentiment_label, 'neutral') as sentiment_label,
+                cd.sentiment_label,
                 COUNT(*) as mention_count
             FROM chat_data cd
             JOIN Coins c ON cd.coin_id = c.coin_id
             WHERE cd.timestamp >= ?
             GROUP BY c.symbol, cd.sentiment_label
-            ORDER BY c.symbol, mention_count DESC
             """
             
-            df = pd.read_sql_query(query, engine, params=(start_time,))
-            
-            if df.empty:
-                print("No data found")
-                return
+            # Create SQLAlchemy engine and connect
+            engine = create_engine(f"mssql+pyodbc:///?odbc_connect={self.conn_str}")
+            with engine.connect() as connection:
+                df = pd.read_sql_query(query, connection, params=(start_time,))
             
             # Calculate positive sentiment percentage for each coin
             coin_sentiments = []
@@ -314,15 +320,15 @@ class Dashboard:
             # Sort coins by positive sentiment percentage (descending)
             sorted_coins = [coin for coin, _ in sorted(coin_sentiments, key=lambda x: x[1], reverse=True)]
             n_coins = len(sorted_coins)
-            n_cols = 2  # 2 columns
+            n_cols = 3  # Changed to 3 columns
             n_rows = (n_coins + n_cols - 1) // n_cols
             
-            # Get screen width and height
-            screen_width = self.root.winfo_screenwidth()
-            screen_height = self.root.winfo_screenheight()
+            # Get window dimensions once
+            window_width = self.root.winfo_width()
+            window_height = self.root.winfo_height()
             
             # Create a canvas with scrollbar first
-            canvas = tk.Canvas(self.mentions_charts_frame, width=screen_width-50)
+            canvas = tk.Canvas(self.mentions_charts_frame, width=window_width-50)
             scrollbar = ttk.Scrollbar(self.mentions_charts_frame, orient="vertical", command=canvas.yview)
             scrollable_frame = ttk.Frame(canvas)
             
@@ -336,13 +342,16 @@ class Dashboard:
             # Create a window in the canvas for the scrollable frame
             canvas.create_window((0, 0), window=scrollable_frame, anchor="nw")
             
-            # Calculate figure size - make each pie chart nearly half screen width
-            fig_width = screen_width / 100  # Convert to inches
-            single_pie_height = screen_height / 100 * 0.8  # 80% of screen height
+            # Calculate figure size
+            fig_width = window_width / 100  # Convert to inches
+            single_pie_height = window_height / 100 * 0.8
             fig_height = single_pie_height * n_rows
             
-            # Create figure with dark background
-            fig = plt.figure(figsize=(fig_width, fig_height), dpi=100, facecolor='#2B2B2B')
+            # Create figure with lemon background
+            fig = plt.figure(figsize=(fig_width, fig_height), dpi=100, facecolor='#FFFACD')
+            
+            # Set up the plots
+            plt.subplots_adjust(hspace=1.2, wspace=0.3)
             
             colors = {
                 'positive': '#00ff00',    # Bright green
@@ -352,59 +361,46 @@ class Dashboard:
                 'very negative': '#800000'  # Dark red
             }
             
-            # Maximum spacing between plots
-            plt.subplots_adjust(hspace=1.2, wspace=0.4)
-            
-            # Use the sorted coins list for creating pie charts
             for idx, coin in enumerate(sorted_coins):
                 coin_data = df[df['symbol'] == coin]
-                ax = fig.add_subplot(n_rows, n_cols, idx + 1)  # Remove 3D projection
-                
+                ax = fig.add_subplot(n_rows, n_cols, idx + 1)
                 sentiment_counts = coin_data.groupby('sentiment_label')['mention_count'].sum()
-                
-                # Calculate start angle
-                start_angle = 90
                 
                 pie_colors = [colors.get(label.lower(), '#808080') for label in sentiment_counts.index]
                 wedges, texts, autotexts = ax.pie(sentiment_counts, 
-                                                labels=sentiment_counts.index,
+                                                labels=[''] * len(sentiment_counts),
                                                 autopct='%1.1f%%',
                                                 colors=pie_colors,
                                                 radius=1.0,
-                                                startangle=start_angle,  # Start from top
-                                                labeldistance=1.1,      # Move labels out slightly
-                                                explode=[0.05] * len(sentiment_counts),  # Slight explode effect
-                                                shadow=True)  # Add shadow for 3D effect
+                                                startangle=90,
+                                                labeldistance=1.1,
+                                                explode=[0.05] * len(sentiment_counts),
+                                                shadow=True)
                 
-                # Style the text
-                plt.setp(autotexts, size=16, weight="bold", color='white')
-                plt.setp(texts, size=16, color='white')
+                plt.setp(autotexts, size=16, weight="bold", color='black')
                 
-                # Add title with positive sentiment percentage
                 positive_pct = next(pct for coin_, pct in coin_sentiments if coin_ == coin)
                 ax.set_title(f'{coin} ({positive_pct:.1f}% Positive)', 
                             pad=20, 
                             y=1.1, 
                             fontsize=18, 
                             weight='bold',
-                            color='white')
+                            color='black')
                 
-                # Set background color
-                ax.set_facecolor('#2B2B2B')
+                ax.set_facecolor('#FFFACD')
             
-            # Configure figure appearance
             plt.tight_layout(h_pad=4.0, w_pad=2.0)
-            fig.patch.set_facecolor('#2B2B2B')
             
-            # Create the matplotlib canvas with dark theme
+            # Create the matplotlib canvas
             chart_canvas = FigureCanvasTkAgg(fig, scrollable_frame)
             chart_widget = chart_canvas.get_tk_widget()
-            chart_widget.configure(bg='#2B2B2B')
             chart_widget.pack(fill='both', expand=True)
             
-            # Configure scrollable frame colors
-            scrollable_frame.configure(style='Custom.TFrame')
-            canvas.configure(bg='#2B2B2B')
+            # Configure scrolling
+            def on_mousewheel(event):
+                canvas.yview_scroll(int(-1*(event.delta/120)), "units")
+            
+            canvas.bind_all("<MouseWheel>", on_mousewheel)
             
             # Update the scroll region after the window is updated
             def configure_scroll_region(event):
@@ -412,13 +408,7 @@ class Dashboard:
             
             scrollable_frame.bind('<Configure>', configure_scroll_region)
             
-            # Configure mouse wheel scrolling
-            def on_mousewheel(event):
-                canvas.yview_scroll(int(-1*(event.delta/120)), "units")
-            
-            canvas.bind_all("<MouseWheel>", on_mousewheel)
-            
-            # Draw the chart
+            # Draw once
             chart_canvas.draw()
             
         except Exception as e:
@@ -504,6 +494,10 @@ class Dashboard:
     def on_closing(self):
         """Handle cleanup when window is closed"""
         try:
+            # Cancel any pending resize timer
+            if hasattr(self, 'resize_timer') and self.resize_timer:
+                self.root.after_cancel(self.resize_timer)
+            
             # Close all matplotlib figures
             plt.close('all')
             
