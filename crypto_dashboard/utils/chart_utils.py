@@ -37,10 +37,20 @@ class ChartManager:
         plt.close('all')
         fig = plt.figure(figsize=(12, 8))
         
+        # Define consistent colors for sentiment
+        colors = {
+            'Positive': '#00ff00',      # Green
+            'Very Positive': '#008000',  # Dark Green
+            'Neutral': '#808080',       # Gray
+            'Negative': '#ff0000',      # Red
+            'Very Negative': '#800000'   # Dark Red
+        }
+        
         # Sentiment over time
         ax1 = fig.add_subplot(211)
         pivot_df = df.pivot(index='date', columns='sentiment_label', values='count').fillna(0)
-        pivot_df.plot(kind='bar', stacked=True, ax=ax1)
+        pivot_df.plot(kind='bar', stacked=True, ax=ax1, 
+                     color=[colors.get(x, '#CCCCCC') for x in pivot_df.columns])
         ax1.set_title(f'{coin} Sentiment Distribution Over Time')
         ax1.set_xlabel('Date')
         ax1.set_ylabel('Number of Mentions')
@@ -49,7 +59,8 @@ class ChartManager:
         # Pie chart of total sentiment distribution
         ax2 = fig.add_subplot(212)
         sentiment_totals = df.groupby('sentiment_label')['count'].sum()
-        ax2.pie(sentiment_totals, labels=sentiment_totals.index, autopct='%1.1f%%')
+        pie_colors = [colors.get(label, '#CCCCCC') for label in sentiment_totals.index]
+        ax2.pie(sentiment_totals, labels=sentiment_totals.index, autopct='%1.1f%%', colors=pie_colors)
         ax2.set_title('Overall Sentiment Distribution')
         
         plt.tight_layout()

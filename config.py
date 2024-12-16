@@ -29,5 +29,11 @@ TWITTER_API_SECRET = 'your_twitter_api_secret'
 TWITTER_ACCESS_TOKEN = 'your_twitter_access_token'
 TWITTER_ACCESS_TOKEN_SECRET = 'your_twitter_access_token_secret'
 
+CRYPTOPANIC_API_KEY = "0598909d59291aa32a50470f1b04d106175081f5"  # Get from https://cryptopanic.com/developers/api/
+CRYPTOPANIC_BASE_URL = "https://cryptopanic.com/api/v1/"
+
+# News API configuration
+NEWS_API_URL = "https://newsapi.org/v2/everything"
+
 
 

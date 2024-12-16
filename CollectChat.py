@@ -10,7 +10,11 @@ from config import (
     REDDIT_CLIENT_ID, 
     REDDIT_CLIENT_SECRET, 
     TWITTER_BEARER_TOKEN, 
-    CRYPTOCOMPARE_API_KEY
+    CRYPTOCOMPARE_API_KEY,
+    CRYPTOPANIC_API_KEY,
+    CRYPTOPANIC_BASE_URL,
+    NEWS_API_URL,
+    NEWS_API_KEY
 )
 import tkinter as tk
 from tkinter import ttk, messagebox
@@ -21,6 +25,7 @@ from tweepy import Client as TwitterClient
 import cryptocompare
 import requests
 import os
+import traceback
 
 def setup_logging():
     formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
@@ -120,42 +125,42 @@ class ChatCollector:
     def collect_news_mentions(self, coin):
         mentions = []
         try:
-            self.log_to_output(f"Starting CryptoCompare News API search for {coin['symbol']}")
+            self.logger.info(f"Starting News API search for {coin['symbol']}")
             
-            url = "https://min-api.cryptocompare.com/data/v2/news/?lang=EN"
-            response = requests.get(url, headers=self.cryptocompare_headers)
+            search_query = f"{coin['symbol']} OR {coin['full_name']} cryptocurrency"
+            
+            response = requests.get(
+                NEWS_API_URL,
+                params={
+                    'q': search_query,
+                    'apiKey': NEWS_API_KEY,
+                    'language': 'en',
+                    'sortBy': 'publishedAt'
+                }
+            )
             
             if response.status_code == 200:
-                news_data = response.json()
-                if news_data.get('Response') == 'Success' or 'Data' in news_data:
-                    articles = news_data.get('Data', [])
-                    self.log_to_output(f"Found {len(articles)} news articles to process")
-                    
-                    for article in articles:
-                        title = article.get('title', '').lower()
-                        body = article.get('body', '').lower()
-                        if coin['symbol'].lower() in title or coin['full_name'].lower() in title or \
-                           coin['symbol'].lower() in body or coin['full_name'].lower() in body:
-                            
-                            content = f"{article.get('title', '')} - {article.get('body', '')}"
-                            sentiment_score, sentiment_label = self.analyze_sentiment(content)
-                            mentions.append({
-                                'source_id': self.sources['CryptoCompare'],
-                                'content': content[:500],
-                                'url': article.get('url', ''),
-                                'sentiment_score': sentiment_score,
-                                'sentiment_label': sentiment_label
-                            })
-                            self.log_to_output(f"Found news mention for {coin['symbol']}")
-                else:
-                    self.log_to_output(f"CryptoCompare News API error response: {news_data.get('Message', 'Unknown error')}")
+                articles = response.json().get('articles', [])
+                self.logger.info(f"Found {len(articles)} news articles")
+                
+                for article in articles:
+                    sentiment_score, sentiment_label = self.analyze_sentiment(article['title'])
+                    mentions.append({
+                        'source_id': self.sources['News'],
+                        'content': article['title'][:500],
+                        'url': article['url'],
+                        'sentiment_score': sentiment_score,
+                        'sentiment_label': sentiment_label,
+                        'coin_id': coin['coin_id']
+                    })
+                    self.logger.info(f"Added news mention for {coin['symbol']}")
+                
             else:
-                self.log_to_output(f"CryptoCompare News API HTTP error: {response.status_code}")
+                self.logger.error(f"News API error: {response.text}")
                 
         except Exception as e:
-            self.log_to_output(f"CryptoCompare News API error for {coin['symbol']}: {str(e)}")
-        
-        self.log_to_output(f"News API - Found {len(mentions)} mentions for {coin['symbol']}")
+            self.logger.error(f"News API error for {coin['symbol']}: {str(e)}")
+            
         return mentions
 
     def collect_reddit_mentions(self, coin):
@@ -210,6 +215,9 @@ class ChatCollector:
         try:
             self.logger.info(f"Searching Twitter for {coin['symbol']}")
             
+            # Add delay to avoid rate limiting
+            time.sleep(2)  # Wait 2 seconds between requests
+            
             query = f"#{coin['symbol'].lower()} OR #{coin['full_name'].lower()} crypto -is:retweet lang:en"
             tweets = self.twitter.search_recent_tweets(
                 query=query,
@@ -233,6 +241,7 @@ class ChatCollector:
                 
         except Exception as e:
             self.logger.error(f"Twitter API error for {coin['symbol']}: {str(e)}")
+            time.sleep(5)  # Wait longer if we hit an error
             
         return mentions
 
@@ -288,14 +297,17 @@ class ChatCollector:
                 'Content-Type': 'application/json'
             }
             data = {
-                "catalogId": "48",  # News catalog ID
+                "catalogId": "48",
                 "pageNo": 1,
-                "pageSize": 20
+                "pageSize": 50
             }
             
             response = requests.post(url, json=data, headers=headers)
+            self.logger.info(f"Binance API response status: {response.status_code}")
+            
             if response.status_code == 200:
                 articles = response.json().get('data', {}).get('articles', [])
+                self.logger.info(f"Found {len(articles)} Binance articles")
                 
                 for article in articles:
                     title = article.get('title', '').lower()
@@ -307,12 +319,20 @@ class ChatCollector:
                             'content': content[:500],
                             'url': f"https://www.binance.com/en/news/{article.get('code', '')}",
                             'sentiment_score': sentiment_score,
-                            'sentiment_label': sentiment_label
+                            'sentiment_label': sentiment_label,
+                            'coin_id': coin['coin_id']
                         })
+                        self.logger.info(f"Added Binance mention for {coin['symbol']}: {content[:100]}")
+                
+                self.logger.info(f"Found {len(mentions)} relevant Binance articles for {coin['symbol']}")
                     
+            else:
+                self.logger.error(f"Binance API error: {response.text}")
+                
         except Exception as e:
             self.logger.error(f"Binance API error for {coin['symbol']}: {str(e)}")
-        
+            self.logger.info(f"Full error: {traceback.format_exc()}")
+            
         return mentions
 
     def collect_coingecko_mentions(self, coin):
@@ -420,7 +440,8 @@ class ChatCollector:
                     'Twitter': self.collect_twitter_mentions,
                     'CryptoCompare': self.collect_cryptocompare_mentions,
                     'Binance': self.collect_binance_mentions,
-                    'CoinGecko': self.collect_coingecko_mentions
+                    'CoinGecko': self.collect_coingecko_mentions,
+                    'CryptoPanic': self.collect_cryptopanic_mentions
                 }
                 
                 for source_name, collection_func in sources.items():
@@ -517,6 +538,63 @@ class ChatCollector:
         all_mentions.extend(binance_mentions)
         
         return all_mentions
+
+    def collect_cryptopanic_mentions(self, coin):
+        """Collect mentions from CryptoPanic for a specific coin"""
+        mentions = []
+        try:
+            self.logger.info("=" * 50)
+            self.logger.info(f"Starting CryptoPanic API search for {coin['symbol']}")
+            
+            # Debug the sources dictionary
+            self.logger.info(f"Sources dictionary: {self.sources}")
+            
+            # Updated parameters based on API examples
+            params = {
+                'auth_token': CRYPTOPANIC_API_KEY,
+                'currencies': coin['symbol'],
+                'public': 'true',
+                'filter': 'hot',  # Get hot/trending news
+                'kind': 'news'    # Only get news items
+            }
+            
+            url = f"{CRYPTOPANIC_BASE_URL}posts/"
+            
+            # Log the full URL with parameters (but mask the API key)
+            full_url = requests.Request('GET', url, params=params).prepare().url
+            masked_url = full_url.replace(CRYPTOPANIC_API_KEY, 'XXXXX')
+            self.logger.info(f"CryptoPanic URL (masked): {masked_url}")
+            
+            response = requests.get(url, params=params)
+            self.logger.info(f"CryptoPanic status code: {response.status_code}")
+            
+            if response.status_code == 200:
+                data = response.json()
+                results = data.get('results', [])
+                self.logger.info(f"CryptoPanic results count: {len(results)}")
+                
+                for post in results:
+                    sentiment_score, sentiment_label = self.analyze_sentiment(post['title'])
+                    mention = {
+                        'source_id': self.sources['CryptoPanic'],
+                        'content': post['title'][:500],
+                        'url': post['url'],
+                        'sentiment_score': sentiment_score,
+                        'sentiment_label': sentiment_label,
+                        'coin_id': coin['coin_id']
+                    }
+                    mentions.append(mention)
+                    self.logger.info(f"Added mention for {coin['symbol']}: {post['title'][:100]}...")
+                    
+            else:
+                self.logger.error(f"CryptoPanic error response: {response.text}")
+                
+        except Exception as e:
+            self.logger.error(f"CryptoPanic API error for {coin['symbol']}: {str(e)}")
+            traceback.print_exc()
+            
+        self.logger.info(f"CryptoPanic - Found {len(mentions)} mentions for {coin['symbol']}")
+        return mentions
 
 class ChatGUI(ChatCollector):
     def __init__(self):
