@@ -185,14 +185,19 @@ class Dashboard:
             return []
 
     def update_price_charts(self):
-        coin = self.coin_var.get()
-        timerange = self.timerange_var.get()
-        
-        # Clear existing charts
-        for widget in self.price_charts_frame.winfo_children():
-            widget.destroy()
-        
+        self.root.config(cursor="wait")  # Set busy cursor
+        plt.close('all')
         try:
+            coin = self.coin_var.get()
+            timerange = self.timerange_var.get()
+            
+            # Show loading indicator
+            self.show_loading()
+            
+            # Clear existing charts
+            for widget in self.price_charts_frame.winfo_children():
+                widget.destroy()
+            
             # Calculate time range
             now = datetime.now()
             if timerange == '24h':
@@ -245,15 +250,24 @@ class Dashboard:
             
         except Exception as e:
             print(f"Error updating price charts: {str(e)}")
+        finally:
+            # Hide loading indicator
+            self.hide_loading()
+            self.root.config(cursor="")  # Reset cursor
 
     def update_sentiment_charts(self):
-        coin = self.sentiment_coin_var.get()
-        
-        # Clear existing charts
-        for widget in self.sentiment_charts_frame.winfo_children():
-            widget.destroy()
-        
+        self.root.config(cursor="wait")  # Set busy cursor
+        plt.close('all')
         try:
+            coin = self.sentiment_coin_var.get()
+            
+            # Show loading indicator
+            self.show_loading()
+            
+            # Clear existing charts
+            for widget in self.sentiment_charts_frame.winfo_children():
+                widget.destroy()
+            
             # Get sentiment data for last 7 days
             query = """
             SELECT 
@@ -301,9 +315,14 @@ class Dashboard:
             
         except Exception as e:
             print(f"Error updating sentiment charts: {str(e)}")
+        finally:
+            # Hide loading indicator
+            self.hide_loading()
+            self.root.config(cursor="")  # Reset cursor
 
     def update_mentions_view(self):
-        # Clear existing charts
+        # Clear existing charts and close all figures
+        plt.close('all')
         for widget in self.mentions_charts_frame.winfo_children():
             widget.destroy()
             
@@ -418,7 +437,6 @@ class Dashboard:
                 
                 plt.setp(autotexts, size=16, weight="bold", color='black')
                 
-                # Just show the coin symbol in the title
                 ax.set_title(coin, 
                             pad=20, 
                             y=1.1, 
@@ -426,49 +444,44 @@ class Dashboard:
                             weight='bold',
                             color='black')
                 
-                ax.set_facecolor('#FFFACD')
-                
-                # Add click event handler for this pie chart
-                def make_click_handler(coin_symbol):
-                    def on_click(event):
-                        # Check if click is within the axes
-                        if event.inaxes != ax:
-                            return
-                        
-                        # Disable the event temporarily
-                        ax.figure.canvas.mpl_disconnect(ax.figure.canvas._button_press_handler_id)
-                        
-                        # Show loading indicator
-                        self.show_loading()
-                        
+                def on_pick(event, coin_symbol=coin):
+                    # Ignore if not left click
+                    if not hasattr(event, 'mouseevent') or event.mouseevent.button != 1:
+                        return
+                    
+                    # Prevent multiple triggers
+                    if hasattr(self, '_processing'):
+                        return
+                    self._processing = True
+                    
+                    def do_updates():
                         try:
                             # Set coin in price analysis tab
                             self.coin_var.set(coin_symbol)
-                            self.update_price_charts()
                             
                             # Set coin in sentiment tab
                             self.sentiment_coin_var.set(coin_symbol)
+                            
+                            # Switch to sentiment tab first
+                            self.notebook.select(2)
+                            
+                            # Then update the charts
                             self.update_sentiment_charts()
                             
-                            # Switch to sentiment tab
-                            self.notebook.select(2)  # Index 2 is sentiment tab
+                        except Exception as e:
+                            print(f"Error in pie chart update: {str(e)}")
                         finally:
-                            # Hide loading indicator
-                            self.hide_loading()
-                            
-                            # Re-enable the event handler
-                            ax.figure.canvas._button_press_handler_id = ax.figure.canvas.mpl_connect(
-                                'button_press_event', make_click_handler(coin_symbol))
-                    return on_click
+                            if hasattr(self, '_processing'):
+                                delattr(self, '_processing')
+                    
+                    # Schedule the updates
+                    self.root.after(100, do_updates)
                 
-                # Connect the click handler to the pie chart
-                handler_id = ax.figure.canvas.mpl_connect('button_press_event', 
-                                                        make_click_handler(coin))
-                ax.figure.canvas._button_press_handler_id = handler_id
-                
-                # Make the pie chart clickable by setting picker
+                # Make pie wedges pickable
                 for wedge in wedges:
                     wedge.set_picker(True)
+                    wedge.figure.canvas.mpl_connect('pick_event', 
+                        lambda event, coin_symbol=coin: on_pick(event, coin_symbol))
             
             plt.tight_layout(h_pad=4.0, w_pad=2.0)
             
@@ -513,6 +526,9 @@ class Dashboard:
             print(f"Error updating mentions view: {str(e)}")
             import traceback
             traceback.print_exc()
+        finally:
+            # Hide loading indicator
+            self.hide_loading()
 
     def show_coin_detail(self, coin):
         # Clear previous details
@@ -593,7 +609,7 @@ class Dashboard:
         """Handle cleanup when window is closed"""
         try:
             # Cancel any pending resize timer
-            if self.resize_timer:
+            if hasattr(self, 'resize_timer') and self.resize_timer:
                 self.root.after_cancel(self.resize_timer)
             
             # Close all matplotlib figures
@@ -611,15 +627,17 @@ class Dashboard:
         self.root.mainloop()
 
     def show_loading(self):
-        """Show the loading indicator"""
-        self.loading_label.lift()  # Bring to front
-        self.loading_label.place(relx=0.5, rely=0.5, anchor='center')
-        self.root.update()
+        """Show the loading indicator safely"""
+        if self.root.winfo_exists() and hasattr(self, 'loading_label'):
+            self.loading_label.lift()
+            self.loading_label.place(relx=0.5, rely=0.5, anchor='center')
+            self.root.update_idletasks()
 
     def hide_loading(self):
-        """Hide the loading indicator"""
-        self.loading_label.place_forget()
-        self.root.update()
+        """Hide the loading indicator safely"""
+        if self.root.winfo_exists() and hasattr(self, 'loading_label'):
+            self.loading_label.place_forget()
+            self.root.update_idletasks()
 
 if __name__ == "__main__":
     app = Dashboard()
