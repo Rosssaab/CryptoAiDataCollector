@@ -13,19 +13,19 @@ class SentimentTab:
 
     def setup_tab(self):
         # Controls frame
-        controls_frame = ttk.Frame(self.frame)
-        controls_frame.pack(fill='x', padx=5, pady=5)
+        self.controls_frame = ttk.Frame(self.frame)
+        self.controls_frame.pack(fill='x', padx=5, pady=5)
         
-        # Dropdown for coin selection
-        ttk.Label(controls_frame, text="Select Coin:").pack(side='left', padx=5)
+        # Coin selection
+        ttk.Label(self.controls_frame, text="Coin:").pack(side='left', padx=5)
         self.coin_var = tk.StringVar()
-        coins = self.db_manager.get_available_coins()
-        self.coin_dropdown = ttk.Combobox(controls_frame, textvariable=self.coin_var, values=coins)
+        coins = ['BTC', 'ETH', 'SOL', 'XRP', 'DOGE']
+        self.coin_dropdown = ttk.Combobox(self.controls_frame, textvariable=self.coin_var, values=coins)
         self.coin_dropdown.pack(side='left', padx=5)
-        self.coin_dropdown.set(coins[0] if coins else '')
+        self.coin_dropdown.set(coins[0])
         
         # Update button
-        update_btn = ttk.Button(controls_frame, text="Update", command=self.update_charts)
+        update_btn = ttk.Button(self.controls_frame, text="Update", command=self.update_charts)
         update_btn.pack(side='left', padx=5)
         
         # Charts frame
@@ -56,5 +56,9 @@ class SentimentTab:
         return self.coin_var.get()
 
     def set_coin(self, coin):
-        self.coin_var.set(coin)
-        self.update_charts()
+        """Set the selected coin in the dropdown and update charts"""
+        if hasattr(self, 'coin_var'):
+            self.coin_var.set(coin)
+            self.coin_dropdown.set(coin)  # Explicitly set the dropdown
+            self.frame.update_idletasks()  # Force GUI update
+            self.update_charts()  # Immediately update the charts

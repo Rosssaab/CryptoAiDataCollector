@@ -12,7 +12,6 @@ class Dashboard:
         self.root.title("Crypto Analytics Dashboard")
         
         # Set initial window size to 1024px wide
-        # Calculate height based on 16:9 aspect ratio
         width = 1024
         height = int(width * 9/16)  # This will be 576px
         
@@ -38,77 +37,61 @@ class Dashboard:
         self.notebook = ttk.Notebook(self.root)
         self.notebook.pack(fill='both', expand=True, padx=5, pady=5)
         
-        # Initialize tabs
-        self.mentions_tab = MentionsTab(self.notebook, self.db_manager, self.chart_manager)
+        # Create tabs
+        self.mentions_tab = MentionsTab(self.notebook, self.db_manager, self.chart_manager, self.notebook)
         self.price_tab = PriceTab(self.notebook, self.db_manager, self.chart_manager)
         self.sentiment_tab = SentimentTab(self.notebook, self.db_manager, self.chart_manager)
         
         # Add tabs to notebook
-        self.notebook.add(self.mentions_tab.get_frame(), text='Mentions Overview')
-        self.notebook.add(self.price_tab.get_frame(), text='Price Analysis')
-        self.notebook.add(self.sentiment_tab.get_frame(), text='Sentiment Analysis')
+        self.notebook.add(self.mentions_tab.get_frame(), text='Mentions')
+        self.notebook.add(self.price_tab.get_frame(), text='Price')
+        self.notebook.add(self.sentiment_tab.get_frame(), text='Sentiment')
+        
+        # Connect tabs
+        self.mentions_tab.set_tab_references(self.price_tab, self.sentiment_tab)
+        
+        # Set up closing handler
+        self.root.protocol("WM_DELETE_WINDOW", self.on_closing)
         
         # Create loading indicator
         self.setup_loading_indicator()
-        
-        # Add window close handler
-        self.root.protocol("WM_DELETE_WINDOW", self.on_closing)
 
     def setup_styles(self):
-        """Configure the application's visual styles"""
+        """Set up custom styles for the application"""
         style = ttk.Style()
-        style.theme_use('clam')
+        style.configure('Mentions.TFrame', background='#FFFACD')
+        style.configure('Price.TFrame', background='#E6E6FA')
+        style.configure('Sentiment.TFrame', background='#98FB98')
         
-        # Configure custom colors
-        style.configure("TFrame", background="#2B2B2B")
-        style.configure("TLabel", background="#2B2B2B", foreground="white")
-        style.configure("TButton", background="#404040", foreground="white")
-        style.configure("TNotebook", background="#2B2B2B", foreground="white")
-        style.configure("TNotebook.Tab", background="#404040", foreground="white", padding=[10, 2])
-        style.map('TNotebook.Tab', background=[('selected', '#505050')])
-        
-        # Configure custom style for mentions tab
-        style.configure("Mentions.TFrame", background="#FFFACD")
-        
-        # Configure the root window color
-        self.root.configure(bg="#2B2B2B")
-
-    def setup_loading_indicator(self):
-        """Setup the loading indicator"""
-        style = ttk.Style()
         style.configure('Loading.TLabel', 
                        font=('Helvetica', 14, 'bold'),
                        background='#2B2B2B',
                        foreground='white')
-        
+
+    def setup_loading_indicator(self):
+        """Set up the loading indicator"""
         self.loading_label = ttk.Label(self.root, text="Loading...", style='Loading.TLabel')
         self.loading_label.place(relx=0.5, rely=0.5, anchor='center')
         self.loading_label.place_forget()
 
     def show_loading(self):
         """Show the loading indicator safely"""
-        if self.root.winfo_exists() and hasattr(self, 'loading_label'):
-            self.loading_label.lift()
+        if self.root.winfo_exists():
             self.loading_label.place(relx=0.5, rely=0.5, anchor='center')
             self.root.update_idletasks()
 
     def hide_loading(self):
         """Hide the loading indicator safely"""
-        if self.root.winfo_exists() and hasattr(self, 'loading_label'):
+        if self.root.winfo_exists():
             self.loading_label.place_forget()
             self.root.update_idletasks()
 
     def on_closing(self):
         """Handle cleanup when window is closed"""
         try:
-            # Close all matplotlib figures
             import matplotlib.pyplot as plt
             plt.close('all')
-            
-            # Destroy the root window
             self.root.destroy()
-            
-            # Quit the application
             self.root.quit()
         except Exception as e:
             print(f"Error during cleanup: {str(e)}")

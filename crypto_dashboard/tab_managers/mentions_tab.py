@@ -4,10 +4,11 @@ from datetime import datetime, timedelta
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 
 class MentionsTab:
-    def __init__(self, parent, db_manager, chart_manager):
+    def __init__(self, parent, db_manager, chart_manager, notebook=None):
         self.parent = parent
         self.db_manager = db_manager
         self.chart_manager = chart_manager
+        self.notebook = notebook  # Store notebook reference
         
         # Create the tab
         self.frame = ttk.Frame(parent, style="Mentions.TFrame")
@@ -20,6 +21,10 @@ class MentionsTab:
         
         # Bind resize event
         self.frame.bind('<Configure>', self.handle_resize)
+        
+        # Store references to other tabs
+        self.price_tab = None
+        self.sentiment_tab = None
 
     def setup_tab(self):
         # Controls frame
@@ -102,7 +107,7 @@ class MentionsTab:
             # Create the figure and charts with current dimensions
             fig, colors = self.chart_manager.create_mentions_pie_charts(
                 df, sorted_coins, n_rows, n_cols, current_width, current_height, 
-                scrollable_frame
+                scrollable_frame, click_handler=self.handle_pie_click
             )
             
             # Create chart canvas and pack it
@@ -196,3 +201,32 @@ class MentionsTab:
                 # Update last known dimensions
                 self.last_width = current_width
                 self.last_height = current_height
+
+    def set_tab_references(self, price_tab, sentiment_tab):
+        """Store references to other tabs"""
+        self.price_tab = price_tab
+        self.sentiment_tab = sentiment_tab
+
+    def handle_pie_click(self, coin):
+        """Handle click events on pie charts"""
+        try:
+            print(f"Pie clicked for coin: {coin}")  # Debug print
+            
+            # Update both tabs first
+            if self.price_tab:
+                self.price_tab.set_coin(coin)
+                print(f"Updated price tab for {coin}")  # Debug print
+                
+            if self.sentiment_tab:
+                self.sentiment_tab.set_coin(coin)
+                print(f"Updated sentiment tab for {coin}")  # Debug print
+            
+            # Then switch to sentiment tab
+            if self.notebook:
+                self.notebook.after(10, lambda: self.notebook.select(2))
+                print("Switched to sentiment tab")  # Debug print
+                
+        except Exception as e:
+            print(f"Error handling pie click: {str(e)}")
+            import traceback
+            traceback.print_exc()
