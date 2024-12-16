@@ -33,6 +33,7 @@ CRYPTOPANIC_API_KEY = "0598909d59291aa32a50470f1b04d106175081f5"  # Get from htt
 CRYPTOPANIC_BASE_URL = "https://cryptopanic.com/api/v1/"
 
 # News API configuration
+NEWS_API_KEY = "a615eccfb6c94bb2b0d1ea6ddce46fb8"  # Get from https://newsapi.org/
 NEWS_API_URL = "https://newsapi.org/v2/everything"
 
 

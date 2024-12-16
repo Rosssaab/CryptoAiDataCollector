@@ -146,12 +146,10 @@ class ChatCollector:
                 for article in articles:
                     sentiment_score, sentiment_label = self.analyze_sentiment(article['title'])
                     mentions.append({
-                        'source_id': self.sources['News'],
                         'content': article['title'][:500],
                         'url': article['url'],
                         'sentiment_score': sentiment_score,
-                        'sentiment_label': sentiment_label,
-                        'coin_id': coin['coin_id']
+                        'sentiment_label': sentiment_label
                     })
                     self.logger.info(f"Added news mention for {coin['symbol']}")
                 
@@ -161,6 +159,7 @@ class ChatCollector:
         except Exception as e:
             self.logger.error(f"News API error for {coin['symbol']}: {str(e)}")
             
+        self.logger.info(f"News API - Found {len(mentions)} mentions for {coin['symbol']}")
         return mentions
 
     def collect_reddit_mentions(self, coin):
@@ -215,8 +214,8 @@ class ChatCollector:
         try:
             self.logger.info(f"Searching Twitter for {coin['symbol']}")
             
-            # Add delay to avoid rate limiting
-            time.sleep(2)  # Wait 2 seconds between requests
+            # Add delay to avoid rate limits
+            time.sleep(2)
             
             query = f"#{coin['symbol'].lower()} OR #{coin['full_name'].lower()} crypto -is:retweet lang:en"
             tweets = self.twitter.search_recent_tweets(
@@ -241,7 +240,8 @@ class ChatCollector:
                 
         except Exception as e:
             self.logger.error(f"Twitter API error for {coin['symbol']}: {str(e)}")
-            time.sleep(5)  # Wait longer if we hit an error
+            # Don't let Twitter errors crash the program
+            return []
             
         return mentions
 
@@ -282,56 +282,6 @@ class ChatCollector:
                 
         except Exception as e:
             self.logger.error(f"CryptoCompare API error for {coin['symbol']}: {str(e)}")
-            
-        return mentions
-
-    def collect_binance_mentions(self, coin):
-        mentions = []
-        try:
-            self.logger.info(f"Fetching Binance news for {coin['symbol']}")
-            
-            url = "https://www.binance.com/bapi/composite/v1/public/cms/article/catalog/list/query"
-            headers = {
-                'User-Agent': 'Mozilla/5.0',
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            }
-            data = {
-                "catalogId": "48",
-                "pageNo": 1,
-                "pageSize": 50
-            }
-            
-            response = requests.post(url, json=data, headers=headers)
-            self.logger.info(f"Binance API response status: {response.status_code}")
-            
-            if response.status_code == 200:
-                articles = response.json().get('data', {}).get('articles', [])
-                self.logger.info(f"Found {len(articles)} Binance articles")
-                
-                for article in articles:
-                    title = article.get('title', '').lower()
-                    if coin['symbol'].lower() in title or coin['full_name'].lower() in title:
-                        content = article.get('title', '')
-                        sentiment_score, sentiment_label = self.analyze_sentiment(content)
-                        mentions.append({
-                            'source_id': self.sources['Binance'],
-                            'content': content[:500],
-                            'url': f"https://www.binance.com/en/news/{article.get('code', '')}",
-                            'sentiment_score': sentiment_score,
-                            'sentiment_label': sentiment_label,
-                            'coin_id': coin['coin_id']
-                        })
-                        self.logger.info(f"Added Binance mention for {coin['symbol']}: {content[:100]}")
-                
-                self.logger.info(f"Found {len(mentions)} relevant Binance articles for {coin['symbol']}")
-                    
-            else:
-                self.logger.error(f"Binance API error: {response.text}")
-                
-        except Exception as e:
-            self.logger.error(f"Binance API error for {coin['symbol']}: {str(e)}")
-            self.logger.info(f"Full error: {traceback.format_exc()}")
             
         return mentions
 
@@ -404,18 +354,27 @@ class ChatCollector:
             raw_mentions = collection_function(coin)
             processed_mentions = []
             
+            # Debug logging
+            self.logger.info(f"Processing {len(raw_mentions)} raw mentions from {source_name}")
+            
             for raw_mention in raw_mentions:
-                processed_mention = {
-                    'coin_id': coin['coin_id'],
-                    'source_id': self.sources[source_name],
-                    'content': raw_mention.get('content', ''),
-                    'url': raw_mention.get('url', ''),
-                    'sentiment_score': raw_mention.get('sentiment_score', 0.0),
-                    'sentiment_label': raw_mention.get('sentiment_label', 'NEUTRAL')
-                }
-                processed_mentions.append(processed_mention)
+                try:
+                    processed_mention = {
+                        'coin_id': coin['coin_id'],
+                        'source_id': self.sources.get(source_name, 3),  # Default to 3 for News
+                        'content': raw_mention.get('content', ''),
+                        'url': raw_mention.get('url', ''),
+                        'sentiment_score': raw_mention.get('sentiment_score', 0.0),
+                        'sentiment_label': raw_mention.get('sentiment_label', 'NEUTRAL')
+                    }
+                    processed_mentions.append(processed_mention)
+                except Exception as e:
+                    self.logger.error(f"Error processing mention for {source_name}: {str(e)}")
+                    continue
                 
+            self.logger.info(f"Processed {len(processed_mentions)} mentions for {source_name}")
             return processed_mentions
+            
         except Exception as e:
             self.logger.error(f"{source_name} API error for {coin['symbol']}: {str(e)}")
             return []
@@ -439,7 +398,6 @@ class ChatCollector:
                     'Reddit': self.collect_reddit_mentions,
                     'Twitter': self.collect_twitter_mentions,
                     'CryptoCompare': self.collect_cryptocompare_mentions,
-                    'Binance': self.collect_binance_mentions,
                     'CoinGecko': self.collect_coingecko_mentions,
                     'CryptoPanic': self.collect_cryptopanic_mentions
                 }
