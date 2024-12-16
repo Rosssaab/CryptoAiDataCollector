@@ -123,12 +123,10 @@ class Dashboard:
 
     def get_available_coins(self):
         try:
-            conn = self.get_db_connection()
-            cursor = conn.cursor()
-            cursor.execute("SELECT symbol FROM Coins ORDER BY symbol")
-            coins = [row[0] for row in cursor.fetchall()]
-            conn.close()
-            return coins
+            engine = create_engine(f"mssql+pyodbc:///?odbc_connect={self.conn_str}")
+            query = "SELECT symbol FROM Coins ORDER BY symbol"
+            df = pd.read_sql_query(query, engine)
+            return df['symbol'].tolist()
         except Exception as e:
             print(f"Error getting coins: {str(e)}")
             return []
@@ -252,10 +250,10 @@ class Dashboard:
             print(f"Error updating sentiment charts: {str(e)}")
 
     def update_mentions_view(self):
-        # Only clear the charts frame
+        # Clear existing charts
         for widget in self.mentions_charts_frame.winfo_children():
             widget.destroy()
-        
+            
         try:
             # Calculate time range
             now = datetime.now()
@@ -269,7 +267,6 @@ class Dashboard:
             else:  # 90d
                 start_time = now - timedelta(days=90)
             
-            # Create SQLAlchemy engine
             engine = create_engine(f"mssql+pyodbc:///?odbc_connect={self.conn_str}")
             
             query = """
@@ -284,7 +281,6 @@ class Dashboard:
             ORDER BY c.symbol, mention_count DESC
             """
             
-            # Use ? parameter style for pyodbc
             df = pd.read_sql_query(query, engine, params=(start_time,))
             
             if df.empty:
@@ -294,10 +290,35 @@ class Dashboard:
             # Create figure with subplots for each coin
             coins = df['symbol'].unique()
             n_coins = len(coins)
-            n_cols = 3
+            n_cols = 2  # 2 columns
             n_rows = (n_coins + n_cols - 1) // n_cols
             
-            fig = plt.figure(figsize=(15, 5 * n_rows))
+            # Get screen width and height
+            screen_width = self.root.winfo_screenwidth()
+            screen_height = self.root.winfo_screenheight()
+            
+            # Create a canvas with scrollbar first
+            canvas = tk.Canvas(self.mentions_charts_frame, width=screen_width-50)  # Leave room for scrollbar
+            scrollbar = ttk.Scrollbar(self.mentions_charts_frame, orient="vertical", command=canvas.yview)
+            scrollable_frame = ttk.Frame(canvas)
+            
+            # Configure the canvas
+            canvas.configure(yscrollcommand=scrollbar.set)
+            
+            # Pack scrollbar and canvas
+            scrollbar.pack(side="right", fill="y")
+            canvas.pack(side="left", fill="both", expand=True)
+            
+            # Create a window in the canvas for the scrollable frame
+            canvas.create_window((0, 0), window=scrollable_frame, anchor="nw")
+            
+            # Calculate figure size - make each pie chart nearly half screen width
+            fig_width = screen_width / 100  # Convert to inches
+            single_pie_height = screen_height / 100 * 0.8  # 80% of screen height
+            fig_height = single_pie_height * n_rows
+            
+            # Create figure
+            fig = plt.figure(figsize=(fig_width, fig_height), dpi=100)
             
             colors = {
                 'positive': '#00ff00',    # Bright green
@@ -307,11 +328,8 @@ class Dashboard:
                 'very negative': '#800000'  # Dark red
             }
             
-            def on_click(event):
-                if event.inaxes:
-                    for idx, coin in enumerate(coins):
-                        if event.inaxes == fig.axes[idx]:
-                            self.show_coin_detail(coin)
+            # Maximum spacing between plots
+            plt.subplots_adjust(hspace=1.2, wspace=0.4)
             
             for idx, coin in enumerate(coins):
                 coin_data = df[df['symbol'] == coin]
@@ -322,23 +340,39 @@ class Dashboard:
                 wedges, texts, autotexts = ax.pie(sentiment_counts, 
                                                 labels=sentiment_counts.index,
                                                 autopct='%1.1f%%',
-                                                colors=pie_colors)
+                                                colors=pie_colors,
+                                                radius=1.0)
                 
-                ax.set_title(f'{coin} Sentiment')
+                plt.setp(autotexts, size=16, weight="bold")
+                plt.setp(texts, size=16)
+                ax.set_title(coin, pad=20, y=-0.1, fontsize=18, weight='bold')
             
-            plt.tight_layout()
+            plt.tight_layout(h_pad=4.0, w_pad=2.0)
             
-            canvas = FigureCanvasTkAgg(fig, self.mentions_charts_frame)
-            canvas.draw()
-            canvas.get_tk_widget().pack(fill='both', expand=True)
+            # Create the matplotlib canvas and add it to the scrollable frame
+            chart_canvas = FigureCanvasTkAgg(fig, scrollable_frame)
+            chart_widget = chart_canvas.get_tk_widget()
+            chart_widget.pack(fill='both', expand=True)
             
-            # Connect the click event
-            canvas.mpl_connect('button_press_event', on_click)
+            # Update the scroll region after the window is updated
+            def configure_scroll_region(event):
+                canvas.configure(scrollregion=canvas.bbox("all"))
             
-            print(f"Found {len(coins)} coins with data")  # Debug print
+            scrollable_frame.bind('<Configure>', configure_scroll_region)
+            
+            # Configure mouse wheel scrolling
+            def on_mousewheel(event):
+                canvas.yview_scroll(int(-1*(event.delta/120)), "units")
+            
+            canvas.bind_all("<MouseWheel>", on_mousewheel)
+            
+            # Draw the chart
+            chart_canvas.draw()
             
         except Exception as e:
             print(f"Error updating mentions view: {str(e)}")
+            import traceback
+            traceback.print_exc()
 
     def show_coin_detail(self, coin):
         # Clear previous details
