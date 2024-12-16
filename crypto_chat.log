@@ -14335,3 +14335,436 @@ Too Many Requests
 2024-12-15 14:03:23,359 - INFO - Fetching CryptoCompare news for OM
 2024-12-15 14:03:24,056 - INFO - Fetching Binance news for OM
 2024-12-15 14:03:26,079 - INFO - Saved 7 mentions successfully
+2024-12-16 12:55:30,973 - INFO - Database connected successfully
+2024-12-16 12:55:31,569 - INFO - Reddit API initialized successfully
+2024-12-16 12:55:31,569 - INFO - Twitter API initialized successfully
+2024-12-16 12:55:34,292 - INFO - CryptoCompare API initialized successfully
+2024-12-16 12:55:34,305 - INFO - Loaded 6 chat sources
+2024-12-16 12:55:47,402 - ERROR - News API API error for BTC: 'News API'
+2024-12-16 12:55:47,406 - INFO - Searching Reddit r/cryptocurrency for BTC
+2024-12-16 12:55:49,080 - INFO - Searching Reddit r/CryptoMarkets for BTC
+2024-12-16 12:55:50,150 - INFO - Searching Twitter for BTC
+2024-12-16 12:55:50,772 - ERROR - Twitter API error for BTC: 429 Too Many Requests
+Usage cap exceeded: Monthly product cap
+2024-12-16 12:55:50,780 - INFO - Fetching CryptoCompare news for BTC
+2024-12-16 12:55:51,885 - INFO - Fetching Binance news for BTC
+2024-12-16 12:55:53,646 - INFO - Saved 31 mentions successfully
+2024-12-16 12:55:54,536 - ERROR - News API API error for ETH: 'News API'
+2024-12-16 12:55:54,540 - INFO - Searching Reddit r/cryptocurrency for ETH
+2024-12-16 12:55:54,949 - INFO - Searching Reddit r/CryptoMarkets for ETH
+2024-12-16 12:55:55,512 - INFO - Searching Twitter for ETH
+2024-12-16 12:55:55,654 - ERROR - Twitter API error for ETH: 429 Too Many Requests
+Too Many Requests
+2024-12-16 12:55:55,654 - INFO - Fetching CryptoCompare news for ETH
+2024-12-16 12:55:56,298 - INFO - Fetching Binance news for ETH
+2024-12-16 12:55:57,928 - INFO - Saved 16 mentions successfully
+2024-12-16 12:56:00,042 - ERROR - News API API error for XRP: 'News API'
+2024-12-16 12:56:00,045 - INFO - Searching Reddit r/cryptocurrency for XRP
+2024-12-16 12:56:00,391 - INFO - Searching Reddit r/CryptoMarkets for XRP
+2024-12-16 12:56:01,028 - INFO - Searching Twitter for XRP
+2024-12-16 12:56:01,156 - ERROR - Twitter API error for XRP: 429 Too Many Requests
+Too Many Requests
+2024-12-16 12:56:01,160 - INFO - Fetching CryptoCompare news for XRP
+2024-12-16 12:56:02,480 - INFO - Fetching Binance news for XRP
+2024-12-16 12:56:04,361 - INFO - Saved 23 mentions successfully
+2024-12-16 12:56:05,192 - ERROR - News API API error for SOL: 'News API'
+2024-12-16 12:56:05,194 - INFO - Searching Reddit r/cryptocurrency for SOL
+2024-12-16 12:56:05,536 - INFO - Searching Reddit r/CryptoMarkets for SOL
+2024-12-16 12:56:06,096 - INFO - Searching Twitter for SOL
+2024-12-16 12:56:06,230 - ERROR - Twitter API error for SOL: 429 Too Many Requests
+Too Many Requests
+2024-12-16 12:56:06,230 - INFO - Fetching CryptoCompare news for SOL
+2024-12-16 12:56:07,417 - INFO - Fetching Binance news for SOL
+2024-12-16 12:56:09,350 - INFO - Saved 15 mentions successfully
+2024-12-16 12:56:11,502 - ERROR - News API API error for BNB: 'News API'
+2024-12-16 12:56:11,505 - INFO - Searching Reddit r/cryptocurrency for BNB
+2024-12-16 12:56:11,853 - INFO - Searching Reddit r/CryptoMarkets for BNB
+2024-12-16 12:56:12,184 - INFO - Searching Twitter for BNB
+2024-12-16 12:56:12,325 - ERROR - Twitter API error for BNB: 429 Too Many Requests
+Too Many Requests
+2024-12-16 12:56:12,332 - INFO - Fetching CryptoCompare news for BNB
+2024-12-16 12:56:12,936 - INFO - Fetching Binance news for BNB
+2024-12-16 12:56:14,753 - INFO - Saved 1 mentions successfully
+2024-12-16 12:56:15,553 - ERROR - News API API error for DOGE: 'News API'
+2024-12-16 12:56:15,557 - INFO - Searching Reddit r/cryptocurrency for DOGE
+2024-12-16 12:56:15,966 - INFO - Searching Reddit r/CryptoMarkets for DOGE
+2024-12-16 12:56:16,354 - INFO - Searching Reddit r/doge for DOGE
+2024-12-16 12:56:16,792 - INFO - Searching Twitter for DOGE
+2024-12-16 12:56:16,930 - ERROR - Twitter API error for DOGE: 429 Too Many Requests
+Too Many Requests
+2024-12-16 12:56:16,933 - INFO - Fetching CryptoCompare news for DOGE
+2024-12-16 12:56:18,016 - INFO - Fetching Binance news for DOGE
+2024-12-16 12:56:19,935 - INFO - Saved 10 mentions successfully
+2024-12-16 12:56:21,826 - ERROR - News API API error for ADA: 'News API'
+2024-12-16 12:56:21,828 - INFO - Searching Reddit r/cryptocurrency for ADA
+2024-12-16 12:56:22,227 - INFO - Searching Reddit r/CryptoMarkets for ADA
+2024-12-16 12:56:22,633 - INFO - Searching Twitter for ADA
+2024-12-16 12:56:22,772 - ERROR - Twitter API error for ADA: 429 Too Many Requests
+Too Many Requests
+2024-12-16 12:56:22,772 - INFO - Fetching CryptoCompare news for ADA
+2024-12-16 12:56:23,365 - INFO - Fetching Binance news for ADA
+2024-12-16 12:56:25,125 - INFO - Saved 4 mentions successfully
+2024-12-16 12:56:26,023 - ERROR - News API API error for TRX: 'News API'
+2024-12-16 12:56:26,025 - INFO - Searching Reddit r/cryptocurrency for TRX
+2024-12-16 12:56:26,366 - INFO - Searching Reddit r/CryptoMarkets for TRX
+2024-12-16 12:56:26,691 - INFO - Searching Twitter for TRX
+2024-12-16 12:56:26,833 - ERROR - Twitter API error for TRX: 429 Too Many Requests
+Too Many Requests
+2024-12-16 12:56:26,840 - INFO - Fetching CryptoCompare news for TRX
+2024-12-16 12:56:27,434 - INFO - Fetching Binance news for TRX
+2024-12-16 12:56:29,887 - ERROR - News API API error for AVAX: 'News API'
+2024-12-16 12:56:29,890 - INFO - Searching Reddit r/cryptocurrency for AVAX
+2024-12-16 12:56:30,237 - INFO - Searching Reddit r/CryptoMarkets for AVAX
+2024-12-16 12:56:30,547 - INFO - Searching Reddit r/avax for AVAX
+2024-12-16 12:56:31,047 - INFO - Searching Twitter for AVAX
+2024-12-16 12:56:31,202 - ERROR - Twitter API error for AVAX: 429 Too Many Requests
+Too Many Requests
+2024-12-16 12:56:31,206 - INFO - Fetching CryptoCompare news for AVAX
+2024-12-16 12:56:31,956 - INFO - Fetching Binance news for AVAX
+2024-12-16 12:56:33,891 - INFO - Saved 7 mentions successfully
+2024-12-16 12:56:34,818 - ERROR - News API API error for LINK: 'News API'
+2024-12-16 12:56:34,818 - INFO - Searching Reddit r/cryptocurrency for LINK
+2024-12-16 12:56:35,297 - INFO - Searching Reddit r/CryptoMarkets for LINK
+2024-12-16 12:56:35,699 - INFO - Searching Reddit r/link for LINK
+2024-12-16 12:56:35,873 - WARNING - Skipping inaccessible subreddit r/link: received 403 HTTP response
+2024-12-16 12:56:36,045 - INFO - Searching Twitter for LINK
+2024-12-16 12:56:36,179 - ERROR - Twitter API error for LINK: 429 Too Many Requests
+Too Many Requests
+2024-12-16 12:56:36,198 - INFO - Fetching CryptoCompare news for LINK
+2024-12-16 12:56:36,766 - INFO - Fetching Binance news for LINK
+2024-12-16 12:56:37,881 - INFO - Saved 12 mentions successfully
+2024-12-16 12:56:38,638 - ERROR - News API API error for SHIB: 'News API'
+2024-12-16 12:56:38,642 - INFO - Searching Reddit r/cryptocurrency for SHIB
+2024-12-16 12:56:39,042 - INFO - Searching Reddit r/CryptoMarkets for SHIB
+2024-12-16 12:56:39,565 - INFO - Searching Reddit r/shib for SHIB
+2024-12-16 12:56:39,939 - INFO - Searching Twitter for SHIB
+2024-12-16 12:56:40,095 - ERROR - Twitter API error for SHIB: 429 Too Many Requests
+Too Many Requests
+2024-12-16 12:56:40,097 - INFO - Fetching CryptoCompare news for SHIB
+2024-12-16 12:56:40,874 - INFO - Fetching Binance news for SHIB
+2024-12-16 12:56:42,048 - INFO - Saved 4 mentions successfully
+2024-12-16 12:56:42,849 - ERROR - News API API error for TON: 'News API'
+2024-12-16 12:56:42,852 - INFO - Searching Reddit r/cryptocurrency for TON
+2024-12-16 12:56:43,201 - INFO - Searching Reddit r/CryptoMarkets for TON
+2024-12-16 12:56:43,520 - INFO - Searching Twitter for TON
+2024-12-16 12:56:43,658 - ERROR - Twitter API error for TON: 429 Too Many Requests
+Too Many Requests
+2024-12-16 12:56:43,664 - INFO - Fetching CryptoCompare news for TON
+2024-12-16 12:56:44,314 - INFO - Fetching Binance news for TON
+2024-12-16 12:56:45,402 - INFO - Saved 1 mentions successfully
+2024-12-16 12:56:46,906 - ERROR - News API API error for DOT: 'News API'
+2024-12-16 12:56:46,909 - INFO - Searching Reddit r/cryptocurrency for DOT
+2024-12-16 12:56:47,229 - INFO - Searching Reddit r/CryptoMarkets for DOT
+2024-12-16 12:56:47,573 - INFO - Searching Twitter for DOT
+2024-12-16 12:56:47,718 - ERROR - Twitter API error for DOT: 429 Too Many Requests
+Too Many Requests
+2024-12-16 12:56:47,720 - INFO - Fetching CryptoCompare news for DOT
+2024-12-16 12:56:49,023 - INFO - Fetching Binance news for DOT
+2024-12-16 12:56:50,263 - INFO - Saved 1 mentions successfully
+2024-12-16 12:56:50,963 - ERROR - News API API error for SUI: 'News API'
+2024-12-16 12:56:50,968 - INFO - Searching Reddit r/cryptocurrency for SUI
+2024-12-16 12:56:51,297 - INFO - Searching Reddit r/CryptoMarkets for SUI
+2024-12-16 12:56:51,735 - INFO - Searching Twitter for SUI
+2024-12-16 12:56:51,881 - ERROR - Twitter API error for SUI: 429 Too Many Requests
+Too Many Requests
+2024-12-16 12:56:51,881 - INFO - Fetching CryptoCompare news for SUI
+2024-12-16 12:56:52,473 - INFO - Fetching Binance news for SUI
+2024-12-16 12:56:53,594 - INFO - Saved 4 mentions successfully
+2024-12-16 12:56:54,356 - ERROR - News API API error for XLM: 'News API'
+2024-12-16 12:56:54,359 - INFO - Searching Reddit r/cryptocurrency for XLM
+2024-12-16 12:56:54,701 - INFO - Searching Reddit r/CryptoMarkets for XLM
+2024-12-16 12:56:55,079 - INFO - Searching Twitter for XLM
+2024-12-16 12:56:55,233 - ERROR - Twitter API error for XLM: 429 Too Many Requests
+Too Many Requests
+2024-12-16 12:56:55,243 - INFO - Fetching CryptoCompare news for XLM
+2024-12-16 12:56:55,933 - INFO - Fetching Binance news for XLM
+2024-12-16 12:56:57,062 - INFO - Saved 1 mentions successfully
+2024-12-16 12:56:58,395 - ERROR - News API API error for HBAR: 'News API'
+2024-12-16 12:56:58,404 - INFO - Searching Reddit r/cryptocurrency for HBAR
+2024-12-16 12:56:58,766 - INFO - Searching Reddit r/CryptoMarkets for HBAR
+2024-12-16 12:56:59,182 - INFO - Searching Reddit r/hbar for HBAR
+2024-12-16 12:56:59,558 - INFO - Searching Twitter for HBAR
+2024-12-16 12:56:59,712 - ERROR - Twitter API error for HBAR: 429 Too Many Requests
+Too Many Requests
+2024-12-16 12:56:59,712 - INFO - Fetching CryptoCompare news for HBAR
+2024-12-16 12:57:00,273 - INFO - Fetching Binance news for HBAR
+2024-12-16 12:57:02,068 - INFO - Saved 4 mentions successfully
+2024-12-16 12:57:02,815 - INFO - Searching Reddit r/cryptocurrency for BCH
+2024-12-16 12:57:03,148 - INFO - Searching Reddit r/CryptoMarkets for BCH
+2024-12-16 12:57:03,485 - INFO - Searching Twitter for BCH
+2024-12-16 12:57:03,633 - ERROR - Twitter API error for BCH: 429 Too Many Requests
+Too Many Requests
+2024-12-16 12:57:03,639 - INFO - Fetching CryptoCompare news for BCH
+2024-12-16 12:57:06,292 - INFO - Fetching Binance news for BCH
+2024-12-16 12:57:08,893 - ERROR - News API API error for UNI: 'News API'
+2024-12-16 12:57:08,896 - INFO - Searching Reddit r/cryptocurrency for UNI
+2024-12-16 12:57:09,315 - INFO - Searching Reddit r/CryptoMarkets for UNI
+2024-12-16 12:57:09,708 - INFO - Searching Twitter for UNI
+2024-12-16 12:57:09,862 - ERROR - Twitter API error for UNI: 429 Too Many Requests
+Too Many Requests
+2024-12-16 12:57:09,862 - INFO - Fetching CryptoCompare news for UNI
+2024-12-16 12:57:11,846 - INFO - Fetching Binance news for UNI
+2024-12-16 12:57:13,734 - INFO - Saved 2 mentions successfully
+2024-12-16 12:57:17,032 - ERROR - News API API error for PEPE: 'News API'
+2024-12-16 12:57:17,036 - INFO - Searching Reddit r/cryptocurrency for PEPE
+2024-12-16 12:57:17,401 - INFO - Searching Reddit r/CryptoMarkets for PEPE
+2024-12-16 12:57:17,799 - INFO - Searching Reddit r/pepe for PEPE
+2024-12-16 12:57:17,948 - WARNING - Skipping inaccessible subreddit r/pepe: received 403 HTTP response
+2024-12-16 12:57:18,033 - INFO - Searching Twitter for PEPE
+2024-12-16 12:57:18,148 - ERROR - Twitter API error for PEPE: 429 Too Many Requests
+Too Many Requests
+2024-12-16 12:57:18,164 - INFO - Fetching CryptoCompare news for PEPE
+2024-12-16 12:57:18,719 - INFO - Fetching Binance news for PEPE
+2024-12-16 12:57:20,636 - INFO - Saved 7 mentions successfully
+2024-12-16 12:57:23,944 - ERROR - News API API error for LTC: 'News API'
+2024-12-16 12:57:23,949 - INFO - Searching Reddit r/cryptocurrency for LTC
+2024-12-16 12:57:24,317 - INFO - Searching Reddit r/CryptoMarkets for LTC
+2024-12-16 12:57:24,718 - INFO - Searching Twitter for LTC
+2024-12-16 12:57:24,856 - ERROR - Twitter API error for LTC: 429 Too Many Requests
+Too Many Requests
+2024-12-16 12:57:24,861 - INFO - Fetching CryptoCompare news for LTC
+2024-12-16 12:57:25,524 - INFO - Fetching Binance news for LTC
+2024-12-16 12:57:27,534 - INFO - Saved 9 mentions successfully
+2024-12-16 12:57:28,301 - ERROR - News API API error for NEAR: 'News API'
+2024-12-16 12:57:28,306 - INFO - Searching Reddit r/cryptocurrency for NEAR
+2024-12-16 12:57:28,722 - INFO - Searching Reddit r/CryptoMarkets for NEAR
+2024-12-16 12:57:29,080 - INFO - Searching Reddit r/near for NEAR
+2024-12-16 12:57:29,257 - WARNING - Skipping inaccessible subreddit r/near: received 403 HTTP response
+2024-12-16 12:57:29,266 - INFO - Searching Twitter for NEAR
+2024-12-16 12:57:29,433 - ERROR - Twitter API error for NEAR: 429 Too Many Requests
+Too Many Requests
+2024-12-16 12:57:29,440 - INFO - Fetching CryptoCompare news for NEAR
+2024-12-16 12:57:30,034 - INFO - Fetching Binance news for NEAR
+2024-12-16 12:57:31,093 - INFO - Saved 3 mentions successfully
+2024-12-16 12:57:32,322 - ERROR - News API API error for APT: 'News API'
+2024-12-16 12:57:32,325 - INFO - Searching Reddit r/cryptocurrency for APT
+2024-12-16 12:57:32,663 - INFO - Searching Reddit r/CryptoMarkets for APT
+2024-12-16 12:57:32,993 - INFO - Searching Twitter for APT
+2024-12-16 12:57:33,136 - ERROR - Twitter API error for APT: 429 Too Many Requests
+Too Many Requests
+2024-12-16 12:57:33,136 - INFO - Fetching CryptoCompare news for APT
+2024-12-16 12:57:33,707 - INFO - Fetching Binance news for APT
+2024-12-16 12:57:35,524 - INFO - Searching Reddit r/cryptocurrency for ICP
+2024-12-16 12:57:35,900 - INFO - Searching Reddit r/CryptoMarkets for ICP
+2024-12-16 12:57:36,236 - INFO - Searching Twitter for ICP
+2024-12-16 12:57:36,378 - ERROR - Twitter API error for ICP: 429 Too Many Requests
+Too Many Requests
+2024-12-16 12:57:36,391 - INFO - Fetching CryptoCompare news for ICP
+2024-12-16 12:57:36,962 - INFO - Fetching Binance news for ICP
+2024-12-16 12:57:38,042 - INFO - Saved 3 mentions successfully
+2024-12-16 12:57:38,836 - ERROR - News API API error for AAVE: 'News API'
+2024-12-16 12:57:38,838 - INFO - Searching Reddit r/cryptocurrency for AAVE
+2024-12-16 12:57:39,266 - INFO - Searching Reddit r/CryptoMarkets for AAVE
+2024-12-16 12:57:39,654 - INFO - Searching Reddit r/aave for AAVE
+2024-12-16 12:57:40,084 - INFO - Searching Twitter for AAVE
+2024-12-16 12:57:40,235 - ERROR - Twitter API error for AAVE: 429 Too Many Requests
+Too Many Requests
+2024-12-16 12:57:40,240 - INFO - Fetching CryptoCompare news for AAVE
+2024-12-16 12:57:40,917 - INFO - Fetching Binance news for AAVE
+2024-12-16 12:57:42,005 - INFO - Saved 1 mentions successfully
+2024-12-16 12:57:42,757 - ERROR - News API API error for POL: 'News API'
+2024-12-16 12:57:42,759 - INFO - Searching Reddit r/cryptocurrency for POL
+2024-12-16 12:57:43,104 - INFO - Searching Reddit r/CryptoMarkets for POL
+2024-12-16 12:57:43,446 - INFO - Searching Twitter for POL
+2024-12-16 12:57:43,593 - ERROR - Twitter API error for POL: 429 Too Many Requests
+Too Many Requests
+2024-12-16 12:57:43,600 - INFO - Fetching CryptoCompare news for POL
+2024-12-16 12:57:44,159 - INFO - Fetching Binance news for POL
+2024-12-16 12:57:46,012 - ERROR - News API API error for ETC: 'News API'
+2024-12-16 12:57:46,015 - INFO - Searching Reddit r/cryptocurrency for ETC
+2024-12-16 12:57:46,359 - INFO - Searching Reddit r/CryptoMarkets for ETC
+2024-12-16 12:57:46,693 - INFO - Searching Twitter for ETC
+2024-12-16 12:57:46,857 - ERROR - Twitter API error for ETC: 429 Too Many Requests
+Too Many Requests
+2024-12-16 12:57:46,866 - INFO - Fetching CryptoCompare news for ETC
+2024-12-16 12:57:47,726 - INFO - Fetching Binance news for ETC
+2024-12-16 12:57:48,815 - INFO - Saved 1 mentions successfully
+2024-12-16 12:57:50,501 - INFO - Searching Reddit r/cryptocurrency for RENDER
+2024-12-16 12:57:51,264 - INFO - Searching Reddit r/CryptoMarkets for RENDER
+2024-12-16 12:57:51,586 - INFO - Searching Reddit r/render for RENDER
+2024-12-16 12:57:51,954 - INFO - Searching Twitter for RENDER
+2024-12-16 12:57:52,098 - ERROR - Twitter API error for RENDER: 429 Too Many Requests
+Too Many Requests
+2024-12-16 12:57:52,100 - INFO - Fetching CryptoCompare news for RENDER
+2024-12-16 12:57:53,212 - INFO - Fetching Binance news for RENDER
+2024-12-16 12:57:54,326 - INFO - Saved 2 mentions successfully
+2024-12-16 12:57:58,055 - ERROR - News API API error for VET: 'News API'
+2024-12-16 12:57:58,058 - INFO - Searching Reddit r/cryptocurrency for VET
+2024-12-16 12:57:58,389 - INFO - Searching Reddit r/CryptoMarkets for VET
+2024-12-16 12:57:58,727 - INFO - Searching Twitter for VET
+2024-12-16 12:57:58,873 - ERROR - Twitter API error for VET: 429 Too Many Requests
+Too Many Requests
+2024-12-16 12:57:58,878 - INFO - Fetching CryptoCompare news for VET
+2024-12-16 12:57:59,649 - INFO - Fetching Binance news for VET
+2024-12-16 12:58:01,595 - INFO - Saved 1 mentions successfully
+2024-12-16 12:58:02,358 - ERROR - News API API error for TAO: 'News API'
+2024-12-16 12:58:02,361 - INFO - Searching Reddit r/cryptocurrency for TAO
+2024-12-16 12:58:02,715 - INFO - Searching Reddit r/CryptoMarkets for TAO
+2024-12-16 12:58:03,114 - INFO - Searching Twitter for TAO
+2024-12-16 12:58:03,257 - ERROR - Twitter API error for TAO: 429 Too Many Requests
+Too Many Requests
+2024-12-16 12:58:03,263 - INFO - Fetching CryptoCompare news for TAO
+2024-12-16 12:58:06,597 - INFO - Fetching Binance news for TAO
+2024-12-16 12:58:08,469 - INFO - Saved 2 mentions successfully
+2024-12-16 12:58:09,339 - ERROR - News API API error for ARB: 'News API'
+2024-12-16 12:58:09,342 - INFO - Searching Reddit r/cryptocurrency for ARB
+2024-12-16 12:58:09,702 - INFO - Searching Reddit r/CryptoMarkets for ARB
+2024-12-16 12:58:10,050 - INFO - Searching Twitter for ARB
+2024-12-16 12:58:10,180 - ERROR - Twitter API error for ARB: 429 Too Many Requests
+Too Many Requests
+2024-12-16 12:58:10,193 - INFO - Fetching CryptoCompare news for ARB
+2024-12-16 12:58:10,831 - INFO - Fetching Binance news for ARB
+2024-12-16 12:58:12,898 - INFO - Saved 3 mentions successfully
+2024-12-16 12:58:14,836 - ERROR - News API API error for FIL: 'News API'
+2024-12-16 12:58:14,839 - INFO - Searching Reddit r/cryptocurrency for FIL
+2024-12-16 12:58:15,183 - INFO - Searching Reddit r/CryptoMarkets for FIL
+2024-12-16 12:58:15,504 - INFO - Searching Twitter for FIL
+2024-12-16 12:58:15,646 - ERROR - Twitter API error for FIL: 429 Too Many Requests
+Too Many Requests
+2024-12-16 12:58:15,661 - INFO - Fetching CryptoCompare news for FIL
+2024-12-16 12:58:16,238 - INFO - Fetching Binance news for FIL
+2024-12-16 12:58:18,084 - INFO - Searching Reddit r/cryptocurrency for KAS
+2024-12-16 12:58:18,429 - INFO - Searching Reddit r/CryptoMarkets for KAS
+2024-12-16 12:58:18,772 - INFO - Searching Twitter for KAS
+2024-12-16 12:58:18,960 - ERROR - Twitter API error for KAS: 429 Too Many Requests
+Too Many Requests
+2024-12-16 12:58:18,960 - INFO - Fetching CryptoCompare news for KAS
+2024-12-16 12:58:19,623 - INFO - Fetching Binance news for KAS
+2024-12-16 12:58:22,109 - INFO - Searching Reddit r/cryptocurrency for XMR
+2024-12-16 12:58:22,476 - INFO - Searching Reddit r/CryptoMarkets for XMR
+2024-12-16 12:58:22,836 - INFO - Searching Twitter for XMR
+2024-12-16 12:58:22,983 - ERROR - Twitter API error for XMR: 429 Too Many Requests
+Too Many Requests
+2024-12-16 12:58:22,985 - INFO - Fetching CryptoCompare news for XMR
+2024-12-16 12:58:23,737 - INFO - Fetching Binance news for XMR
+2024-12-16 12:58:24,859 - INFO - Saved 2 mentions successfully
+2024-12-16 12:58:26,727 - ERROR - News API API error for OM: 'News API'
+2024-12-16 12:58:26,731 - INFO - Searching Reddit r/cryptocurrency for OM
+2024-12-16 12:58:27,056 - INFO - Searching Reddit r/CryptoMarkets for OM
+2024-12-16 12:58:27,398 - INFO - Searching Twitter for OM
+2024-12-16 12:58:27,538 - ERROR - Twitter API error for OM: 429 Too Many Requests
+Too Many Requests
+2024-12-16 12:58:27,543 - INFO - Fetching CryptoCompare news for OM
+2024-12-16 12:58:28,133 - INFO - Fetching Binance news for OM
+2024-12-16 12:58:29,263 - INFO - Saved 4 mentions successfully
+2024-12-16 12:58:33,532 - INFO - Searching Reddit r/cryptocurrency for FTM
+2024-12-16 12:58:33,870 - INFO - Searching Reddit r/CryptoMarkets for FTM
+2024-12-16 12:58:34,208 - INFO - Searching Twitter for FTM
+2024-12-16 12:58:34,346 - ERROR - Twitter API error for FTM: 429 Too Many Requests
+Too Many Requests
+2024-12-16 12:58:34,355 - INFO - Fetching CryptoCompare news for FTM
+2024-12-16 12:58:34,942 - INFO - Fetching Binance news for FTM
+2024-12-16 12:58:36,059 - INFO - Saved 1 mentions successfully
+2024-12-16 13:01:33,420 - INFO - Database connected successfully
+2024-12-16 13:01:33,420 - INFO - Reddit API initialized successfully
+2024-12-16 13:01:33,420 - INFO - Twitter API initialized successfully
+2024-12-16 13:01:34,050 - INFO - CryptoCompare API initialized successfully
+2024-12-16 13:01:34,057 - INFO - Loaded 6 chat sources
+2024-12-16 13:01:52,994 - INFO - Database connected successfully
+2024-12-16 13:01:52,994 - INFO - Reddit API initialized successfully
+2024-12-16 13:01:52,994 - INFO - Twitter API initialized successfully
+2024-12-16 13:01:53,603 - INFO - CryptoCompare API initialized successfully
+2024-12-16 13:01:53,610 - INFO - Loaded 6 chat sources
+2024-12-16 13:01:55,069 - ERROR - News API API error for BTC: 'News API'
+2024-12-16 13:01:55,069 - INFO - Searching Reddit r/cryptocurrency for BTC
+2024-12-16 13:01:56,671 - INFO - Searching Reddit r/CryptoMarkets for BTC
+2024-12-16 13:01:57,132 - INFO - Searching Twitter for BTC
+2024-12-16 13:01:57,697 - ERROR - Twitter API error for BTC: 429 Too Many Requests
+Too Many Requests
+2024-12-16 13:01:57,715 - INFO - Fetching CryptoCompare news for BTC
+2024-12-16 13:01:58,318 - INFO - Fetching Binance news for BTC
+2024-12-16 13:02:00,334 - INFO - Saved 31 mentions successfully
+2024-12-16 13:02:01,293 - ERROR - News API API error for ETH: 'News API'
+2024-12-16 13:02:01,293 - INFO - Searching Reddit r/cryptocurrency for ETH
+2024-12-16 13:02:01,703 - INFO - Searching Reddit r/CryptoMarkets for ETH
+2024-12-16 13:02:02,066 - INFO - Searching Twitter for ETH
+2024-12-16 13:02:02,206 - ERROR - Twitter API error for ETH: 429 Too Many Requests
+Too Many Requests
+2024-12-16 13:02:02,209 - INFO - Fetching CryptoCompare news for ETH
+2024-12-16 13:02:04,153 - INFO - Fetching Binance news for ETH
+2024-12-16 13:02:06,006 - INFO - Saved 16 mentions successfully
+2024-12-16 13:03:17,885 - INFO - Database connected successfully
+2024-12-16 13:03:17,885 - INFO - Reddit API initialized successfully
+2024-12-16 13:03:17,885 - INFO - Twitter API initialized successfully
+2024-12-16 13:03:18,510 - INFO - CryptoCompare API initialized successfully
+2024-12-16 13:03:18,517 - INFO - Loaded 6 chat sources
+2024-12-16 13:03:21,143 - ERROR - News API API error for BTC: 'News API'
+2024-12-16 13:03:21,143 - INFO - Searching Reddit r/cryptocurrency for BTC
+2024-12-16 13:03:22,797 - INFO - Searching Reddit r/CryptoMarkets for BTC
+2024-12-16 13:03:23,298 - INFO - Searching Twitter for BTC
+2024-12-16 13:04:36,713 - INFO - Database connected successfully
+2024-12-16 13:04:36,719 - INFO - Reddit API initialized successfully
+2024-12-16 13:04:36,719 - INFO - Twitter API initialized successfully
+2024-12-16 13:04:37,425 - INFO - CryptoCompare API initialized successfully
+2024-12-16 13:04:37,441 - INFO - Loaded 6 chat sources
+2024-12-16 13:04:38,640 - ERROR - News API API error for BTC: 'News API'
+2024-12-16 13:04:38,643 - INFO - Searching Reddit r/cryptocurrency for BTC
+2024-12-16 13:04:40,492 - INFO - Searching Reddit r/CryptoMarkets for BTC
+2024-12-16 13:04:40,935 - INFO - Searching Twitter for BTC
+2024-12-16 13:04:41,549 - ERROR - Twitter API error for BTC: 429 Too Many Requests
+Too Many Requests
+2024-12-16 13:04:41,553 - INFO - Fetching CryptoCompare news for BTC
+2024-12-16 13:04:42,229 - INFO - Fetching Binance news for BTC
+2024-12-16 13:04:43,915 - INFO - Saved 31 mentions successfully
+2024-12-16 13:04:46,043 - ERROR - News API API error for ETH: 'News API'
+2024-12-16 13:04:46,043 - INFO - Searching Reddit r/cryptocurrency for ETH
+2024-12-16 13:04:46,436 - INFO - Searching Reddit r/CryptoMarkets for ETH
+2024-12-16 13:04:46,786 - INFO - Searching Twitter for ETH
+2024-12-16 13:04:46,913 - ERROR - Twitter API error for ETH: 429 Too Many Requests
+Too Many Requests
+2024-12-16 13:04:46,930 - INFO - Fetching CryptoCompare news for ETH
+2024-12-16 13:04:47,516 - INFO - Fetching Binance news for ETH
+2024-12-16 13:04:49,142 - INFO - Saved 16 mentions successfully
+2024-12-16 13:06:01,104 - INFO - Database connected successfully
+2024-12-16 13:06:01,105 - INFO - Reddit API initialized successfully
+2024-12-16 13:06:01,105 - INFO - Twitter API initialized successfully
+2024-12-16 13:06:01,848 - INFO - CryptoCompare API initialized successfully
+2024-12-16 13:06:01,854 - INFO - Loaded 6 chat sources
+2024-12-16 13:06:02,653 - ERROR - News API API error for BTC: 'News API'
+2024-12-16 13:06:02,655 - INFO - Searching Reddit r/cryptocurrency for BTC
+2024-12-16 13:06:04,261 - INFO - Searching Reddit r/CryptoMarkets for BTC
+2024-12-16 13:06:04,719 - INFO - Searching Twitter for BTC
+2024-12-16 13:06:05,287 - ERROR - Twitter API error for BTC: 429 Too Many Requests
+Too Many Requests
+2024-12-16 13:06:05,287 - INFO - Fetching CryptoCompare news for BTC
+2024-12-16 13:06:05,896 - INFO - Fetching Binance news for BTC
+2024-12-16 13:06:07,509 - INFO - Saved 32 mentions successfully
+2024-12-16 13:06:08,269 - ERROR - News API API error for ETH: 'News API'
+2024-12-16 13:06:08,269 - INFO - Searching Reddit r/cryptocurrency for ETH
+2024-12-16 13:06:08,641 - INFO - Searching Reddit r/CryptoMarkets for ETH
+2024-12-16 13:06:08,991 - INFO - Searching Twitter for ETH
+2024-12-16 13:06:09,123 - ERROR - Twitter API error for ETH: 429 Too Many Requests
+Too Many Requests
+2024-12-16 13:06:09,125 - INFO - Fetching CryptoCompare news for ETH
+2024-12-16 13:06:10,295 - INFO - Fetching Binance news for ETH
+2024-12-16 13:06:11,905 - INFO - Saved 16 mentions successfully
+2024-12-16 13:06:12,569 - ERROR - News API API error for XRP: 'News API'
+2024-12-16 13:06:12,569 - INFO - Searching Reddit r/cryptocurrency for XRP
+2024-12-16 13:06:12,966 - INFO - Searching Reddit r/CryptoMarkets for XRP
+2024-12-16 13:06:13,417 - INFO - Searching Twitter for XRP
+2024-12-16 13:06:13,551 - ERROR - Twitter API error for XRP: 429 Too Many Requests
+Too Many Requests
+2024-12-16 13:06:13,551 - INFO - Fetching CryptoCompare news for XRP
+2024-12-16 13:06:15,852 - INFO - Fetching Binance news for XRP
+2024-12-16 13:06:17,920 - INFO - Saved 23 mentions successfully
+2024-12-16 13:06:18,674 - ERROR - News API API error for SOL: 'News API'
+2024-12-16 13:06:18,674 - INFO - Searching Reddit r/cryptocurrency for SOL
+2024-12-16 13:06:19,013 - INFO - Searching Reddit r/CryptoMarkets for SOL
+2024-12-16 13:06:19,390 - INFO - Searching Twitter for SOL
+2024-12-16 13:06:19,517 - ERROR - Twitter API error for SOL: 429 Too Many Requests
+Too Many Requests
+2024-12-16 13:06:19,517 - INFO - Fetching CryptoCompare news for SOL
+2024-12-16 13:06:20,129 - INFO - Fetching Binance news for SOL
+2024-12-16 13:06:22,102 - INFO - Saved 15 mentions successfully
+2024-12-16 13:06:22,714 - ERROR - News API API error for BNB: 'News API'
+2024-12-16 13:06:22,714 - INFO - Searching Reddit r/cryptocurrency for BNB
+2024-12-16 13:06:23,037 - INFO - Searching Reddit r/CryptoMarkets for BNB
+2024-12-16 13:06:23,355 - INFO - Searching Twitter for BNB
+2024-12-16 13:06:23,497 - ERROR - Twitter API error for BNB: 429 Too Many Requests
+Too Many Requests
+2024-12-16 13:06:23,497 - INFO - Fetching CryptoCompare news for BNB
+2024-12-16 13:06:24,174 - INFO - Fetching Binance news for BNB
+2024-12-16 13:06:26,240 - INFO - Saved 1 mentions successfully
+2024-12-16 13:06:27,457 - ERROR - News API API error for DOGE: 'News API'
+2024-12-16 13:06:27,457 - INFO - Searching Reddit r/cryptocurrency for DOGE
+2024-12-16 13:06:27,836 - INFO - Searching Reddit r/CryptoMarkets for DOGE

@@ -431,13 +431,13 @@ class ChatCollector:
                         
                         # Update GUI with new mentions
                         for mention in source_mentions:
-                            self.tree.insert("", 0, values=(
+                            self.update_tree((
                                 datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
                                 coin_symbol,
                                 source_name,
                                 mention['sentiment_label'],
                                 mention['content'][:100]
-                            ), tags=(mention['sentiment_label'].lower(),))
+                            ))
                             
                     except Exception as e:
                         self.log_to_output(f"ERROR - {source_name} - {coin_symbol}: {str(e)}")
@@ -479,14 +479,44 @@ class ChatCollector:
             # Print to console
             print(log_message.strip())
             
-            # Update GUI status
-            self.status_label.config(text=message)
-            
-            # Force GUI to update
-            self.root.update_idletasks()
+            # Update GUI status only if running in GUI mode
+            if hasattr(self, 'status_label') and hasattr(self, 'root'):
+                self.status_label.config(text=message)
+                self.root.update_idletasks()
             
         except Exception as e:
             print(f"Error writing to output.txt: {str(e)}")
+
+    def update_tree(self, data):
+        # Only update tree if in GUI mode
+        if hasattr(self, 'tree'):
+            if isinstance(data, tuple) and len(data) == 5:
+                self.tree.insert("", 0, values=data)
+            else:
+                logging.warning(f"Invalid data format for tree update: {data}")
+
+    def collect_mentions(self, coin_symbol):
+        """Collect mentions from all sources"""
+        all_mentions = []
+        
+        # Skip News API for now
+        # news_mentions = self.collect_news_api_mentions(coin_symbol)
+        # all_mentions.extend(news_mentions)
+        
+        # Collect from other sources
+        reddit_mentions = self.collect_reddit_mentions(coin_symbol)
+        all_mentions.extend(reddit_mentions)
+        
+        twitter_mentions = self.collect_twitter_mentions(coin_symbol)
+        all_mentions.extend(twitter_mentions)
+        
+        cryptocompare_mentions = self.collect_cryptocompare_mentions(coin_symbol)
+        all_mentions.extend(cryptocompare_mentions)
+        
+        binance_mentions = self.collect_binance_mentions(coin_symbol)
+        all_mentions.extend(binance_mentions)
+        
+        return all_mentions
 
 class ChatGUI(ChatCollector):
     def __init__(self):

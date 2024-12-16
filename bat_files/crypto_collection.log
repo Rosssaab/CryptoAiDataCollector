@@ -866,3 +866,274 @@ Processing WBT/USDT (48/49)
 2024-12-15 00:29:43,852 - INFO - ==================================================
 
 2024-12-15 00:29:43,858 - INFO - Database connection closed
+2024-12-16 13:08:14,953 - INFO - Connecting to database...
+2024-12-16 13:08:15,030 - INFO - Database connected. Found 35 coins and 104 price records
+2024-12-16 13:08:15,030 - INFO - Cached 35 coin IDs for tracking
+2024-12-16 13:08:15,046 - INFO - ==================================================
+2024-12-16 13:08:15,046 - INFO - STARTING NEW COLLECTION CYCLE: 2024-12-16 13:08:15.046543
+2024-12-16 13:08:15,046 - INFO - ==================================================
+2024-12-16 13:08:15,046 - INFO - Step 1: Fetching top coins from CoinGecko...
+2024-12-16 13:08:15,046 - INFO - Fetching top 50 coins from CoinGecko...
+2024-12-16 13:08:15,059 - INFO - Calling CoinGecko API: https://api.coingecko.com/api/v3/coins/markets
+2024-12-16 13:08:15,663 - INFO - API Response Status: 200
+2024-12-16 13:08:15,663 - INFO - Raw API response received: 50 coins
+2024-12-16 13:08:15,663 - INFO - Processing coin: BTC (Bitcoin)
+2024-12-16 13:08:15,663 - INFO - Added coin: BTC - Bitcoin
+2024-12-16 13:08:15,663 - INFO - Processing coin: ETH (Ethereum)
+2024-12-16 13:08:15,663 - INFO - Added coin: ETH - Ethereum
+2024-12-16 13:08:15,669 - INFO - Processing coin: USDT (Tether)
+2024-12-16 13:08:15,669 - INFO - Processing coin: XRP (XRP)
+2024-12-16 13:08:15,669 - INFO - Added coin: XRP - XRP
+2024-12-16 13:08:15,669 - INFO - Processing coin: BNB (BNB)
+2024-12-16 13:08:15,669 - INFO - Added coin: BNB - BNB
+2024-12-16 13:08:15,669 - INFO - Processing coin: SOL (Solana)
+2024-12-16 13:08:15,669 - INFO - Added coin: SOL - Solana
+2024-12-16 13:08:15,669 - INFO - Processing coin: DOGE (Dogecoin)
+2024-12-16 13:08:15,676 - INFO - Added coin: DOGE - Dogecoin
+2024-12-16 13:08:15,676 - INFO - Processing coin: USDC (USDC)
+2024-12-16 13:08:15,677 - INFO - Processing coin: STETH (Lido Staked Ether)
+2024-12-16 13:08:15,677 - INFO - Added coin: STETH - Lido Staked Ether
+2024-12-16 13:08:15,677 - INFO - Processing coin: ADA (Cardano)
+2024-12-16 13:08:15,677 - INFO - Added coin: ADA - Cardano
+2024-12-16 13:08:15,685 - INFO - Processing coin: TRX (TRON)
+2024-12-16 13:08:15,685 - INFO - Added coin: TRX - TRON
+2024-12-16 13:08:15,687 - INFO - Processing coin: AVAX (Avalanche)
+2024-12-16 13:08:15,687 - INFO - Added coin: AVAX - Avalanche
+2024-12-16 13:08:15,687 - INFO - Processing coin: LINK (Chainlink)
+2024-12-16 13:08:15,687 - INFO - Added coin: LINK - Chainlink
+2024-12-16 13:08:15,687 - INFO - Processing coin: WSTETH (Wrapped stETH)
+2024-12-16 13:08:15,687 - INFO - Added coin: WSTETH - Wrapped stETH
+2024-12-16 13:08:15,687 - INFO - Processing coin: SHIB (Shiba Inu)
+2024-12-16 13:08:15,693 - INFO - Added coin: SHIB - Shiba Inu
+2024-12-16 13:08:15,694 - INFO - Processing coin: TON (Toncoin)
+2024-12-16 13:08:15,694 - INFO - Added coin: TON - Toncoin
+2024-12-16 13:08:15,694 - INFO - Processing coin: WBTC (Wrapped Bitcoin)
+2024-12-16 13:08:15,694 - INFO - Processing coin: SUI (Sui)
+2024-12-16 13:08:15,701 - INFO - Added coin: SUI - Sui
+2024-12-16 13:08:15,701 - INFO - Processing coin: DOT (Polkadot)
+2024-12-16 13:08:15,703 - INFO - Added coin: DOT - Polkadot
+2024-12-16 13:08:15,703 - INFO - Processing coin: XLM (Stellar)
+2024-12-16 13:08:15,704 - INFO - Added coin: XLM - Stellar
+2024-12-16 13:08:15,704 - INFO - Processing coin: HBAR (Hedera)
+2024-12-16 13:08:15,705 - INFO - Added coin: HBAR - Hedera
+2024-12-16 13:08:15,706 - INFO - Processing coin: WETH (WETH)
+2024-12-16 13:08:15,706 - INFO - Processing coin: BCH (Bitcoin Cash)
+2024-12-16 13:08:15,707 - INFO - Added coin: BCH - Bitcoin Cash
+2024-12-16 13:08:15,707 - INFO - Processing coin: UNI (Uniswap)
+2024-12-16 13:08:15,709 - INFO - Added coin: UNI - Uniswap
+2024-12-16 13:08:15,709 - INFO - Processing coin: PEPE (Pepe)
+2024-12-16 13:08:15,709 - INFO - Added coin: PEPE - Pepe
+2024-12-16 13:08:15,709 - INFO - Processing coin: LEO (LEO Token)
+2024-12-16 13:08:15,713 - INFO - Added coin: LEO - LEO Token
+2024-12-16 13:08:15,714 - INFO - Processing coin: LTC (Litecoin)
+2024-12-16 13:08:15,714 - INFO - Added coin: LTC - Litecoin
+2024-12-16 13:08:15,714 - INFO - Processing coin: HYPE (Hyperliquid)
+2024-12-16 13:08:15,716 - INFO - Added coin: HYPE - Hyperliquid
+2024-12-16 13:08:15,716 - INFO - Processing coin: NEAR (NEAR Protocol)
+2024-12-16 13:08:15,716 - INFO - Added coin: NEAR - NEAR Protocol
+2024-12-16 13:08:15,716 - INFO - Processing coin: WEETH (Wrapped eETH)
+2024-12-16 13:08:15,716 - INFO - Added coin: WEETH - Wrapped eETH
+2024-12-16 13:08:15,718 - INFO - Processing coin: APT (Aptos)
+2024-12-16 13:08:15,718 - INFO - Added coin: APT - Aptos
+2024-12-16 13:08:15,718 - INFO - Processing coin: ICP (Internet Computer)
+2024-12-16 13:08:15,718 - INFO - Added coin: ICP - Internet Computer
+2024-12-16 13:08:15,718 - INFO - Processing coin: USDE (Ethena USDe)
+2024-12-16 13:08:15,720 - INFO - Processing coin: AAVE (Aave)
+2024-12-16 13:08:15,720 - INFO - Added coin: AAVE - Aave
+2024-12-16 13:08:15,720 - INFO - Processing coin: USDS (USDS)
+2024-12-16 13:08:15,720 - INFO - Processing coin: POL (POL (ex-MATIC))
+2024-12-16 13:08:15,722 - INFO - Added coin: POL - POL (ex-MATIC)
+2024-12-16 13:08:15,722 - INFO - Processing coin: ETC (Ethereum Classic)
+2024-12-16 13:08:15,722 - INFO - Added coin: ETC - Ethereum Classic
+2024-12-16 13:08:15,722 - INFO - Processing coin: CRO (Cronos)
+2024-12-16 13:08:15,722 - INFO - Added coin: CRO - Cronos
+2024-12-16 13:08:15,722 - INFO - Processing coin: RENDER (Render)
+2024-12-16 13:08:15,724 - INFO - Added coin: RENDER - Render
+2024-12-16 13:08:15,724 - INFO - Processing coin: BGB (Bitget Token)
+2024-12-16 13:08:15,724 - INFO - Added coin: BGB - Bitget Token
+2024-12-16 13:08:15,724 - INFO - Processing coin: FET (Artificial Superintelligence Alliance)
+2024-12-16 13:08:15,724 - INFO - Added coin: FET - Artificial Superintelligence Alliance
+2024-12-16 13:08:15,728 - INFO - Processing coin: VET (VeChain)
+2024-12-16 13:08:15,728 - INFO - Added coin: VET - VeChain
+2024-12-16 13:08:15,728 - INFO - Processing coin: MNT (Mantle)
+2024-12-16 13:08:15,728 - INFO - Added coin: MNT - Mantle
+2024-12-16 13:08:15,728 - INFO - Processing coin: TAO (Bittensor)
+2024-12-16 13:08:15,728 - INFO - Added coin: TAO - Bittensor
+2024-12-16 13:08:15,728 - INFO - Processing coin: FIL (Filecoin)
+2024-12-16 13:08:15,728 - INFO - Added coin: FIL - Filecoin
+2024-12-16 13:08:15,728 - INFO - Processing coin: ARB (Arbitrum)
+2024-12-16 13:08:15,728 - INFO - Added coin: ARB - Arbitrum
+2024-12-16 13:08:15,728 - INFO - Processing coin: XMR (Monero)
+2024-12-16 13:08:15,728 - INFO - Added coin: XMR - Monero
+2024-12-16 13:08:15,728 - INFO - Processing coin: FTM (Fantom)
+2024-12-16 13:08:15,728 - INFO - Added coin: FTM - Fantom
+2024-12-16 13:08:15,728 - INFO - Processing coin: OM (MANTRA)
+2024-12-16 13:08:15,728 - INFO - Added coin: OM - MANTRA
+2024-12-16 13:08:15,728 - INFO - Processing coin: KAS (Kaspa)
+2024-12-16 13:08:15,728 - INFO - Added coin: KAS - Kaspa
+2024-12-16 13:08:15,728 - INFO - Processed 44 non-stablecoin coins
+2024-12-16 13:08:15,736 - INFO - Retrieved 44 coins from CoinGecko
+2024-12-16 13:08:15,736 - INFO - Step 2: Initializing Binance connection...
+2024-12-16 13:08:16,452 - INFO - Binance connection established
+2024-12-16 13:08:16,452 - INFO - Step 3: Starting price collection from Binance...
+2024-12-16 13:08:16,452 - INFO - 
+Processing BTC/USDT (1/44)
+2024-12-16 13:08:21,123 - INFO - Saved price data for BTC:
+2024-12-16 13:08:21,123 - INFO -   Price: $103849.94
+2024-12-16 13:08:21,123 - INFO -   Volume 24h: $29,866.84
+2024-12-16 13:08:21,123 - INFO -   Change 24h: +1.11%
+2024-12-16 13:08:21,133 - INFO - 
+Processing ETH/USDT (2/44)
+2024-12-16 13:08:21,374 - INFO - Saved price data for ETH:
+2024-12-16 13:08:21,374 - INFO -   Price: $3897.49
+2024-12-16 13:08:21,377 - INFO -   Volume 24h: $440,818.93
+2024-12-16 13:08:21,377 - INFO -   Change 24h: +0.62%
+2024-12-16 13:08:21,377 - INFO - 
+Processing XRP/USDT (3/44)
+2024-12-16 13:08:21,611 - INFO - Saved price data for XRP:
+2024-12-16 13:08:21,611 - INFO -   Price: $2.36
+2024-12-16 13:08:21,611 - INFO -   Volume 24h: $328,325,414.00
+2024-12-16 13:08:21,611 - INFO -   Change 24h: -1.34%
+2024-12-16 13:08:21,611 - INFO - 
+Processing BNB/USDT (4/44)
+2024-12-16 13:08:21,852 - INFO - Saved price data for BNB:
+2024-12-16 13:08:21,852 - INFO -   Price: $711.93
+2024-12-16 13:08:21,856 - INFO -   Volume 24h: $416,114.56
+2024-12-16 13:08:21,856 - INFO -   Change 24h: -0.43%
+2024-12-16 13:08:21,857 - INFO - 
+Processing SOL/USDT (5/44)
+2024-12-16 13:08:22,085 - INFO - Saved price data for SOL:
+2024-12-16 13:08:22,085 - INFO -   Price: $214.26
+2024-12-16 13:08:22,085 - INFO -   Volume 24h: $3,286,400.64
+2024-12-16 13:08:22,090 - INFO -   Change 24h: -1.92%
+2024-12-16 13:08:22,090 - INFO - 
+Processing DOGE/USDT (6/44)
+2024-12-16 13:08:22,319 - INFO - Saved price data for DOGE:
+2024-12-16 13:08:22,319 - INFO -   Price: $0.39
+2024-12-16 13:08:22,321 - INFO -   Volume 24h: $1,310,576,185.00
+2024-12-16 13:08:22,323 - INFO -   Change 24h: -1.48%
+2024-12-16 13:08:22,325 - INFO - 
+Processing STETH/USDT (7/44)
+2024-12-16 13:08:22,325 - ERROR - Error fetching STETH/USDT from Binance: binance does not have market symbol STETH/USDT
+2024-12-16 13:08:22,325 - WARNING - No price data received for STETH/USDT
+2024-12-16 13:08:22,325 - INFO - 
+Processing ADA/USDT (8/44)
+2024-12-16 13:08:22,559 - INFO - Saved price data for ADA:
+2024-12-16 13:08:22,559 - INFO -   Price: $1.06
+2024-12-16 13:08:22,559 - INFO -   Volume 24h: $179,224,474.00
+2024-12-16 13:08:22,559 - INFO -   Change 24h: -2.16%
+2024-12-16 13:08:22,565 - INFO - 
+Processing TRX/USDT (9/44)
+2024-12-16 13:08:22,808 - INFO - Saved price data for TRX:
+2024-12-16 13:08:22,808 - INFO -   Price: $0.28
+2024-12-16 13:08:22,812 - INFO -   Volume 24h: $596,840,319.70
+2024-12-16 13:08:22,812 - INFO -   Change 24h: -2.05%
+2024-12-16 13:08:22,814 - INFO - 
+Processing AVAX/USDT (10/44)
+2024-12-16 13:08:23,050 - INFO - Saved price data for AVAX:
+2024-12-16 13:08:23,050 - INFO -   Price: $48.73
+2024-12-16 13:08:23,050 - INFO -   Volume 24h: $2,752,987.06
+2024-12-16 13:08:23,050 - INFO -   Change 24h: -2.19%
+2024-12-16 13:08:23,050 - INFO - 
+Processing LINK/USDT (11/44)
+2024-12-16 13:08:23,291 - INFO - Saved price data for LINK:
+2024-12-16 13:08:23,291 - INFO -   Price: $29.68
+2024-12-16 13:08:23,291 - INFO -   Volume 24h: $9,119,319.04
+2024-12-16 13:08:23,296 - INFO -   Change 24h: +4.51%
+2024-12-16 13:08:23,296 - INFO - 
+Processing WSTETH/USDT (12/44)
+2024-12-16 13:08:23,296 - ERROR - Error fetching WSTETH/USDT from Binance: binance does not have market symbol WSTETH/USDT
+2024-12-16 13:08:23,302 - WARNING - No price data received for WSTETH/USDT
+2024-12-16 13:08:23,302 - INFO - 
+Processing SHIB/USDT (13/44)
+2024-12-16 13:08:23,532 - INFO - Saved price data for SHIB:
+2024-12-16 13:08:23,532 - INFO -   Price: $0.00
+2024-12-16 13:08:23,537 - INFO -   Volume 24h: $2,947,685,071,245.00
+2024-12-16 13:08:23,539 - INFO -   Change 24h: -3.15%
+2024-12-16 13:08:23,540 - INFO - 
+Processing TON/USDT (14/44)
+2024-12-16 13:08:23,787 - INFO - Saved price data for TON:
+2024-12-16 13:08:23,787 - INFO -   Price: $6.04
+2024-12-16 13:08:23,787 - INFO -   Volume 24h: $9,487,420.19
+2024-12-16 13:08:23,787 - INFO -   Change 24h: -3.33%
+2024-12-16 13:08:23,792 - INFO - 
+Processing SUI/USDT (15/44)
+2024-12-16 13:08:24,018 - INFO - Saved price data for SUI:
+2024-12-16 13:08:24,018 - INFO -   Price: $4.68
+2024-12-16 13:08:24,018 - INFO -   Volume 24h: $74,106,567.90
+2024-12-16 13:08:24,018 - INFO -   Change 24h: +3.91%
+2024-12-16 13:08:24,018 - INFO - 
+Processing DOT/USDT (16/44)
+2024-12-16 13:08:24,256 - INFO - Saved price data for DOT:
+2024-12-16 13:08:24,256 - INFO -   Price: $8.65
+2024-12-16 13:08:24,256 - INFO -   Volume 24h: $11,285,026.46
+2024-12-16 13:08:24,256 - INFO -   Change 24h: -2.73%
+2024-12-16 13:08:24,265 - INFO - 
+Processing XLM/USDT (17/44)
+2024-12-16 13:08:24,502 - INFO - Saved price data for XLM:
+2024-12-16 13:08:24,502 - INFO -   Price: $0.41
+2024-12-16 13:08:24,502 - INFO -   Volume 24h: $139,778,124.00
+2024-12-16 13:08:24,502 - INFO -   Change 24h: -4.74%
+2024-12-16 13:08:24,502 - INFO - 
+Processing HBAR/USDT (18/44)
+2024-12-16 13:08:24,743 - INFO - Saved price data for HBAR:
+2024-12-16 13:08:24,743 - INFO -   Price: $0.28
+2024-12-16 13:08:24,743 - INFO -   Volume 24h: $413,165,235.00
+2024-12-16 13:08:24,743 - INFO -   Change 24h: -4.23%
+2024-12-16 13:08:24,750 - INFO - 
+Processing BCH/USDT (19/44)
+2024-12-16 13:08:24,978 - INFO - Saved price data for BCH:
+2024-12-16 13:08:24,978 - INFO -   Price: $526.20
+2024-12-16 13:08:24,978 - INFO -   Volume 24h: $61,497.86
+2024-12-16 13:08:24,978 - INFO -   Change 24h: -3.08%
+2024-12-16 13:08:24,993 - INFO - 
+Processing UNI/USDT (20/44)
+2024-12-16 13:08:25,266 - INFO - Saved price data for UNI:
+2024-12-16 13:08:25,266 - INFO -   Price: $16.33
+2024-12-16 13:08:25,266 - INFO -   Volume 24h: $5,501,570.53
+2024-12-16 13:08:25,266 - INFO -   Change 24h: -1.80%
+2024-12-16 13:08:25,266 - INFO - 
+Processing PEPE/USDT (21/44)
+2024-12-16 13:08:25,528 - INFO - Saved price data for PEPE:
+2024-12-16 13:08:25,528 - INFO -   Price: $0.00
+2024-12-16 13:08:25,532 - INFO -   Volume 24h: $16,787,825,584,689.00
+2024-12-16 13:08:25,532 - INFO -   Change 24h: -1.45%
+2024-12-16 13:08:25,532 - INFO - 
+Processing LEO/USDT (22/44)
+2024-12-16 13:08:25,535 - ERROR - Error fetching LEO/USDT from Binance: binance does not have market symbol LEO/USDT
+2024-12-16 13:08:25,536 - WARNING - No price data received for LEO/USDT
+2024-12-16 13:08:25,536 - INFO - 
+Processing LTC/USDT (23/44)
+2024-12-16 13:08:25,793 - INFO - Saved price data for LTC:
+2024-12-16 13:08:25,793 - INFO -   Price: $116.66
+2024-12-16 13:08:25,793 - INFO -   Volume 24h: $833,788.04
+2024-12-16 13:08:25,798 - INFO -   Change 24h: -1.00%
+2024-12-16 13:08:25,800 - INFO - 
+Processing HYPE/USDT (24/44)
+2024-12-16 13:08:25,801 - ERROR - Error fetching HYPE/USDT from Binance: binance does not have market symbol HYPE/USDT
+2024-12-16 13:08:25,802 - WARNING - No price data received for HYPE/USDT
+2024-12-16 13:08:25,802 - INFO - 
+Processing NEAR/USDT (25/44)
+2024-12-16 13:08:26,041 - INFO - Saved price data for NEAR:
+2024-12-16 13:08:26,041 - INFO -   Price: $6.60
+2024-12-16 13:08:26,045 - INFO -   Volume 24h: $9,182,403.10
+2024-12-16 13:08:26,045 - INFO -   Change 24h: -1.26%
+2024-12-16 13:08:26,045 - INFO - 
+Processing WEETH/USDT (26/44)
+2024-12-16 13:08:26,048 - ERROR - Error fetching WEETH/USDT from Binance: binance does not have market symbol WEETH/USDT
+2024-12-16 13:08:26,048 - WARNING - No price data received for WEETH/USDT
+2024-12-16 13:08:26,048 - INFO - 
+Processing APT/USDT (27/44)
+2024-12-16 13:08:26,704 - INFO - Saved price data for APT:
+2024-12-16 13:08:26,704 - INFO -   Price: $13.44
+2024-12-16 13:08:26,709 - INFO -   Volume 24h: $5,647,580.38
+2024-12-16 13:08:26,710 - INFO -   Change 24h: +0.45%
+2024-12-16 13:08:26,710 - INFO - 
+Processing ICP/USDT (28/44)
+2024-12-16 13:08:26,944 - INFO - Saved price data for ICP:
+2024-12-16 13:08:26,944 - INFO -   Price: $12.61
+2024-12-16 13:08:26,944 - INFO -   Volume 24h: $2,689,646.55
+2024-12-16 13:08:26,944 - INFO -   Change 24h: -2.11%
+2024-12-16 13:08:26,944 - INFO - 
+Processing AAVE/USDT (29/44)
+2024-12-16 13:08:27,588 - INFO - Database connection closed

@@ -1,0 +1,9 @@
+2024-12-16 13:07:14,988 - INFO - Database connected successfully
+2024-12-16 13:07:15,003 - INFO - Reddit API initialized successfully
+2024-12-16 13:07:15,003 - INFO - Twitter API initialized successfully
+2024-12-16 13:07:16,084 - INFO - CryptoCompare API initialized successfully
+2024-12-16 13:07:16,100 - INFO - Loaded 6 chat sources
+2024-12-16 13:07:16,869 - ERROR - News API API error for BTC: 'News API'
+2024-12-16 13:07:16,869 - INFO - Searching Reddit r/cryptocurrency for BTC
+2024-12-16 13:07:18,410 - INFO - Searching Reddit r/CryptoMarkets for BTC
+2024-12-16 13:07:18,884 - INFO - Searching Twitter for BTC

@@ -1,5 +1,5 @@
 echo Starting Crypto Data Collection: %date% %time%
-python C:\PythonApps\CryptoAiAnalyzer\app.py --service
+python C:\PythonApps\CryptoAiAnalyzer\PriceCollector.py --service
 if errorlevel 1 (
     echo Collection failed with error code %errorlevel%
 ) else (

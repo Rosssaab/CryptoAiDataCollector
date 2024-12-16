@@ -8,6 +8,7 @@ from tkinter import ttk, messagebox
 import threading
 from config import DB_CONNECTION_STRING
 import logging
+import os
 
 def setup_logging():
     # Create a formatter
@@ -271,6 +272,32 @@ class CryptoCollector:
                 self.logger.error(f"Error closing database connection: {str(e)}")
 
         return records_added > 0
+
+    def log_to_output(self, message):
+        try:
+            # Write to output.txt with absolute path
+            timestamp = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+            log_message = f"{timestamp} - {message}\n"
+            
+            # Get current directory and create full path
+            current_dir = os.path.dirname(os.path.abspath(__file__))
+            output_file = os.path.join(current_dir, 'output.txt')
+            
+            # Write to file
+            with open(output_file, 'a', encoding='utf-8') as f:
+                f.write(log_message)
+            
+            # Print to console
+            print(log_message.strip())
+            
+            # Update GUI status only if running in GUI mode
+            if hasattr(self, 'status_label'):
+                self.status_label.config(text=message)
+                # Force GUI to update
+                self.root.update_idletasks()
+            
+        except Exception as e:
+            print(f"Error writing to output.txt: {str(e)}")
 
 class CryptoGUI(CryptoCollector):
     def __init__(self):

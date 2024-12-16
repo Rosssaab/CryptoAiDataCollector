@@ -941,3 +941,1309 @@ Data collection completed!
 2024-12-15 14:03:26 - Total mentions collected: 163
 2024-12-15 14:03:32 - Loaded 0 records
 2024-12-15 14:03:34 - Loaded 0 records
+2024-12-16 12:55:34 - Updated coin dropdown with 35 coins
+2024-12-16 12:55:37 - Loaded 1000 records
+2024-12-16 12:55:46 - 
+Starting data collection...
+2024-12-16 12:55:46 - 
+Processing BTC (1/35)
+2024-12-16 12:55:46 - Starting CryptoCompare News API search for BTC
+2024-12-16 12:55:47 - Found 50 news articles to process
+2024-12-16 12:55:47 - Found news mention for BTC
+2024-12-16 12:55:47 - Found news mention for BTC
+2024-12-16 12:55:47 - Found news mention for BTC
+2024-12-16 12:55:47 - Found news mention for BTC
+2024-12-16 12:55:47 - Found news mention for BTC
+2024-12-16 12:55:47 - Found news mention for BTC
+2024-12-16 12:55:47 - Found news mention for BTC
+2024-12-16 12:55:47 - Found news mention for BTC
+2024-12-16 12:55:47 - Found news mention for BTC
+2024-12-16 12:55:47 - Found news mention for BTC
+2024-12-16 12:55:47 - Found news mention for BTC
+2024-12-16 12:55:47 - Found news mention for BTC
+2024-12-16 12:55:47 - Found news mention for BTC
+2024-12-16 12:55:47 - Found news mention for BTC
+2024-12-16 12:55:47 - Found news mention for BTC
+2024-12-16 12:55:47 - Found news mention for BTC
+2024-12-16 12:55:47 - Found news mention for BTC
+2024-12-16 12:55:47 - Found news mention for BTC
+2024-12-16 12:55:47 - Found news mention for BTC
+2024-12-16 12:55:47 - Found news mention for BTC
+2024-12-16 12:55:47 - Found news mention for BTC
+2024-12-16 12:55:47 - Found news mention for BTC
+2024-12-16 12:55:47 - Found news mention for BTC
+2024-12-16 12:55:47 - Found news mention for BTC
+2024-12-16 12:55:47 - Found news mention for BTC
+2024-12-16 12:55:47 - News API - Found 25 mentions for BTC
+2024-12-16 12:55:47 - News API - BTC: Found 0 mentions
+2024-12-16 12:55:49 - Reddit - BTC: Found 28 mentions
+2024-12-16 12:55:50 - Twitter - BTC: Found 0 mentions
+2024-12-16 12:55:51 - CryptoCompare - BTC: Found 2 mentions
+2024-12-16 12:55:52 - Binance - BTC: Found 0 mentions
+2024-12-16 12:55:52 - Starting CoinGecko search for BTC
+2024-12-16 12:55:52 - CoinGecko search URL: https://api.coingecko.com/api/v3/search?query=BTC
+2024-12-16 12:55:52 - CoinGecko search response status: 200
+2024-12-16 12:55:52 - CoinGecko coins found: 25
+2024-12-16 12:55:53 - CoinGecko details response status: 200
+2024-12-16 12:55:53 - CoinGecko - Found 1 mentions for BTC
+2024-12-16 12:55:53 - CoinGecko - BTC: Found 1 mentions
+2024-12-16 12:55:53 - Save completed
+2024-12-16 12:55:53 - Progress: 1/35 coins processed
+2024-12-16 12:55:53 - Total mentions collected so far: 31
+2024-12-16 12:55:53 - 
+Processing ETH (2/35)
+2024-12-16 12:55:53 - Starting CryptoCompare News API search for ETH
+2024-12-16 12:55:54 - Found 50 news articles to process
+2024-12-16 12:55:54 - Found news mention for ETH
+2024-12-16 12:55:54 - Found news mention for ETH
+2024-12-16 12:55:54 - Found news mention for ETH
+2024-12-16 12:55:54 - Found news mention for ETH
+2024-12-16 12:55:54 - Found news mention for ETH
+2024-12-16 12:55:54 - Found news mention for ETH
+2024-12-16 12:55:54 - Found news mention for ETH
+2024-12-16 12:55:54 - Found news mention for ETH
+2024-12-16 12:55:54 - Found news mention for ETH
+2024-12-16 12:55:54 - Found news mention for ETH
+2024-12-16 12:55:54 - Found news mention for ETH
+2024-12-16 12:55:54 - Found news mention for ETH
+2024-12-16 12:55:54 - Found news mention for ETH
+2024-12-16 12:55:54 - Found news mention for ETH
+2024-12-16 12:55:54 - Found news mention for ETH
+2024-12-16 12:55:54 - Found news mention for ETH
+2024-12-16 12:55:54 - News API - Found 16 mentions for ETH
+2024-12-16 12:55:54 - News API - ETH: Found 0 mentions
+2024-12-16 12:55:55 - Reddit - ETH: Found 12 mentions
+2024-12-16 12:55:55 - Twitter - ETH: Found 0 mentions
+2024-12-16 12:55:56 - CryptoCompare - ETH: Found 3 mentions
+2024-12-16 12:55:56 - Binance - ETH: Found 0 mentions
+2024-12-16 12:55:56 - Starting CoinGecko search for ETH
+2024-12-16 12:55:56 - CoinGecko search URL: https://api.coingecko.com/api/v3/search?query=ETH
+2024-12-16 12:55:57 - CoinGecko search response status: 200
+2024-12-16 12:55:57 - CoinGecko coins found: 25
+2024-12-16 12:55:57 - CoinGecko details response status: 200
+2024-12-16 12:55:57 - CoinGecko - Found 1 mentions for ETH
+2024-12-16 12:55:57 - CoinGecko - ETH: Found 1 mentions
+2024-12-16 12:55:57 - Save completed
+2024-12-16 12:55:57 - Progress: 2/35 coins processed
+2024-12-16 12:55:57 - Total mentions collected so far: 47
+2024-12-16 12:55:57 - 
+Processing XRP (3/35)
+2024-12-16 12:55:58 - Starting CryptoCompare News API search for XRP
+2024-12-16 12:55:59 - Found 50 news articles to process
+2024-12-16 12:55:59 - Found news mention for XRP
+2024-12-16 12:55:59 - Found news mention for XRP
+2024-12-16 12:55:59 - Found news mention for XRP
+2024-12-16 12:55:59 - Found news mention for XRP
+2024-12-16 12:56:00 - Found news mention for XRP
+2024-12-16 12:56:00 - Found news mention for XRP
+2024-12-16 12:56:00 - Found news mention for XRP
+2024-12-16 12:56:00 - Found news mention for XRP
+2024-12-16 12:56:00 - Found news mention for XRP
+2024-12-16 12:56:00 - Found news mention for XRP
+2024-12-16 12:56:00 - Found news mention for XRP
+2024-12-16 12:56:00 - News API - Found 11 mentions for XRP
+2024-12-16 12:56:00 - News API - XRP: Found 0 mentions
+2024-12-16 12:56:00 - Reddit - XRP: Found 12 mentions
+2024-12-16 12:56:01 - Twitter - XRP: Found 0 mentions
+2024-12-16 12:56:02 - CryptoCompare - XRP: Found 10 mentions
+2024-12-16 12:56:02 - Binance - XRP: Found 0 mentions
+2024-12-16 12:56:02 - Starting CoinGecko search for XRP
+2024-12-16 12:56:02 - CoinGecko search URL: https://api.coingecko.com/api/v3/search?query=XRP
+2024-12-16 12:56:03 - CoinGecko search response status: 200
+2024-12-16 12:56:03 - CoinGecko coins found: 16
+2024-12-16 12:56:04 - CoinGecko details response status: 200
+2024-12-16 12:56:04 - CoinGecko - Found 1 mentions for XRP
+2024-12-16 12:56:04 - CoinGecko - XRP: Found 1 mentions
+2024-12-16 12:56:04 - Save completed
+2024-12-16 12:56:04 - Progress: 3/35 coins processed
+2024-12-16 12:56:04 - Total mentions collected so far: 70
+2024-12-16 12:56:04 - 
+Processing SOL (4/35)
+2024-12-16 12:56:04 - Starting CryptoCompare News API search for SOL
+2024-12-16 12:56:05 - Found 50 news articles to process
+2024-12-16 12:56:05 - Found news mention for SOL
+2024-12-16 12:56:05 - Found news mention for SOL
+2024-12-16 12:56:05 - Found news mention for SOL
+2024-12-16 12:56:05 - Found news mention for SOL
+2024-12-16 12:56:05 - Found news mention for SOL
+2024-12-16 12:56:05 - Found news mention for SOL
+2024-12-16 12:56:05 - Found news mention for SOL
+2024-12-16 12:56:05 - Found news mention for SOL
+2024-12-16 12:56:05 - Found news mention for SOL
+2024-12-16 12:56:05 - Found news mention for SOL
+2024-12-16 12:56:05 - Found news mention for SOL
+2024-12-16 12:56:05 - Found news mention for SOL
+2024-12-16 12:56:05 - Found news mention for SOL
+2024-12-16 12:56:05 - Found news mention for SOL
+2024-12-16 12:56:05 - Found news mention for SOL
+2024-12-16 12:56:05 - Found news mention for SOL
+2024-12-16 12:56:05 - News API - Found 16 mentions for SOL
+2024-12-16 12:56:05 - News API - SOL: Found 0 mentions
+2024-12-16 12:56:05 - Reddit - SOL: Found 10 mentions
+2024-12-16 12:56:06 - Twitter - SOL: Found 0 mentions
+2024-12-16 12:56:07 - CryptoCompare - SOL: Found 4 mentions
+2024-12-16 12:56:07 - Binance - SOL: Found 0 mentions
+2024-12-16 12:56:07 - Starting CoinGecko search for SOL
+2024-12-16 12:56:07 - CoinGecko search URL: https://api.coingecko.com/api/v3/search?query=SOL
+2024-12-16 12:56:08 - CoinGecko search response status: 200
+2024-12-16 12:56:08 - CoinGecko coins found: 25
+2024-12-16 12:56:09 - CoinGecko details response status: 200
+2024-12-16 12:56:09 - CoinGecko - Found 1 mentions for SOL
+2024-12-16 12:56:09 - CoinGecko - SOL: Found 1 mentions
+2024-12-16 12:56:09 - Save completed
+2024-12-16 12:56:09 - Progress: 4/35 coins processed
+2024-12-16 12:56:09 - Total mentions collected so far: 85
+2024-12-16 12:56:09 - 
+Processing BNB (5/35)
+2024-12-16 12:56:09 - Starting CryptoCompare News API search for BNB
+2024-12-16 12:56:11 - Found 50 news articles to process
+2024-12-16 12:56:11 - Found news mention for BNB
+2024-12-16 12:56:11 - Found news mention for BNB
+2024-12-16 12:56:11 - News API - Found 2 mentions for BNB
+2024-12-16 12:56:11 - News API - BNB: Found 0 mentions
+2024-12-16 12:56:12 - Reddit - BNB: Found 0 mentions
+2024-12-16 12:56:12 - Twitter - BNB: Found 0 mentions
+2024-12-16 12:56:12 - CryptoCompare - BNB: Found 0 mentions
+2024-12-16 12:56:13 - Binance - BNB: Found 0 mentions
+2024-12-16 12:56:13 - Starting CoinGecko search for BNB
+2024-12-16 12:56:13 - CoinGecko search URL: https://api.coingecko.com/api/v3/search?query=BNB
+2024-12-16 12:56:14 - CoinGecko search response status: 200
+2024-12-16 12:56:14 - CoinGecko coins found: 25
+2024-12-16 12:56:14 - CoinGecko details response status: 200
+2024-12-16 12:56:14 - CoinGecko - Found 1 mentions for BNB
+2024-12-16 12:56:14 - CoinGecko - BNB: Found 1 mentions
+2024-12-16 12:56:14 - Save completed
+2024-12-16 12:56:14 - Progress: 5/35 coins processed
+2024-12-16 12:56:14 - Total mentions collected so far: 86
+2024-12-16 12:56:14 - 
+Processing DOGE (6/35)
+2024-12-16 12:56:14 - Starting CryptoCompare News API search for DOGE
+2024-12-16 12:56:15 - Found 50 news articles to process
+2024-12-16 12:56:15 - Found news mention for DOGE
+2024-12-16 12:56:15 - Found news mention for DOGE
+2024-12-16 12:56:15 - Found news mention for DOGE
+2024-12-16 12:56:15 - Found news mention for DOGE
+2024-12-16 12:56:15 - Found news mention for DOGE
+2024-12-16 12:56:15 - News API - Found 5 mentions for DOGE
+2024-12-16 12:56:15 - News API - DOGE: Found 0 mentions
+2024-12-16 12:56:16 - Reddit - DOGE: Found 7 mentions
+2024-12-16 12:56:16 - Twitter - DOGE: Found 0 mentions
+2024-12-16 12:56:18 - CryptoCompare - DOGE: Found 2 mentions
+2024-12-16 12:56:18 - Binance - DOGE: Found 0 mentions
+2024-12-16 12:56:18 - Starting CoinGecko search for DOGE
+2024-12-16 12:56:18 - CoinGecko search URL: https://api.coingecko.com/api/v3/search?query=DOGE
+2024-12-16 12:56:19 - CoinGecko search response status: 200
+2024-12-16 12:56:19 - CoinGecko coins found: 25
+2024-12-16 12:56:19 - CoinGecko details response status: 200
+2024-12-16 12:56:19 - CoinGecko - Found 1 mentions for DOGE
+2024-12-16 12:56:19 - CoinGecko - DOGE: Found 1 mentions
+2024-12-16 12:56:19 - Save completed
+2024-12-16 12:56:19 - Progress: 6/35 coins processed
+2024-12-16 12:56:19 - Total mentions collected so far: 96
+2024-12-16 12:56:19 - 
+Processing ADA (7/35)
+2024-12-16 12:56:20 - Starting CryptoCompare News API search for ADA
+2024-12-16 12:56:21 - Found 50 news articles to process
+2024-12-16 12:56:21 - Found news mention for ADA
+2024-12-16 12:56:21 - Found news mention for ADA
+2024-12-16 12:56:21 - Found news mention for ADA
+2024-12-16 12:56:21 - Found news mention for ADA
+2024-12-16 12:56:21 - Found news mention for ADA
+2024-12-16 12:56:21 - Found news mention for ADA
+2024-12-16 12:56:21 - News API - Found 6 mentions for ADA
+2024-12-16 12:56:21 - News API - ADA: Found 0 mentions
+2024-12-16 12:56:22 - Reddit - ADA: Found 4 mentions
+2024-12-16 12:56:22 - Twitter - ADA: Found 0 mentions
+2024-12-16 12:56:23 - CryptoCompare - ADA: Found 0 mentions
+2024-12-16 12:56:23 - Binance - ADA: Found 0 mentions
+2024-12-16 12:56:23 - Starting CoinGecko search for ADA
+2024-12-16 12:56:23 - CoinGecko search URL: https://api.coingecko.com/api/v3/search?query=ADA
+2024-12-16 12:56:24 - CoinGecko search response status: 200
+2024-12-16 12:56:24 - CoinGecko coins found: 25
+2024-12-16 12:56:25 - CoinGecko details response status: 429
+2024-12-16 12:56:25 - CoinGecko - Found 0 mentions for ADA
+2024-12-16 12:56:25 - CoinGecko - ADA: Found 0 mentions
+2024-12-16 12:56:25 - Save completed
+2024-12-16 12:56:25 - Progress: 7/35 coins processed
+2024-12-16 12:56:25 - Total mentions collected so far: 100
+2024-12-16 12:56:25 - 
+Processing TRX (8/35)
+2024-12-16 12:56:25 - Starting CryptoCompare News API search for TRX
+2024-12-16 12:56:25 - Found 50 news articles to process
+2024-12-16 12:56:25 - Found news mention for TRX
+2024-12-16 12:56:25 - Found news mention for TRX
+2024-12-16 12:56:25 - Found news mention for TRX
+2024-12-16 12:56:25 - Found news mention for TRX
+2024-12-16 12:56:25 - Found news mention for TRX
+2024-12-16 12:56:25 - Found news mention for TRX
+2024-12-16 12:56:25 - Found news mention for TRX
+2024-12-16 12:56:25 - Found news mention for TRX
+2024-12-16 12:56:25 - Found news mention for TRX
+2024-12-16 12:56:25 - Found news mention for TRX
+2024-12-16 12:56:26 - Found news mention for TRX
+2024-12-16 12:56:26 - News API - Found 11 mentions for TRX
+2024-12-16 12:56:26 - News API - TRX: Found 0 mentions
+2024-12-16 12:56:26 - Reddit - TRX: Found 0 mentions
+2024-12-16 12:56:26 - Twitter - TRX: Found 0 mentions
+2024-12-16 12:56:27 - CryptoCompare - TRX: Found 0 mentions
+2024-12-16 12:56:27 - Binance - TRX: Found 0 mentions
+2024-12-16 12:56:27 - Starting CoinGecko search for TRX
+2024-12-16 12:56:27 - CoinGecko search URL: https://api.coingecko.com/api/v3/search?query=TRX
+2024-12-16 12:56:28 - CoinGecko search response status: 200
+2024-12-16 12:56:28 - CoinGecko coins found: 11
+2024-12-16 12:56:29 - CoinGecko details response status: 429
+2024-12-16 12:56:29 - CoinGecko - Found 0 mentions for TRX
+2024-12-16 12:56:29 - CoinGecko - TRX: Found 0 mentions
+2024-12-16 12:56:29 - Progress: 8/35 coins processed
+2024-12-16 12:56:29 - Total mentions collected so far: 100
+2024-12-16 12:56:29 - 
+Processing AVAX (9/35)
+2024-12-16 12:56:29 - Starting CryptoCompare News API search for AVAX
+2024-12-16 12:56:29 - Found 50 news articles to process
+2024-12-16 12:56:29 - Found news mention for AVAX
+2024-12-16 12:56:29 - Found news mention for AVAX
+2024-12-16 12:56:29 - News API - Found 2 mentions for AVAX
+2024-12-16 12:56:29 - News API - AVAX: Found 0 mentions
+2024-12-16 12:56:30 - Reddit - AVAX: Found 7 mentions
+2024-12-16 12:56:31 - Twitter - AVAX: Found 0 mentions
+2024-12-16 12:56:31 - CryptoCompare - AVAX: Found 0 mentions
+2024-12-16 12:56:32 - Binance - AVAX: Found 0 mentions
+2024-12-16 12:56:32 - Starting CoinGecko search for AVAX
+2024-12-16 12:56:32 - CoinGecko search URL: https://api.coingecko.com/api/v3/search?query=AVAX
+2024-12-16 12:56:33 - CoinGecko search response status: 200
+2024-12-16 12:56:33 - CoinGecko coins found: 21
+2024-12-16 12:56:33 - CoinGecko details response status: 429
+2024-12-16 12:56:33 - CoinGecko - Found 0 mentions for AVAX
+2024-12-16 12:56:33 - CoinGecko - AVAX: Found 0 mentions
+2024-12-16 12:56:33 - Save completed
+2024-12-16 12:56:33 - Progress: 9/35 coins processed
+2024-12-16 12:56:33 - Total mentions collected so far: 107
+2024-12-16 12:56:33 - 
+Processing LINK (10/35)
+2024-12-16 12:56:33 - Starting CryptoCompare News API search for LINK
+2024-12-16 12:56:34 - Found 50 news articles to process
+2024-12-16 12:56:34 - Found news mention for LINK
+2024-12-16 12:56:34 - Found news mention for LINK
+2024-12-16 12:56:34 - Found news mention for LINK
+2024-12-16 12:56:34 - Found news mention for LINK
+2024-12-16 12:56:34 - Found news mention for LINK
+2024-12-16 12:56:34 - News API - Found 5 mentions for LINK
+2024-12-16 12:56:34 - News API - LINK: Found 0 mentions
+2024-12-16 12:56:35 - Reddit - LINK: Found 12 mentions
+2024-12-16 12:56:36 - Twitter - LINK: Found 0 mentions
+2024-12-16 12:56:36 - CryptoCompare - LINK: Found 0 mentions
+2024-12-16 12:56:37 - Binance - LINK: Found 0 mentions
+2024-12-16 12:56:37 - Starting CoinGecko search for LINK
+2024-12-16 12:56:37 - CoinGecko search URL: https://api.coingecko.com/api/v3/search?query=LINK
+2024-12-16 12:56:37 - CoinGecko search response status: 429
+2024-12-16 12:56:37 - CoinGecko - Found 0 mentions for LINK
+2024-12-16 12:56:37 - CoinGecko - LINK: Found 0 mentions
+2024-12-16 12:56:37 - Save completed
+2024-12-16 12:56:37 - Progress: 10/35 coins processed
+2024-12-16 12:56:37 - Total mentions collected so far: 119
+2024-12-16 12:56:37 - 
+Processing SHIB (11/35)
+2024-12-16 12:56:37 - Starting CryptoCompare News API search for SHIB
+2024-12-16 12:56:38 - Found 50 news articles to process
+2024-12-16 12:56:38 - Found news mention for SHIB
+2024-12-16 12:56:38 - Found news mention for SHIB
+2024-12-16 12:56:38 - Found news mention for SHIB
+2024-12-16 12:56:38 - Found news mention for SHIB
+2024-12-16 12:56:38 - News API - Found 4 mentions for SHIB
+2024-12-16 12:56:38 - News API - SHIB: Found 0 mentions
+2024-12-16 12:56:39 - Reddit - SHIB: Found 2 mentions
+2024-12-16 12:56:40 - Twitter - SHIB: Found 0 mentions
+2024-12-16 12:56:40 - CryptoCompare - SHIB: Found 2 mentions
+2024-12-16 12:56:41 - Binance - SHIB: Found 0 mentions
+2024-12-16 12:56:41 - Starting CoinGecko search for SHIB
+2024-12-16 12:56:41 - CoinGecko search URL: https://api.coingecko.com/api/v3/search?query=SHIB
+2024-12-16 12:56:41 - CoinGecko search response status: 429
+2024-12-16 12:56:42 - CoinGecko - Found 0 mentions for SHIB
+2024-12-16 12:56:42 - CoinGecko - SHIB: Found 0 mentions
+2024-12-16 12:56:42 - Save completed
+2024-12-16 12:56:42 - Progress: 11/35 coins processed
+2024-12-16 12:56:42 - Total mentions collected so far: 123
+2024-12-16 12:56:42 - 
+Processing TON (12/35)
+2024-12-16 12:56:42 - Starting CryptoCompare News API search for TON
+2024-12-16 12:56:42 - Found 50 news articles to process
+2024-12-16 12:56:42 - Found news mention for TON
+2024-12-16 12:56:42 - Found news mention for TON
+2024-12-16 12:56:42 - Found news mention for TON
+2024-12-16 12:56:42 - Found news mention for TON
+2024-12-16 12:56:42 - Found news mention for TON
+2024-12-16 12:56:42 - Found news mention for TON
+2024-12-16 12:56:42 - Found news mention for TON
+2024-12-16 12:56:42 - News API - Found 7 mentions for TON
+2024-12-16 12:56:42 - News API - TON: Found 0 mentions
+2024-12-16 12:56:43 - Reddit - TON: Found 1 mentions
+2024-12-16 12:56:43 - Twitter - TON: Found 0 mentions
+2024-12-16 12:56:44 - CryptoCompare - TON: Found 0 mentions
+2024-12-16 12:56:44 - Binance - TON: Found 0 mentions
+2024-12-16 12:56:44 - Starting CoinGecko search for TON
+2024-12-16 12:56:44 - CoinGecko search URL: https://api.coingecko.com/api/v3/search?query=TON
+2024-12-16 12:56:45 - CoinGecko search response status: 429
+2024-12-16 12:56:45 - CoinGecko - Found 0 mentions for TON
+2024-12-16 12:56:45 - CoinGecko - TON: Found 0 mentions
+2024-12-16 12:56:45 - Save completed
+2024-12-16 12:56:45 - Progress: 12/35 coins processed
+2024-12-16 12:56:45 - Total mentions collected so far: 124
+2024-12-16 12:56:45 - 
+Processing DOT (13/35)
+2024-12-16 12:56:45 - Starting CryptoCompare News API search for DOT
+2024-12-16 12:56:46 - Found 50 news articles to process
+2024-12-16 12:56:46 - Found news mention for DOT
+2024-12-16 12:56:46 - Found news mention for DOT
+2024-12-16 12:56:46 - News API - Found 2 mentions for DOT
+2024-12-16 12:56:46 - News API - DOT: Found 0 mentions
+2024-12-16 12:56:47 - Reddit - DOT: Found 1 mentions
+2024-12-16 12:56:47 - Twitter - DOT: Found 0 mentions
+2024-12-16 12:56:49 - CryptoCompare - DOT: Found 0 mentions
+2024-12-16 12:56:49 - Binance - DOT: Found 0 mentions
+2024-12-16 12:56:49 - Starting CoinGecko search for DOT
+2024-12-16 12:56:49 - CoinGecko search URL: https://api.coingecko.com/api/v3/search?query=DOT
+2024-12-16 12:56:50 - CoinGecko search response status: 429
+2024-12-16 12:56:50 - CoinGecko - Found 0 mentions for DOT
+2024-12-16 12:56:50 - CoinGecko - DOT: Found 0 mentions
+2024-12-16 12:56:50 - Save completed
+2024-12-16 12:56:50 - Progress: 13/35 coins processed
+2024-12-16 12:56:50 - Total mentions collected so far: 125
+2024-12-16 12:56:50 - 
+Processing SUI (14/35)
+2024-12-16 12:56:50 - Starting CryptoCompare News API search for SUI
+2024-12-16 12:56:50 - Found 50 news articles to process
+2024-12-16 12:56:50 - Found news mention for SUI
+2024-12-16 12:56:50 - News API - Found 1 mentions for SUI
+2024-12-16 12:56:50 - News API - SUI: Found 0 mentions
+2024-12-16 12:56:51 - Reddit - SUI: Found 4 mentions
+2024-12-16 12:56:51 - Twitter - SUI: Found 0 mentions
+2024-12-16 12:56:52 - CryptoCompare - SUI: Found 0 mentions
+2024-12-16 12:56:52 - Binance - SUI: Found 0 mentions
+2024-12-16 12:56:52 - Starting CoinGecko search for SUI
+2024-12-16 12:56:52 - CoinGecko search URL: https://api.coingecko.com/api/v3/search?query=SUI
+2024-12-16 12:56:53 - CoinGecko search response status: 429
+2024-12-16 12:56:53 - CoinGecko - Found 0 mentions for SUI
+2024-12-16 12:56:53 - CoinGecko - SUI: Found 0 mentions
+2024-12-16 12:56:53 - Save completed
+2024-12-16 12:56:53 - Progress: 14/35 coins processed
+2024-12-16 12:56:53 - Total mentions collected so far: 129
+2024-12-16 12:56:53 - 
+Processing XLM (15/35)
+2024-12-16 12:56:53 - Starting CryptoCompare News API search for XLM
+2024-12-16 12:56:54 - Found 50 news articles to process
+2024-12-16 12:56:54 - Found news mention for XLM
+2024-12-16 12:56:54 - News API - Found 1 mentions for XLM
+2024-12-16 12:56:54 - News API - XLM: Found 0 mentions
+2024-12-16 12:56:55 - Reddit - XLM: Found 1 mentions
+2024-12-16 12:56:55 - Twitter - XLM: Found 0 mentions
+2024-12-16 12:56:55 - CryptoCompare - XLM: Found 0 mentions
+2024-12-16 12:56:56 - Binance - XLM: Found 0 mentions
+2024-12-16 12:56:56 - Starting CoinGecko search for XLM
+2024-12-16 12:56:56 - CoinGecko search URL: https://api.coingecko.com/api/v3/search?query=XLM
+2024-12-16 12:56:57 - CoinGecko search response status: 429
+2024-12-16 12:56:57 - CoinGecko - Found 0 mentions for XLM
+2024-12-16 12:56:57 - CoinGecko - XLM: Found 0 mentions
+2024-12-16 12:56:57 - Save completed
+2024-12-16 12:56:57 - Progress: 15/35 coins processed
+2024-12-16 12:56:57 - Total mentions collected so far: 130
+2024-12-16 12:56:57 - 
+Processing HBAR (16/35)
+2024-12-16 12:56:57 - Starting CryptoCompare News API search for HBAR
+2024-12-16 12:56:58 - Found 50 news articles to process
+2024-12-16 12:56:58 - Found news mention for HBAR
+2024-12-16 12:56:58 - News API - Found 1 mentions for HBAR
+2024-12-16 12:56:58 - News API - HBAR: Found 0 mentions
+2024-12-16 12:56:59 - Reddit - HBAR: Found 4 mentions
+2024-12-16 12:56:59 - Twitter - HBAR: Found 0 mentions
+2024-12-16 12:57:00 - CryptoCompare - HBAR: Found 0 mentions
+2024-12-16 12:57:00 - Binance - HBAR: Found 0 mentions
+2024-12-16 12:57:00 - Starting CoinGecko search for HBAR
+2024-12-16 12:57:00 - CoinGecko search URL: https://api.coingecko.com/api/v3/search?query=HBAR
+2024-12-16 12:57:01 - CoinGecko search response status: 200
+2024-12-16 12:57:01 - CoinGecko coins found: 7
+2024-12-16 12:57:02 - CoinGecko details response status: 429
+2024-12-16 12:57:02 - CoinGecko - Found 0 mentions for HBAR
+2024-12-16 12:57:02 - CoinGecko - HBAR: Found 0 mentions
+2024-12-16 12:57:02 - Save completed
+2024-12-16 12:57:02 - Progress: 16/35 coins processed
+2024-12-16 12:57:02 - Total mentions collected so far: 134
+2024-12-16 12:57:02 - 
+Processing BCH (17/35)
+2024-12-16 12:57:02 - Starting CryptoCompare News API search for BCH
+2024-12-16 12:57:02 - Found 50 news articles to process
+2024-12-16 12:57:02 - News API - Found 0 mentions for BCH
+2024-12-16 12:57:02 - News API - BCH: Found 0 mentions
+2024-12-16 12:57:03 - Reddit - BCH: Found 0 mentions
+2024-12-16 12:57:03 - Twitter - BCH: Found 0 mentions
+2024-12-16 12:57:06 - CryptoCompare - BCH: Found 0 mentions
+2024-12-16 12:57:06 - Binance - BCH: Found 0 mentions
+2024-12-16 12:57:06 - Starting CoinGecko search for BCH
+2024-12-16 12:57:06 - CoinGecko search URL: https://api.coingecko.com/api/v3/search?query=BCH
+2024-12-16 12:57:07 - CoinGecko search response status: 200
+2024-12-16 12:57:07 - CoinGecko coins found: 8
+2024-12-16 12:57:08 - CoinGecko details response status: 429
+2024-12-16 12:57:08 - CoinGecko - Found 0 mentions for BCH
+2024-12-16 12:57:08 - CoinGecko - BCH: Found 0 mentions
+2024-12-16 12:57:08 - Progress: 17/35 coins processed
+2024-12-16 12:57:08 - Total mentions collected so far: 134
+2024-12-16 12:57:08 - 
+Processing UNI (18/35)
+2024-12-16 12:57:08 - Starting CryptoCompare News API search for UNI
+2024-12-16 12:57:08 - Found 50 news articles to process
+2024-12-16 12:57:08 - Found news mention for UNI
+2024-12-16 12:57:08 - Found news mention for UNI
+2024-12-16 12:57:08 - Found news mention for UNI
+2024-12-16 12:57:08 - Found news mention for UNI
+2024-12-16 12:57:08 - Found news mention for UNI
+2024-12-16 12:57:08 - Found news mention for UNI
+2024-12-16 12:57:08 - Found news mention for UNI
+2024-12-16 12:57:08 - Found news mention for UNI
+2024-12-16 12:57:08 - Found news mention for UNI
+2024-12-16 12:57:08 - Found news mention for UNI
+2024-12-16 12:57:08 - Found news mention for UNI
+2024-12-16 12:57:08 - Found news mention for UNI
+2024-12-16 12:57:08 - Found news mention for UNI
+2024-12-16 12:57:08 - Found news mention for UNI
+2024-12-16 12:57:08 - Found news mention for UNI
+2024-12-16 12:57:08 - Found news mention for UNI
+2024-12-16 12:57:08 - News API - Found 16 mentions for UNI
+2024-12-16 12:57:08 - News API - UNI: Found 0 mentions
+2024-12-16 12:57:09 - Reddit - UNI: Found 1 mentions
+2024-12-16 12:57:09 - Twitter - UNI: Found 0 mentions
+2024-12-16 12:57:11 - CryptoCompare - UNI: Found 1 mentions
+2024-12-16 12:57:12 - Binance - UNI: Found 0 mentions
+2024-12-16 12:57:12 - Starting CoinGecko search for UNI
+2024-12-16 12:57:12 - CoinGecko search URL: https://api.coingecko.com/api/v3/search?query=UNI
+2024-12-16 12:57:13 - CoinGecko search response status: 200
+2024-12-16 12:57:13 - CoinGecko coins found: 25
+2024-12-16 12:57:13 - CoinGecko details response status: 429
+2024-12-16 12:57:13 - CoinGecko - Found 0 mentions for UNI
+2024-12-16 12:57:13 - CoinGecko - UNI: Found 0 mentions
+2024-12-16 12:57:13 - Save completed
+2024-12-16 12:57:13 - Progress: 18/35 coins processed
+2024-12-16 12:57:13 - Total mentions collected so far: 136
+2024-12-16 12:57:13 - 
+Processing PEPE (19/35)
+2024-12-16 12:57:13 - Starting CryptoCompare News API search for PEPE
+2024-12-16 12:57:17 - Found 50 news articles to process
+2024-12-16 12:57:17 - Found news mention for PEPE
+2024-12-16 12:57:17 - News API - Found 1 mentions for PEPE
+2024-12-16 12:57:17 - News API - PEPE: Found 0 mentions
+2024-12-16 12:57:17 - Reddit - PEPE: Found 6 mentions
+2024-12-16 12:57:18 - Twitter - PEPE: Found 0 mentions
+2024-12-16 12:57:18 - CryptoCompare - PEPE: Found 1 mentions
+2024-12-16 12:57:19 - Binance - PEPE: Found 0 mentions
+2024-12-16 12:57:19 - Starting CoinGecko search for PEPE
+2024-12-16 12:57:19 - CoinGecko search URL: https://api.coingecko.com/api/v3/search?query=PEPE
+2024-12-16 12:57:20 - CoinGecko search response status: 200
+2024-12-16 12:57:20 - CoinGecko coins found: 25
+2024-12-16 12:57:20 - CoinGecko details response status: 429
+2024-12-16 12:57:20 - CoinGecko - Found 0 mentions for PEPE
+2024-12-16 12:57:20 - CoinGecko - PEPE: Found 0 mentions
+2024-12-16 12:57:20 - Save completed
+2024-12-16 12:57:20 - Progress: 19/35 coins processed
+2024-12-16 12:57:20 - Total mentions collected so far: 143
+2024-12-16 12:57:20 - 
+Processing LTC (20/35)
+2024-12-16 12:57:20 - Starting CryptoCompare News API search for LTC
+2024-12-16 12:57:23 - Found 50 news articles to process
+2024-12-16 12:57:23 - Found news mention for LTC
+2024-12-16 12:57:23 - Found news mention for LTC
+2024-12-16 12:57:23 - Found news mention for LTC
+2024-12-16 12:57:23 - Found news mention for LTC
+2024-12-16 12:57:23 - Found news mention for LTC
+2024-12-16 12:57:23 - Found news mention for LTC
+2024-12-16 12:57:23 - Found news mention for LTC
+2024-12-16 12:57:23 - Found news mention for LTC
+2024-12-16 12:57:23 - Found news mention for LTC
+2024-12-16 12:57:23 - News API - Found 9 mentions for LTC
+2024-12-16 12:57:23 - News API - LTC: Found 0 mentions
+2024-12-16 12:57:24 - Reddit - LTC: Found 4 mentions
+2024-12-16 12:57:24 - Twitter - LTC: Found 0 mentions
+2024-12-16 12:57:25 - CryptoCompare - LTC: Found 4 mentions
+2024-12-16 12:57:25 - Binance - LTC: Found 0 mentions
+2024-12-16 12:57:25 - Starting CoinGecko search for LTC
+2024-12-16 12:57:25 - CoinGecko search URL: https://api.coingecko.com/api/v3/search?query=LTC
+2024-12-16 12:57:26 - CoinGecko search response status: 200
+2024-12-16 12:57:26 - CoinGecko coins found: 8
+2024-12-16 12:57:27 - CoinGecko details response status: 200
+2024-12-16 12:57:27 - CoinGecko - Found 1 mentions for LTC
+2024-12-16 12:57:27 - CoinGecko - LTC: Found 1 mentions
+2024-12-16 12:57:27 - Save completed
+2024-12-16 12:57:27 - Progress: 20/35 coins processed
+2024-12-16 12:57:27 - Total mentions collected so far: 152
+2024-12-16 12:57:27 - 
+Processing NEAR (21/35)
+2024-12-16 12:57:27 - Starting CryptoCompare News API search for NEAR
+2024-12-16 12:57:28 - Found 50 news articles to process
+2024-12-16 12:57:28 - Found news mention for NEAR
+2024-12-16 12:57:28 - Found news mention for NEAR
+2024-12-16 12:57:28 - Found news mention for NEAR
+2024-12-16 12:57:28 - Found news mention for NEAR
+2024-12-16 12:57:28 - Found news mention for NEAR
+2024-12-16 12:57:28 - Found news mention for NEAR
+2024-12-16 12:57:28 - Found news mention for NEAR
+2024-12-16 12:57:28 - Found news mention for NEAR
+2024-12-16 12:57:28 - Found news mention for NEAR
+2024-12-16 12:57:28 - News API - Found 9 mentions for NEAR
+2024-12-16 12:57:28 - News API - NEAR: Found 0 mentions
+2024-12-16 12:57:29 - Reddit - NEAR: Found 3 mentions
+2024-12-16 12:57:29 - Twitter - NEAR: Found 0 mentions
+2024-12-16 12:57:30 - CryptoCompare - NEAR: Found 0 mentions
+2024-12-16 12:57:30 - Binance - NEAR: Found 0 mentions
+2024-12-16 12:57:30 - Starting CoinGecko search for NEAR
+2024-12-16 12:57:30 - CoinGecko search URL: https://api.coingecko.com/api/v3/search?query=NEAR
+2024-12-16 12:57:31 - CoinGecko search response status: 429
+2024-12-16 12:57:31 - CoinGecko - Found 0 mentions for NEAR
+2024-12-16 12:57:31 - CoinGecko - NEAR: Found 0 mentions
+2024-12-16 12:57:31 - Save completed
+2024-12-16 12:57:31 - Progress: 21/35 coins processed
+2024-12-16 12:57:31 - Total mentions collected so far: 155
+2024-12-16 12:57:31 - 
+Processing APT (22/35)
+2024-12-16 12:57:31 - Starting CryptoCompare News API search for APT
+2024-12-16 12:57:32 - Found 50 news articles to process
+2024-12-16 12:57:32 - Found news mention for APT
+2024-12-16 12:57:32 - Found news mention for APT
+2024-12-16 12:57:32 - Found news mention for APT
+2024-12-16 12:57:32 - Found news mention for APT
+2024-12-16 12:57:32 - News API - Found 4 mentions for APT
+2024-12-16 12:57:32 - News API - APT: Found 0 mentions
+2024-12-16 12:57:32 - Reddit - APT: Found 0 mentions
+2024-12-16 12:57:33 - Twitter - APT: Found 0 mentions
+2024-12-16 12:57:33 - CryptoCompare - APT: Found 0 mentions
+2024-12-16 12:57:34 - Binance - APT: Found 0 mentions
+2024-12-16 12:57:34 - Starting CoinGecko search for APT
+2024-12-16 12:57:34 - CoinGecko search URL: https://api.coingecko.com/api/v3/search?query=APT
+2024-12-16 12:57:34 - CoinGecko search response status: 429
+2024-12-16 12:57:34 - CoinGecko - Found 0 mentions for APT
+2024-12-16 12:57:34 - CoinGecko - APT: Found 0 mentions
+2024-12-16 12:57:34 - Progress: 22/35 coins processed
+2024-12-16 12:57:34 - Total mentions collected so far: 155
+2024-12-16 12:57:34 - 
+Processing ICP (23/35)
+2024-12-16 12:57:34 - Starting CryptoCompare News API search for ICP
+2024-12-16 12:57:35 - Found 50 news articles to process
+2024-12-16 12:57:35 - News API - Found 0 mentions for ICP
+2024-12-16 12:57:35 - News API - ICP: Found 0 mentions
+2024-12-16 12:57:36 - Reddit - ICP: Found 3 mentions
+2024-12-16 12:57:36 - Twitter - ICP: Found 0 mentions
+2024-12-16 12:57:36 - CryptoCompare - ICP: Found 0 mentions
+2024-12-16 12:57:37 - Binance - ICP: Found 0 mentions
+2024-12-16 12:57:37 - Starting CoinGecko search for ICP
+2024-12-16 12:57:37 - CoinGecko search URL: https://api.coingecko.com/api/v3/search?query=ICP
+2024-12-16 12:57:38 - CoinGecko search response status: 429
+2024-12-16 12:57:38 - CoinGecko - Found 0 mentions for ICP
+2024-12-16 12:57:38 - CoinGecko - ICP: Found 0 mentions
+2024-12-16 12:57:38 - Save completed
+2024-12-16 12:57:38 - Progress: 23/35 coins processed
+2024-12-16 12:57:38 - Total mentions collected so far: 158
+2024-12-16 12:57:38 - 
+Processing AAVE (24/35)
+2024-12-16 12:57:38 - Starting CryptoCompare News API search for AAVE
+2024-12-16 12:57:38 - Found 50 news articles to process
+2024-12-16 12:57:38 - Found news mention for AAVE
+2024-12-16 12:57:38 - News API - Found 1 mentions for AAVE
+2024-12-16 12:57:38 - News API - AAVE: Found 0 mentions
+2024-12-16 12:57:40 - Reddit - AAVE: Found 1 mentions
+2024-12-16 12:57:40 - Twitter - AAVE: Found 0 mentions
+2024-12-16 12:57:40 - CryptoCompare - AAVE: Found 0 mentions
+2024-12-16 12:57:41 - Binance - AAVE: Found 0 mentions
+2024-12-16 12:57:41 - Starting CoinGecko search for AAVE
+2024-12-16 12:57:41 - CoinGecko search URL: https://api.coingecko.com/api/v3/search?query=AAVE
+2024-12-16 12:57:41 - CoinGecko search response status: 429
+2024-12-16 12:57:41 - CoinGecko - Found 0 mentions for AAVE
+2024-12-16 12:57:41 - CoinGecko - AAVE: Found 0 mentions
+2024-12-16 12:57:42 - Save completed
+2024-12-16 12:57:42 - Progress: 24/35 coins processed
+2024-12-16 12:57:42 - Total mentions collected so far: 159
+2024-12-16 12:57:42 - 
+Processing POL (25/35)
+2024-12-16 12:57:42 - Starting CryptoCompare News API search for POL
+2024-12-16 12:57:42 - Found 50 news articles to process
+2024-12-16 12:57:42 - Found news mention for POL
+2024-12-16 12:57:42 - Found news mention for POL
+2024-12-16 12:57:42 - Found news mention for POL
+2024-12-16 12:57:42 - Found news mention for POL
+2024-12-16 12:57:42 - Found news mention for POL
+2024-12-16 12:57:42 - Found news mention for POL
+2024-12-16 12:57:42 - Found news mention for POL
+2024-12-16 12:57:42 - Found news mention for POL
+2024-12-16 12:57:42 - News API - Found 8 mentions for POL
+2024-12-16 12:57:42 - News API - POL: Found 0 mentions
+2024-12-16 12:57:43 - Reddit - POL: Found 0 mentions
+2024-12-16 12:57:43 - Twitter - POL: Found 0 mentions
+2024-12-16 12:57:44 - CryptoCompare - POL: Found 0 mentions
+2024-12-16 12:57:44 - Binance - POL: Found 0 mentions
+2024-12-16 12:57:44 - Starting CoinGecko search for POL
+2024-12-16 12:57:44 - CoinGecko search URL: https://api.coingecko.com/api/v3/search?query=POL
+2024-12-16 12:57:45 - CoinGecko search response status: 429
+2024-12-16 12:57:45 - CoinGecko - Found 0 mentions for POL
+2024-12-16 12:57:45 - CoinGecko - POL: Found 0 mentions
+2024-12-16 12:57:45 - Progress: 25/35 coins processed
+2024-12-16 12:57:45 - Total mentions collected so far: 159
+2024-12-16 12:57:45 - 
+Processing ETC (26/35)
+2024-12-16 12:57:45 - Starting CryptoCompare News API search for ETC
+2024-12-16 12:57:45 - Found 50 news articles to process
+2024-12-16 12:57:45 - Found news mention for ETC
+2024-12-16 12:57:46 - Found news mention for ETC
+2024-12-16 12:57:46 - News API - Found 2 mentions for ETC
+2024-12-16 12:57:46 - News API - ETC: Found 0 mentions
+2024-12-16 12:57:46 - Reddit - ETC: Found 1 mentions
+2024-12-16 12:57:46 - Twitter - ETC: Found 0 mentions
+2024-12-16 12:57:47 - CryptoCompare - ETC: Found 0 mentions
+2024-12-16 12:57:48 - Binance - ETC: Found 0 mentions
+2024-12-16 12:57:48 - Starting CoinGecko search for ETC
+2024-12-16 12:57:48 - CoinGecko search URL: https://api.coingecko.com/api/v3/search?query=ETC
+2024-12-16 12:57:48 - CoinGecko search response status: 429
+2024-12-16 12:57:48 - CoinGecko - Found 0 mentions for ETC
+2024-12-16 12:57:48 - CoinGecko - ETC: Found 0 mentions
+2024-12-16 12:57:48 - Save completed
+2024-12-16 12:57:48 - Progress: 26/35 coins processed
+2024-12-16 12:57:48 - Total mentions collected so far: 160
+2024-12-16 12:57:48 - 
+Processing RENDER (27/35)
+2024-12-16 12:57:48 - Starting CryptoCompare News API search for RENDER
+2024-12-16 12:57:50 - Found 50 news articles to process
+2024-12-16 12:57:50 - News API - Found 0 mentions for RENDER
+2024-12-16 12:57:50 - News API - RENDER: Found 0 mentions
+2024-12-16 12:57:51 - Reddit - RENDER: Found 2 mentions
+2024-12-16 12:57:52 - Twitter - RENDER: Found 0 mentions
+2024-12-16 12:57:53 - CryptoCompare - RENDER: Found 0 mentions
+2024-12-16 12:57:53 - Binance - RENDER: Found 0 mentions
+2024-12-16 12:57:53 - Starting CoinGecko search for RENDER
+2024-12-16 12:57:53 - CoinGecko search URL: https://api.coingecko.com/api/v3/search?query=RENDER
+2024-12-16 12:57:54 - CoinGecko search response status: 429
+2024-12-16 12:57:54 - CoinGecko - Found 0 mentions for RENDER
+2024-12-16 12:57:54 - CoinGecko - RENDER: Found 0 mentions
+2024-12-16 12:57:54 - Save completed
+2024-12-16 12:57:54 - Progress: 27/35 coins processed
+2024-12-16 12:57:54 - Total mentions collected so far: 162
+2024-12-16 12:57:54 - 
+Processing VET (28/35)
+2024-12-16 12:57:54 - Starting CryptoCompare News API search for VET
+2024-12-16 12:57:58 - Found 50 news articles to process
+2024-12-16 12:57:58 - Found news mention for VET
+2024-12-16 12:57:58 - News API - Found 1 mentions for VET
+2024-12-16 12:57:58 - News API - VET: Found 0 mentions
+2024-12-16 12:57:58 - Reddit - VET: Found 0 mentions
+2024-12-16 12:57:58 - Twitter - VET: Found 0 mentions
+2024-12-16 12:57:59 - CryptoCompare - VET: Found 0 mentions
+2024-12-16 12:58:00 - Binance - VET: Found 0 mentions
+2024-12-16 12:58:00 - Starting CoinGecko search for VET
+2024-12-16 12:58:00 - CoinGecko search URL: https://api.coingecko.com/api/v3/search?query=VET
+2024-12-16 12:58:00 - CoinGecko search response status: 200
+2024-12-16 12:58:00 - CoinGecko coins found: 16
+2024-12-16 12:58:01 - CoinGecko details response status: 200
+2024-12-16 12:58:01 - CoinGecko - Found 1 mentions for VET
+2024-12-16 12:58:01 - CoinGecko - VET: Found 1 mentions
+2024-12-16 12:58:01 - Save completed
+2024-12-16 12:58:01 - Progress: 28/35 coins processed
+2024-12-16 12:58:01 - Total mentions collected so far: 163
+2024-12-16 12:58:01 - 
+Processing TAO (29/35)
+2024-12-16 12:58:01 - Starting CryptoCompare News API search for TAO
+2024-12-16 12:58:02 - Found 50 news articles to process
+2024-12-16 12:58:02 - Found news mention for TAO
+2024-12-16 12:58:02 - News API - Found 1 mentions for TAO
+2024-12-16 12:58:02 - News API - TAO: Found 0 mentions
+2024-12-16 12:58:03 - Reddit - TAO: Found 1 mentions
+2024-12-16 12:58:03 - Twitter - TAO: Found 0 mentions
+2024-12-16 12:58:06 - CryptoCompare - TAO: Found 0 mentions
+2024-12-16 12:58:07 - Binance - TAO: Found 0 mentions
+2024-12-16 12:58:07 - Starting CoinGecko search for TAO
+2024-12-16 12:58:07 - CoinGecko search URL: https://api.coingecko.com/api/v3/search?query=TAO
+2024-12-16 12:58:07 - CoinGecko search response status: 200
+2024-12-16 12:58:07 - CoinGecko coins found: 23
+2024-12-16 12:58:08 - CoinGecko details response status: 200
+2024-12-16 12:58:08 - CoinGecko - Found 1 mentions for TAO
+2024-12-16 12:58:08 - CoinGecko - TAO: Found 1 mentions
+2024-12-16 12:58:08 - Save completed
+2024-12-16 12:58:08 - Progress: 29/35 coins processed
+2024-12-16 12:58:08 - Total mentions collected so far: 165
+2024-12-16 12:58:08 - 
+Processing ARB (30/35)
+2024-12-16 12:58:08 - Starting CryptoCompare News API search for ARB
+2024-12-16 12:58:09 - Found 50 news articles to process
+2024-12-16 12:58:09 - Found news mention for ARB
+2024-12-16 12:58:09 - Found news mention for ARB
+2024-12-16 12:58:09 - Found news mention for ARB
+2024-12-16 12:58:09 - News API - Found 3 mentions for ARB
+2024-12-16 12:58:09 - News API - ARB: Found 0 mentions
+2024-12-16 12:58:10 - Reddit - ARB: Found 1 mentions
+2024-12-16 12:58:10 - Twitter - ARB: Found 0 mentions
+2024-12-16 12:58:10 - CryptoCompare - ARB: Found 1 mentions
+2024-12-16 12:58:11 - Binance - ARB: Found 0 mentions
+2024-12-16 12:58:11 - Starting CoinGecko search for ARB
+2024-12-16 12:58:11 - CoinGecko search URL: https://api.coingecko.com/api/v3/search?query=ARB
+2024-12-16 12:58:12 - CoinGecko search response status: 200
+2024-12-16 12:58:12 - CoinGecko coins found: 25
+2024-12-16 12:58:12 - CoinGecko details response status: 200
+2024-12-16 12:58:12 - CoinGecko - Found 1 mentions for ARB
+2024-12-16 12:58:12 - CoinGecko - ARB: Found 1 mentions
+2024-12-16 12:58:12 - Save completed
+2024-12-16 12:58:12 - Progress: 30/35 coins processed
+2024-12-16 12:58:12 - Total mentions collected so far: 168
+2024-12-16 12:58:12 - 
+Processing FIL (31/35)
+2024-12-16 12:58:12 - Starting CryptoCompare News API search for FIL
+2024-12-16 12:58:14 - Found 50 news articles to process
+2024-12-16 12:58:14 - Found news mention for FIL
+2024-12-16 12:58:14 - Found news mention for FIL
+2024-12-16 12:58:14 - Found news mention for FIL
+2024-12-16 12:58:14 - Found news mention for FIL
+2024-12-16 12:58:14 - Found news mention for FIL
+2024-12-16 12:58:14 - Found news mention for FIL
+2024-12-16 12:58:14 - Found news mention for FIL
+2024-12-16 12:58:14 - News API - Found 7 mentions for FIL
+2024-12-16 12:58:14 - News API - FIL: Found 0 mentions
+2024-12-16 12:58:15 - Reddit - FIL: Found 0 mentions
+2024-12-16 12:58:15 - Twitter - FIL: Found 0 mentions
+2024-12-16 12:58:16 - CryptoCompare - FIL: Found 0 mentions
+2024-12-16 12:58:16 - Binance - FIL: Found 0 mentions
+2024-12-16 12:58:16 - Starting CoinGecko search for FIL
+2024-12-16 12:58:16 - CoinGecko search URL: https://api.coingecko.com/api/v3/search?query=FIL
+2024-12-16 12:58:17 - CoinGecko search response status: 429
+2024-12-16 12:58:17 - CoinGecko - Found 0 mentions for FIL
+2024-12-16 12:58:17 - CoinGecko - FIL: Found 0 mentions
+2024-12-16 12:58:17 - Progress: 31/35 coins processed
+2024-12-16 12:58:17 - Total mentions collected so far: 168
+2024-12-16 12:58:17 - 
+Processing KAS (32/35)
+2024-12-16 12:58:17 - Starting CryptoCompare News API search for KAS
+2024-12-16 12:58:18 - Found 50 news articles to process
+2024-12-16 12:58:18 - News API - Found 0 mentions for KAS
+2024-12-16 12:58:18 - News API - KAS: Found 0 mentions
+2024-12-16 12:58:18 - Reddit - KAS: Found 0 mentions
+2024-12-16 12:58:18 - Twitter - KAS: Found 0 mentions
+2024-12-16 12:58:19 - CryptoCompare - KAS: Found 0 mentions
+2024-12-16 12:58:20 - Binance - KAS: Found 0 mentions
+2024-12-16 12:58:20 - Starting CoinGecko search for KAS
+2024-12-16 12:58:20 - CoinGecko search URL: https://api.coingecko.com/api/v3/search?query=KAS
+2024-12-16 12:58:20 - CoinGecko search response status: 429
+2024-12-16 12:58:20 - CoinGecko - Found 0 mentions for KAS
+2024-12-16 12:58:20 - CoinGecko - KAS: Found 0 mentions
+2024-12-16 12:58:20 - Progress: 32/35 coins processed
+2024-12-16 12:58:20 - Total mentions collected so far: 168
+2024-12-16 12:58:20 - 
+Processing XMR (33/35)
+2024-12-16 12:58:20 - Starting CryptoCompare News API search for XMR
+2024-12-16 12:58:22 - Found 50 news articles to process
+2024-12-16 12:58:22 - News API - Found 0 mentions for XMR
+2024-12-16 12:58:22 - News API - XMR: Found 0 mentions
+2024-12-16 12:58:22 - Reddit - XMR: Found 2 mentions
+2024-12-16 12:58:22 - Twitter - XMR: Found 0 mentions
+2024-12-16 12:58:23 - CryptoCompare - XMR: Found 0 mentions
+2024-12-16 12:58:24 - Binance - XMR: Found 0 mentions
+2024-12-16 12:58:24 - Starting CoinGecko search for XMR
+2024-12-16 12:58:24 - CoinGecko search URL: https://api.coingecko.com/api/v3/search?query=XMR
+2024-12-16 12:58:24 - CoinGecko search response status: 429
+2024-12-16 12:58:24 - CoinGecko - Found 0 mentions for XMR
+2024-12-16 12:58:24 - CoinGecko - XMR: Found 0 mentions
+2024-12-16 12:58:24 - Save completed
+2024-12-16 12:58:24 - Progress: 33/35 coins processed
+2024-12-16 12:58:24 - Total mentions collected so far: 170
+2024-12-16 12:58:24 - 
+Processing OM (34/35)
+2024-12-16 12:58:24 - Starting CryptoCompare News API search for OM
+2024-12-16 12:58:26 - Found 50 news articles to process
+2024-12-16 12:58:26 - Found news mention for OM
+2024-12-16 12:58:26 - Found news mention for OM
+2024-12-16 12:58:26 - Found news mention for OM
+2024-12-16 12:58:26 - Found news mention for OM
+2024-12-16 12:58:26 - Found news mention for OM
+2024-12-16 12:58:26 - Found news mention for OM
+2024-12-16 12:58:26 - Found news mention for OM
+2024-12-16 12:58:26 - Found news mention for OM
+2024-12-16 12:58:26 - Found news mention for OM
+2024-12-16 12:58:26 - Found news mention for OM
+2024-12-16 12:58:26 - Found news mention for OM
+2024-12-16 12:58:26 - Found news mention for OM
+2024-12-16 12:58:26 - Found news mention for OM
+2024-12-16 12:58:26 - Found news mention for OM
+2024-12-16 12:58:26 - Found news mention for OM
+2024-12-16 12:58:26 - Found news mention for OM
+2024-12-16 12:58:26 - Found news mention for OM
+2024-12-16 12:58:26 - Found news mention for OM
+2024-12-16 12:58:26 - Found news mention for OM
+2024-12-16 12:58:26 - Found news mention for OM
+2024-12-16 12:58:26 - Found news mention for OM
+2024-12-16 12:58:26 - Found news mention for OM
+2024-12-16 12:58:26 - Found news mention for OM
+2024-12-16 12:58:26 - Found news mention for OM
+2024-12-16 12:58:26 - Found news mention for OM
+2024-12-16 12:58:26 - Found news mention for OM
+2024-12-16 12:58:26 - Found news mention for OM
+2024-12-16 12:58:26 - Found news mention for OM
+2024-12-16 12:58:26 - Found news mention for OM
+2024-12-16 12:58:26 - Found news mention for OM
+2024-12-16 12:58:26 - Found news mention for OM
+2024-12-16 12:58:26 - Found news mention for OM
+2024-12-16 12:58:26 - Found news mention for OM
+2024-12-16 12:58:26 - Found news mention for OM
+2024-12-16 12:58:26 - News API - Found 34 mentions for OM
+2024-12-16 12:58:26 - News API - OM: Found 0 mentions
+2024-12-16 12:58:27 - Reddit - OM: Found 1 mentions
+2024-12-16 12:58:27 - Twitter - OM: Found 0 mentions
+2024-12-16 12:58:28 - CryptoCompare - OM: Found 3 mentions
+2024-12-16 12:58:28 - Binance - OM: Found 0 mentions
+2024-12-16 12:58:28 - Starting CoinGecko search for OM
+2024-12-16 12:58:28 - CoinGecko search URL: https://api.coingecko.com/api/v3/search?query=OM
+2024-12-16 12:58:29 - CoinGecko search response status: 429
+2024-12-16 12:58:29 - CoinGecko - Found 0 mentions for OM
+2024-12-16 12:58:29 - CoinGecko - OM: Found 0 mentions
+2024-12-16 12:58:29 - Save completed
+2024-12-16 12:58:29 - Progress: 34/35 coins processed
+2024-12-16 12:58:29 - Total mentions collected so far: 174
+2024-12-16 12:58:29 - 
+Processing FTM (35/35)
+2024-12-16 12:58:29 - Starting CryptoCompare News API search for FTM
+2024-12-16 12:58:33 - Found 50 news articles to process
+2024-12-16 12:58:33 - News API - Found 0 mentions for FTM
+2024-12-16 12:58:33 - News API - FTM: Found 0 mentions
+2024-12-16 12:58:34 - Reddit - FTM: Found 1 mentions
+2024-12-16 12:58:34 - Twitter - FTM: Found 0 mentions
+2024-12-16 12:58:34 - CryptoCompare - FTM: Found 0 mentions
+2024-12-16 12:58:35 - Binance - FTM: Found 0 mentions
+2024-12-16 12:58:35 - Starting CoinGecko search for FTM
+2024-12-16 12:58:35 - CoinGecko search URL: https://api.coingecko.com/api/v3/search?query=FTM
+2024-12-16 12:58:36 - CoinGecko search response status: 429
+2024-12-16 12:58:36 - CoinGecko - Found 0 mentions for FTM
+2024-12-16 12:58:36 - CoinGecko - FTM: Found 0 mentions
+2024-12-16 12:58:36 - Save completed
+2024-12-16 12:58:36 - Progress: 35/35 coins processed
+2024-12-16 12:58:36 - Total mentions collected so far: 175
+2024-12-16 12:58:36 - 
+Data collection completed!
+2024-12-16 12:58:36 - Total mentions collected: 175
+2024-12-16 12:58:40 - Loaded 1000 records
+2024-12-16 13:01:34 - Updated coin dropdown with 35 coins
+2024-12-16 13:01:53 - 
+Starting data collection...
+2024-12-16 13:01:53 - 
+Processing BTC (1/35)
+2024-12-16 13:01:53 - Starting CryptoCompare News API search for BTC
+2024-12-16 13:01:54 - Found 50 news articles to process
+2024-12-16 13:01:54 - Found news mention for BTC
+2024-12-16 13:01:54 - Found news mention for BTC
+2024-12-16 13:01:54 - Found news mention for BTC
+2024-12-16 13:01:54 - Found news mention for BTC
+2024-12-16 13:01:54 - Found news mention for BTC
+2024-12-16 13:01:55 - Found news mention for BTC
+2024-12-16 13:01:55 - Found news mention for BTC
+2024-12-16 13:01:55 - Found news mention for BTC
+2024-12-16 13:01:55 - Found news mention for BTC
+2024-12-16 13:01:55 - Found news mention for BTC
+2024-12-16 13:01:55 - Found news mention for BTC
+2024-12-16 13:01:55 - Found news mention for BTC
+2024-12-16 13:01:55 - Found news mention for BTC
+2024-12-16 13:01:55 - Found news mention for BTC
+2024-12-16 13:01:55 - Found news mention for BTC
+2024-12-16 13:01:55 - Found news mention for BTC
+2024-12-16 13:01:55 - Found news mention for BTC
+2024-12-16 13:01:55 - Found news mention for BTC
+2024-12-16 13:01:55 - Found news mention for BTC
+2024-12-16 13:01:55 - Found news mention for BTC
+2024-12-16 13:01:55 - Found news mention for BTC
+2024-12-16 13:01:55 - Found news mention for BTC
+2024-12-16 13:01:55 - News API - Found 22 mentions for BTC
+2024-12-16 13:01:55 - News API - BTC: Found 0 mentions
+2024-12-16 13:01:57 - Reddit - BTC: Found 28 mentions
+2024-12-16 13:01:57 - ERROR - Reddit - BTC: 'ChatCollector' object has no attribute 'tree'
+2024-12-16 13:01:57 - Twitter - BTC: Found 0 mentions
+2024-12-16 13:01:58 - CryptoCompare - BTC: Found 2 mentions
+2024-12-16 13:01:58 - ERROR - CryptoCompare - BTC: 'ChatCollector' object has no attribute 'tree'
+2024-12-16 13:01:58 - Binance - BTC: Found 0 mentions
+2024-12-16 13:01:58 - Starting CoinGecko search for BTC
+2024-12-16 13:01:58 - CoinGecko search URL: https://api.coingecko.com/api/v3/search?query=BTC
+2024-12-16 13:01:59 - CoinGecko search response status: 200
+2024-12-16 13:01:59 - CoinGecko coins found: 25
+2024-12-16 13:02:00 - CoinGecko details response status: 200
+2024-12-16 13:02:00 - CoinGecko - Found 1 mentions for BTC
+2024-12-16 13:02:00 - CoinGecko - BTC: Found 1 mentions
+2024-12-16 13:02:00 - ERROR - CoinGecko - BTC: 'ChatCollector' object has no attribute 'tree'
+2024-12-16 13:02:00 - Save completed
+2024-12-16 13:02:00 - Progress: 1/35 coins processed
+2024-12-16 13:02:00 - Total mentions collected so far: 31
+2024-12-16 13:02:00 - 
+Processing ETH (2/35)
+2024-12-16 13:02:00 - Starting CryptoCompare News API search for ETH
+2024-12-16 13:02:01 - Found 50 news articles to process
+2024-12-16 13:02:01 - Found news mention for ETH
+2024-12-16 13:02:01 - Found news mention for ETH
+2024-12-16 13:02:01 - Found news mention for ETH
+2024-12-16 13:02:01 - Found news mention for ETH
+2024-12-16 13:02:01 - Found news mention for ETH
+2024-12-16 13:02:01 - Found news mention for ETH
+2024-12-16 13:02:01 - Found news mention for ETH
+2024-12-16 13:02:01 - Found news mention for ETH
+2024-12-16 13:02:01 - Found news mention for ETH
+2024-12-16 13:02:01 - Found news mention for ETH
+2024-12-16 13:02:01 - Found news mention for ETH
+2024-12-16 13:02:01 - Found news mention for ETH
+2024-12-16 13:02:01 - Found news mention for ETH
+2024-12-16 13:02:01 - Found news mention for ETH
+2024-12-16 13:02:01 - Found news mention for ETH
+2024-12-16 13:02:01 - News API - Found 15 mentions for ETH
+2024-12-16 13:02:01 - News API - ETH: Found 0 mentions
+2024-12-16 13:02:02 - Reddit - ETH: Found 12 mentions
+2024-12-16 13:02:02 - ERROR - Reddit - ETH: 'ChatCollector' object has no attribute 'tree'
+2024-12-16 13:02:02 - Twitter - ETH: Found 0 mentions
+2024-12-16 13:02:04 - CryptoCompare - ETH: Found 3 mentions
+2024-12-16 13:02:04 - ERROR - CryptoCompare - ETH: 'ChatCollector' object has no attribute 'tree'
+2024-12-16 13:02:04 - Binance - ETH: Found 0 mentions
+2024-12-16 13:02:04 - Starting CoinGecko search for ETH
+2024-12-16 13:02:04 - CoinGecko search URL: https://api.coingecko.com/api/v3/search?query=ETH
+2024-12-16 13:02:05 - CoinGecko search response status: 200
+2024-12-16 13:02:05 - CoinGecko coins found: 25
+2024-12-16 13:02:05 - CoinGecko details response status: 200
+2024-12-16 13:02:05 - CoinGecko - Found 1 mentions for ETH
+2024-12-16 13:02:05 - CoinGecko - ETH: Found 1 mentions
+2024-12-16 13:02:05 - ERROR - CoinGecko - ETH: 'ChatCollector' object has no attribute 'tree'
+2024-12-16 13:02:06 - Save completed
+2024-12-16 13:02:06 - Progress: 2/35 coins processed
+2024-12-16 13:02:06 - Total mentions collected so far: 47
+2024-12-16 13:02:06 - 
+Processing XRP (3/35)
+2024-12-16 13:02:06 - Starting CryptoCompare News API search for XRP
+2024-12-16 13:03:18 - 
+Starting data collection...
+2024-12-16 13:03:18 - 
+Processing BTC (1/35)
+2024-12-16 13:03:18 - Starting CryptoCompare News API search for BTC
+2024-12-16 13:03:20 - Found 50 news articles to process
+2024-12-16 13:03:20 - Found news mention for BTC
+2024-12-16 13:03:20 - Found news mention for BTC
+2024-12-16 13:03:20 - Found news mention for BTC
+2024-12-16 13:03:20 - Found news mention for BTC
+2024-12-16 13:03:21 - Found news mention for BTC
+2024-12-16 13:03:21 - Found news mention for BTC
+2024-12-16 13:03:21 - Found news mention for BTC
+2024-12-16 13:03:21 - Found news mention for BTC
+2024-12-16 13:03:21 - Found news mention for BTC
+2024-12-16 13:03:21 - Found news mention for BTC
+2024-12-16 13:03:21 - Found news mention for BTC
+2024-12-16 13:03:21 - Found news mention for BTC
+2024-12-16 13:03:21 - Found news mention for BTC
+2024-12-16 13:03:21 - Found news mention for BTC
+2024-12-16 13:03:21 - Found news mention for BTC
+2024-12-16 13:03:21 - Found news mention for BTC
+2024-12-16 13:03:21 - Found news mention for BTC
+2024-12-16 13:03:21 - Found news mention for BTC
+2024-12-16 13:03:21 - Found news mention for BTC
+2024-12-16 13:03:21 - Found news mention for BTC
+2024-12-16 13:03:21 - Found news mention for BTC
+2024-12-16 13:03:21 - Found news mention for BTC
+2024-12-16 13:03:21 - News API - Found 22 mentions for BTC
+2024-12-16 13:03:21 - News API - BTC: Found 0 mentions
+2024-12-16 13:03:23 - Reddit - BTC: Found 28 mentions
+2024-12-16 13:03:23 - ERROR - Reddit - BTC: 'ChatCollector' object has no attribute 'tree'
+2024-12-16 13:04:37 - 
+Starting data collection...
+2024-12-16 13:04:37 - 
+Processing BTC (1/35)
+2024-12-16 13:04:37 - Starting CryptoCompare News API search for BTC
+2024-12-16 13:04:38 - Found 50 news articles to process
+2024-12-16 13:04:38 - Found news mention for BTC
+2024-12-16 13:04:38 - Found news mention for BTC
+2024-12-16 13:04:38 - Found news mention for BTC
+2024-12-16 13:04:38 - Found news mention for BTC
+2024-12-16 13:04:38 - Found news mention for BTC
+2024-12-16 13:04:38 - Found news mention for BTC
+2024-12-16 13:04:38 - Found news mention for BTC
+2024-12-16 13:04:38 - Found news mention for BTC
+2024-12-16 13:04:38 - Found news mention for BTC
+2024-12-16 13:04:38 - Found news mention for BTC
+2024-12-16 13:04:38 - Found news mention for BTC
+2024-12-16 13:04:38 - Found news mention for BTC
+2024-12-16 13:04:38 - Found news mention for BTC
+2024-12-16 13:04:38 - Found news mention for BTC
+2024-12-16 13:04:38 - Found news mention for BTC
+2024-12-16 13:04:38 - Found news mention for BTC
+2024-12-16 13:04:38 - Found news mention for BTC
+2024-12-16 13:04:38 - Found news mention for BTC
+2024-12-16 13:04:38 - Found news mention for BTC
+2024-12-16 13:04:38 - Found news mention for BTC
+2024-12-16 13:04:38 - Found news mention for BTC
+2024-12-16 13:04:38 - Found news mention for BTC
+2024-12-16 13:04:38 - News API - Found 22 mentions for BTC
+2024-12-16 13:04:38 - News API - BTC: Found 0 mentions
+2024-12-16 13:04:40 - Reddit - BTC: Found 28 mentions
+2024-12-16 13:04:40 - ERROR - Reddit - BTC: ChatCollector.update_tree() takes 2 positional arguments but 6 were given
+2024-12-16 13:04:41 - Twitter - BTC: Found 0 mentions
+2024-12-16 13:04:42 - CryptoCompare - BTC: Found 2 mentions
+2024-12-16 13:04:42 - ERROR - CryptoCompare - BTC: ChatCollector.update_tree() takes 2 positional arguments but 6 were given
+2024-12-16 13:04:42 - Binance - BTC: Found 0 mentions
+2024-12-16 13:04:42 - Starting CoinGecko search for BTC
+2024-12-16 13:04:42 - CoinGecko search URL: https://api.coingecko.com/api/v3/search?query=BTC
+2024-12-16 13:04:43 - CoinGecko search response status: 200
+2024-12-16 13:04:43 - CoinGecko coins found: 25
+2024-12-16 13:04:43 - CoinGecko details response status: 200
+2024-12-16 13:04:43 - CoinGecko - Found 1 mentions for BTC
+2024-12-16 13:04:43 - CoinGecko - BTC: Found 1 mentions
+2024-12-16 13:04:43 - ERROR - CoinGecko - BTC: ChatCollector.update_tree() takes 2 positional arguments but 6 were given
+2024-12-16 13:04:43 - Save completed
+2024-12-16 13:04:43 - Progress: 1/35 coins processed
+2024-12-16 13:04:43 - Total mentions collected so far: 31
+2024-12-16 13:04:43 - 
+Processing ETH (2/35)
+2024-12-16 13:04:43 - Starting CryptoCompare News API search for ETH
+2024-12-16 13:04:45 - Found 50 news articles to process
+2024-12-16 13:04:45 - Found news mention for ETH
+2024-12-16 13:04:45 - Found news mention for ETH
+2024-12-16 13:04:45 - Found news mention for ETH
+2024-12-16 13:04:45 - Found news mention for ETH
+2024-12-16 13:04:45 - Found news mention for ETH
+2024-12-16 13:04:45 - Found news mention for ETH
+2024-12-16 13:04:45 - Found news mention for ETH
+2024-12-16 13:04:45 - Found news mention for ETH
+2024-12-16 13:04:45 - Found news mention for ETH
+2024-12-16 13:04:46 - Found news mention for ETH
+2024-12-16 13:04:46 - Found news mention for ETH
+2024-12-16 13:04:46 - Found news mention for ETH
+2024-12-16 13:04:46 - Found news mention for ETH
+2024-12-16 13:04:46 - Found news mention for ETH
+2024-12-16 13:04:46 - Found news mention for ETH
+2024-12-16 13:04:46 - Found news mention for ETH
+2024-12-16 13:04:46 - News API - Found 16 mentions for ETH
+2024-12-16 13:04:46 - News API - ETH: Found 0 mentions
+2024-12-16 13:04:46 - Reddit - ETH: Found 12 mentions
+2024-12-16 13:04:46 - ERROR - Reddit - ETH: ChatCollector.update_tree() takes 2 positional arguments but 6 were given
+2024-12-16 13:04:46 - Twitter - ETH: Found 0 mentions
+2024-12-16 13:04:47 - CryptoCompare - ETH: Found 3 mentions
+2024-12-16 13:04:47 - ERROR - CryptoCompare - ETH: ChatCollector.update_tree() takes 2 positional arguments but 6 were given
+2024-12-16 13:04:47 - Binance - ETH: Found 0 mentions
+2024-12-16 13:04:47 - Starting CoinGecko search for ETH
+2024-12-16 13:04:47 - CoinGecko search URL: https://api.coingecko.com/api/v3/search?query=ETH
+2024-12-16 13:04:48 - CoinGecko search response status: 200
+2024-12-16 13:04:48 - CoinGecko coins found: 25
+2024-12-16 13:04:49 - CoinGecko details response status: 200
+2024-12-16 13:04:49 - CoinGecko - Found 1 mentions for ETH
+2024-12-16 13:04:49 - CoinGecko - ETH: Found 1 mentions
+2024-12-16 13:04:49 - ERROR - CoinGecko - ETH: ChatCollector.update_tree() takes 2 positional arguments but 6 were given
+2024-12-16 13:04:49 - Save completed
+2024-12-16 13:04:49 - Progress: 2/35 coins processed
+2024-12-16 13:04:49 - Total mentions collected so far: 47
+2024-12-16 13:04:49 - 
+Processing XRP (3/35)
+2024-12-16 13:04:49 - Starting CryptoCompare News API search for XRP
+2024-12-16 13:06:01 - 
+Starting data collection...
+2024-12-16 13:06:01 - 
+Processing BTC (1/35)
+2024-12-16 13:06:01 - Starting CryptoCompare News API search for BTC
+2024-12-16 13:06:02 - Found 50 news articles to process
+2024-12-16 13:06:02 - Found news mention for BTC
+2024-12-16 13:06:02 - Found news mention for BTC
+2024-12-16 13:06:02 - Found news mention for BTC
+2024-12-16 13:06:02 - Found news mention for BTC
+2024-12-16 13:06:02 - Found news mention for BTC
+2024-12-16 13:06:02 - Found news mention for BTC
+2024-12-16 13:06:02 - Found news mention for BTC
+2024-12-16 13:06:02 - Found news mention for BTC
+2024-12-16 13:06:02 - Found news mention for BTC
+2024-12-16 13:06:02 - Found news mention for BTC
+2024-12-16 13:06:02 - Found news mention for BTC
+2024-12-16 13:06:02 - Found news mention for BTC
+2024-12-16 13:06:02 - Found news mention for BTC
+2024-12-16 13:06:02 - Found news mention for BTC
+2024-12-16 13:06:02 - Found news mention for BTC
+2024-12-16 13:06:02 - Found news mention for BTC
+2024-12-16 13:06:02 - Found news mention for BTC
+2024-12-16 13:06:02 - Found news mention for BTC
+2024-12-16 13:06:02 - Found news mention for BTC
+2024-12-16 13:06:02 - Found news mention for BTC
+2024-12-16 13:06:02 - Found news mention for BTC
+2024-12-16 13:06:02 - Found news mention for BTC
+2024-12-16 13:06:02 - Found news mention for BTC
+2024-12-16 13:06:02 - News API - Found 23 mentions for BTC
+2024-12-16 13:06:02 - News API - BTC: Found 0 mentions
+2024-12-16 13:06:04 - Reddit - BTC: Found 28 mentions
+2024-12-16 13:06:05 - Twitter - BTC: Found 0 mentions
+2024-12-16 13:06:05 - CryptoCompare - BTC: Found 3 mentions
+2024-12-16 13:06:06 - Binance - BTC: Found 0 mentions
+2024-12-16 13:06:06 - Starting CoinGecko search for BTC
+2024-12-16 13:06:06 - CoinGecko search URL: https://api.coingecko.com/api/v3/search?query=BTC
+2024-12-16 13:06:06 - CoinGecko search response status: 200
+2024-12-16 13:06:06 - CoinGecko coins found: 25
+2024-12-16 13:06:07 - CoinGecko details response status: 200
+2024-12-16 13:06:07 - CoinGecko - Found 1 mentions for BTC
+2024-12-16 13:06:07 - CoinGecko - BTC: Found 1 mentions
+2024-12-16 13:06:07 - Save completed
+2024-12-16 13:06:07 - Progress: 1/35 coins processed
+2024-12-16 13:06:07 - Total mentions collected so far: 32
+2024-12-16 13:06:07 - 
+Processing ETH (2/35)
+2024-12-16 13:06:07 - Starting CryptoCompare News API search for ETH
+2024-12-16 13:06:08 - Found 50 news articles to process
+2024-12-16 13:06:08 - Found news mention for ETH
+2024-12-16 13:06:08 - Found news mention for ETH
+2024-12-16 13:06:08 - Found news mention for ETH
+2024-12-16 13:06:08 - Found news mention for ETH
+2024-12-16 13:06:08 - Found news mention for ETH
+2024-12-16 13:06:08 - Found news mention for ETH
+2024-12-16 13:06:08 - Found news mention for ETH
+2024-12-16 13:06:08 - Found news mention for ETH
+2024-12-16 13:06:08 - Found news mention for ETH
+2024-12-16 13:06:08 - Found news mention for ETH
+2024-12-16 13:06:08 - Found news mention for ETH
+2024-12-16 13:06:08 - Found news mention for ETH
+2024-12-16 13:06:08 - Found news mention for ETH
+2024-12-16 13:06:08 - Found news mention for ETH
+2024-12-16 13:06:08 - Found news mention for ETH
+2024-12-16 13:06:08 - Found news mention for ETH
+2024-12-16 13:06:08 - News API - Found 16 mentions for ETH
+2024-12-16 13:06:08 - News API - ETH: Found 0 mentions
+2024-12-16 13:06:08 - Reddit - ETH: Found 12 mentions
+2024-12-16 13:06:09 - Twitter - ETH: Found 0 mentions
+2024-12-16 13:06:10 - CryptoCompare - ETH: Found 3 mentions
+2024-12-16 13:06:10 - Binance - ETH: Found 0 mentions
+2024-12-16 13:06:10 - Starting CoinGecko search for ETH
+2024-12-16 13:06:10 - CoinGecko search URL: https://api.coingecko.com/api/v3/search?query=ETH
+2024-12-16 13:06:11 - CoinGecko search response status: 200
+2024-12-16 13:06:11 - CoinGecko coins found: 25
+2024-12-16 13:06:11 - CoinGecko details response status: 200
+2024-12-16 13:06:11 - CoinGecko - Found 1 mentions for ETH
+2024-12-16 13:06:11 - CoinGecko - ETH: Found 1 mentions
+2024-12-16 13:06:11 - Save completed
+2024-12-16 13:06:11 - Progress: 2/35 coins processed
+2024-12-16 13:06:11 - Total mentions collected so far: 48
+2024-12-16 13:06:11 - 
+Processing XRP (3/35)
+2024-12-16 13:06:11 - Starting CryptoCompare News API search for XRP
+2024-12-16 13:06:12 - Found 50 news articles to process
+2024-12-16 13:06:12 - Found news mention for XRP
+2024-12-16 13:06:12 - Found news mention for XRP
+2024-12-16 13:06:12 - Found news mention for XRP
+2024-12-16 13:06:12 - Found news mention for XRP
+2024-12-16 13:06:12 - Found news mention for XRP
+2024-12-16 13:06:12 - Found news mention for XRP
+2024-12-16 13:06:12 - Found news mention for XRP
+2024-12-16 13:06:12 - Found news mention for XRP
+2024-12-16 13:06:12 - Found news mention for XRP
+2024-12-16 13:06:12 - Found news mention for XRP
+2024-12-16 13:06:12 - Found news mention for XRP
+2024-12-16 13:06:12 - News API - Found 11 mentions for XRP
+2024-12-16 13:06:12 - News API - XRP: Found 0 mentions
+2024-12-16 13:06:13 - Reddit - XRP: Found 12 mentions
+2024-12-16 13:06:13 - Twitter - XRP: Found 0 mentions
+2024-12-16 13:06:15 - CryptoCompare - XRP: Found 10 mentions
+2024-12-16 13:06:16 - Binance - XRP: Found 0 mentions
+2024-12-16 13:06:16 - Starting CoinGecko search for XRP
+2024-12-16 13:06:16 - CoinGecko search URL: https://api.coingecko.com/api/v3/search?query=XRP
+2024-12-16 13:06:17 - CoinGecko search response status: 200
+2024-12-16 13:06:17 - CoinGecko coins found: 16
+2024-12-16 13:06:17 - CoinGecko details response status: 200
+2024-12-16 13:06:17 - CoinGecko - Found 1 mentions for XRP
+2024-12-16 13:06:17 - CoinGecko - XRP: Found 1 mentions
+2024-12-16 13:06:17 - Save completed
+2024-12-16 13:06:17 - Progress: 3/35 coins processed
+2024-12-16 13:06:17 - Total mentions collected so far: 71
+2024-12-16 13:06:17 - 
+Processing SOL (4/35)
+2024-12-16 13:06:17 - Starting CryptoCompare News API search for SOL
+2024-12-16 13:06:18 - Found 50 news articles to process
+2024-12-16 13:06:18 - Found news mention for SOL
+2024-12-16 13:06:18 - Found news mention for SOL
+2024-12-16 13:06:18 - Found news mention for SOL
+2024-12-16 13:06:18 - Found news mention for SOL
+2024-12-16 13:06:18 - Found news mention for SOL
+2024-12-16 13:06:18 - Found news mention for SOL
+2024-12-16 13:06:18 - Found news mention for SOL
+2024-12-16 13:06:18 - Found news mention for SOL
+2024-12-16 13:06:18 - Found news mention for SOL
+2024-12-16 13:06:18 - Found news mention for SOL
+2024-12-16 13:06:18 - Found news mention for SOL
+2024-12-16 13:06:18 - Found news mention for SOL
+2024-12-16 13:06:18 - Found news mention for SOL
+2024-12-16 13:06:18 - Found news mention for SOL
+2024-12-16 13:06:18 - Found news mention for SOL
+2024-12-16 13:06:18 - Found news mention for SOL
+2024-12-16 13:06:18 - Found news mention for SOL
+2024-12-16 13:06:18 - Found news mention for SOL
+2024-12-16 13:06:18 - Found news mention for SOL
+2024-12-16 13:06:18 - Found news mention for SOL
+2024-12-16 13:06:18 - Found news mention for SOL
+2024-12-16 13:06:18 - Found news mention for SOL
+2024-12-16 13:06:18 - News API - Found 22 mentions for SOL
+2024-12-16 13:06:18 - News API - SOL: Found 0 mentions
+2024-12-16 13:06:19 - Reddit - SOL: Found 10 mentions
+2024-12-16 13:06:19 - Twitter - SOL: Found 0 mentions
+2024-12-16 13:06:20 - CryptoCompare - SOL: Found 4 mentions
+2024-12-16 13:06:20 - Binance - SOL: Found 0 mentions
+2024-12-16 13:06:20 - Starting CoinGecko search for SOL
+2024-12-16 13:06:20 - CoinGecko search URL: https://api.coingecko.com/api/v3/search?query=SOL
+2024-12-16 13:06:21 - CoinGecko search response status: 200
+2024-12-16 13:06:21 - CoinGecko coins found: 25
+2024-12-16 13:06:22 - CoinGecko details response status: 200
+2024-12-16 13:06:22 - CoinGecko - Found 1 mentions for SOL
+2024-12-16 13:06:22 - CoinGecko - SOL: Found 1 mentions
+2024-12-16 13:06:22 - Save completed
+2024-12-16 13:06:22 - Progress: 4/35 coins processed
+2024-12-16 13:06:22 - Total mentions collected so far: 86
+2024-12-16 13:06:22 - 
+Processing BNB (5/35)
+2024-12-16 13:06:22 - Starting CryptoCompare News API search for BNB
+2024-12-16 13:06:22 - Found 50 news articles to process
+2024-12-16 13:06:22 - Found news mention for BNB
+2024-12-16 13:06:22 - Found news mention for BNB
+2024-12-16 13:06:22 - Found news mention for BNB
+2024-12-16 13:06:22 - News API - Found 3 mentions for BNB
+2024-12-16 13:06:22 - News API - BNB: Found 0 mentions
+2024-12-16 13:06:23 - Reddit - BNB: Found 0 mentions
+2024-12-16 13:06:23 - Twitter - BNB: Found 0 mentions
+2024-12-16 13:06:24 - CryptoCompare - BNB: Found 0 mentions
+2024-12-16 13:06:24 - Binance - BNB: Found 0 mentions
+2024-12-16 13:06:24 - Starting CoinGecko search for BNB
+2024-12-16 13:06:24 - CoinGecko search URL: https://api.coingecko.com/api/v3/search?query=BNB
+2024-12-16 13:06:25 - CoinGecko search response status: 200
+2024-12-16 13:06:25 - CoinGecko coins found: 25
+2024-12-16 13:06:26 - CoinGecko details response status: 200
+2024-12-16 13:06:26 - CoinGecko - Found 1 mentions for BNB
+2024-12-16 13:06:26 - CoinGecko - BNB: Found 1 mentions
+2024-12-16 13:06:26 - Save completed
+2024-12-16 13:06:26 - Progress: 5/35 coins processed
+2024-12-16 13:06:26 - Total mentions collected so far: 87
+2024-12-16 13:06:26 - 
+Processing DOGE (6/35)
+2024-12-16 13:06:26 - Starting CryptoCompare News API search for DOGE
+2024-12-16 13:06:27 - Found 50 news articles to process
+2024-12-16 13:06:27 - Found news mention for DOGE
+2024-12-16 13:06:27 - Found news mention for DOGE
+2024-12-16 13:06:27 - Found news mention for DOGE
+2024-12-16 13:06:27 - Found news mention for DOGE
+2024-12-16 13:06:27 - Found news mention for DOGE
+2024-12-16 13:06:27 - News API - Found 5 mentions for DOGE
+2024-12-16 13:06:27 - News API - DOGE: Found 0 mentions
+2024-12-16 13:07:16 - 
+Starting data collection...
+2024-12-16 13:07:16 - 
+Processing BTC (1/35)
+2024-12-16 13:07:16 - Starting CryptoCompare News API search for BTC
+2024-12-16 13:07:16 - Found 50 news articles to process
+2024-12-16 13:07:16 - Found news mention for BTC
+2024-12-16 13:07:16 - Found news mention for BTC
+2024-12-16 13:07:16 - Found news mention for BTC
+2024-12-16 13:07:16 - Found news mention for BTC
+2024-12-16 13:07:16 - Found news mention for BTC
+2024-12-16 13:07:16 - Found news mention for BTC
+2024-12-16 13:07:16 - Found news mention for BTC
+2024-12-16 13:07:16 - Found news mention for BTC
+2024-12-16 13:07:16 - Found news mention for BTC
+2024-12-16 13:07:16 - Found news mention for BTC
+2024-12-16 13:07:16 - Found news mention for BTC
+2024-12-16 13:07:16 - Found news mention for BTC
+2024-12-16 13:07:16 - Found news mention for BTC
+2024-12-16 13:07:16 - Found news mention for BTC
+2024-12-16 13:07:16 - Found news mention for BTC
+2024-12-16 13:07:16 - Found news mention for BTC
+2024-12-16 13:07:16 - Found news mention for BTC
+2024-12-16 13:07:16 - Found news mention for BTC
+2024-12-16 13:07:16 - Found news mention for BTC
+2024-12-16 13:07:16 - Found news mention for BTC
+2024-12-16 13:07:16 - Found news mention for BTC
+2024-12-16 13:07:16 - Found news mention for BTC
+2024-12-16 13:07:16 - News API - Found 22 mentions for BTC
+2024-12-16 13:07:16 - News API - BTC: Found 0 mentions
+2024-12-16 13:07:18 - Reddit - BTC: Found 28 mentions
